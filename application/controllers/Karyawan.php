@@ -19,9 +19,10 @@ class Karyawan extends CI_Controller
         $this->load->view('karyawan/dashboard',$data);
     }
     public function karyawan()
-    {        $data['user']=$this->m_model->get_data('user')->result();
+    {
+    //    $data['user']=$this->m_model->get_data('user')->result();
 
-        $this->load->view('karyawan/karyawan',$data);
+        $this->load->view('karyawan/karyawan');
     }
     
 }

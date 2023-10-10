@@ -30,7 +30,7 @@ class Auth extends CI_Controller
             ];
             $this->session->set_userdata($data);
             if ($this->session->userdata('role') == 'admin') {
-                redirect(base_url('admin'));
+                redirect(base_url('admin/dashboard'));
             }elseif ($this->session->userdata('role') == 'karyawan') {
             redirect(base_url('karyawan/dashboard'))  ;
             } else {
@@ -45,6 +45,39 @@ class Auth extends CI_Controller
         $this->session->sess_destroy();
         redirect(base_url('auth/login'));
     }
+    public function admin()
+	{
+
+		$data['title'] = 'Halaman Registrasi';
+
+		$this->load->view('auth/admin');
+	}
+    public function aksi_register_admin()
+	{
+$role="admin";
+		$data = [
+			'username' => $this->input->post('username'),
+			'email' => $this->input->post('email'),
+			'nama_depan' => $this->input->post('nama_depan'),
+			'nama_belakang' => $this->input->post('nama_belakang'),
+			'password' => md5($this->input->post('password')),
+            'role'=> $role
+		];
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
+
+		if ($this->form_validation->run() === TRUE) {
+			$this->m_model->tambah_data('user', $data);
+			redirect(base_url('auth/login'));
+            
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			Password anda kurang dari 8 angka
+			
+		
+		  </div>');
+			redirect(base_url(('auth/admin')));
+		}
+	}
     public function register()
 	{
 
@@ -54,7 +87,7 @@ class Auth extends CI_Controller
 	}
 	public function aksi_register()
 	{
-
+$role="karyawan";
 		$data = [
 			'username' => $this->input->post('username'),
 			'email' => $this->input->post('email'),
@@ -62,7 +95,7 @@ class Auth extends CI_Controller
 			'nama_belakang' => $this->input->post('nama_belakang'),
 			'password' => md5($this->input->post('password')),
 
-
+'role'=> $role
 		];
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
 

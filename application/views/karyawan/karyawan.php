@@ -15,6 +15,9 @@
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://fontawesome.com/">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- script -->
     <title>Karyawan</title>
 </head>
 <style>
@@ -561,41 +564,64 @@ nav.close~.dashboard .top {
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="<?php echo base_url('karyawan/dashboard')   ?>">
+                <li><a href="<?php echo base_url('karyawan/dashboard') ?>">
+                        <i class="fa-solid fa-house"></i>
                         <span class="link-name">Dashboard</span>
                     </a></li>
                 <li><a href="<?php echo base_url('karyawan/karyawan') ?>">
+                        <i class="fa-solid fa-users-line"></i>
+
                         <span class="link-name">Karyawan</span>
                     </a></li>
                 <li><a href="<?php echo base_url('karyawan/absensi') ?>">
+                        <i class="fa-regular fa-calendar-days"></i>
                         <span class="link-name">Absensi</span>
                     </a></li>
                 <li><a href="<?php echo base_url('karyawan/izin') ?>">
+                        <i class="fa-solid fa-i"></i>
                         <span class="link-name">Izin</span>
                     </a></li>
 
+                <li><a href="<?php echo base_url('karyawan/akun') ?>">
+                        <i class="fa-solid fa-circle-user"></i>
+                        <span class="link-name">Edit Profil</span>
+                    </a></li>
+                <li class="mode">
+                    <a href="#">
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                        <span class="link-name">Mode Gelap</span>
+                    </a>
+
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+                <hr>
+                <li class="logout-mode position-absolute bottom-50 start-0">
+
+                <li>
+
+                    <div id="clock">
+                        <!-- Jam akan ditampilkan di sini -->
+                    </div>
+                </li>
 
 
-                <ul class="logout-mode">
-                    <li><a href="<?php echo base_url('karyawan/akun') ?>">
+                <script>
+                function updateClock() {
+                    var now = new Date();
+                    var clock = document.getElementById('clock');
+                    clock.innerHTML = now.toLocaleTimeString();
+                }
 
-                            <span class="link-name">Edit Profil</span>
-                        </a></li>
-                    <li><a href="<?php echo base_url('Auth/logout') ?>">
-                            <span class="link-name">Keluar</span>
-                        </a></li>
-
-                    <li class="mode">
-                        <a href="#">
-
-                            <span class="link-name">Mode Gelap</span>
-                        </a>
-
-                        <div class="mode-toggle">
-                            <span class="switch"></span>
-                        </div>
-                    </li>
-                </ul>
+                // Memperbarui jam setiap detik
+                setInterval(updateClock, 1000);
+                </script>
+                <li><a href="<?php echo base_url('Auth/logout') ?>">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="link-name">Keluar</span>
+                    </a></li>
+                </li>
         </div>
     </nav>
 
@@ -619,7 +645,7 @@ nav.close~.dashboard .top {
                     <span class="text">Karyawan</span>
                 </div>
 
-                <div class="activity-data">
+                <!-- <div class="activity-data">
                     <table class="table table-striped table-hover ">
                         <thead>
                             <tr>
@@ -659,7 +685,7 @@ nav.close~.dashboard .top {
 
                         </tbody>
                     </table>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

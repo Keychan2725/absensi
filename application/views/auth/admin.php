@@ -6,7 +6,7 @@
     <meta name="author" content="Muhamad Nauval Azhar">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="This is a login page template based on Bootstrap 5">
-    <title>Halaman Login</title>
+    <title>Halaman Register Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -36,27 +36,45 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"> Login</p>
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"> Register Admin</p>
 
                                     <?php echo $this->session->flashdata('message'); ?>
 
                                     <form method="POST" class="needs-validation" novalidate="" autocomplete="off"
-                                        action="<?php echo base_url(); ?>Auth/aksi_login">
+                                        action="<?php echo base_url(); ?>Auth/aksi_register_admin">
 
 
 
                                         <div class="d-flex flex-row align-items-center mb-4">
 
                                             <div class="form-outline flex-fill mb-0">
-                                                <input placeholder="Email" type="email" id="email" name="email"
-                                                    class="form-control" value="<?php echo set_value('email'); ?>
-                                    " required autofocus>
+                                                <input placeholder="Username" type="text" id="username" name="username"
+                                                    class="form-control" required autofocus>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center mb-4">
 
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input placeholder="Email" type="text" id="email" name="email"
+                                                    class="form-control" required autofocus>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center mb-4">
+
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="text" id="nama_depan" placeholder="Nama Depan"
+                                                    name="nama_depan" class="form-control" required autofocus>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center mb-4">
+
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input placeholder="Nama Belakang" type="text" id="nama_belakang"
+                                                    name="nama_belakang" class="form-control" required autofocus>
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
-
                                             <div class="d-flex form-outline flex-fill mb-0">
                                                 <input placeholder="Password" type="password" id="password"
                                                     name="password" class="form-control">
@@ -70,17 +88,13 @@
 
                                         <div class="form-check d-flex justify-content-center mb-5">
                                             <label for="form2Example3">
-                                                don't have an account ? <a
-                                                    href="<?php echo base_url('auth/register') ?>"
-                                                    class="text-dark">Registrasi Karyawan</a>
-                                                Or
-                                                <a href="<?php echo base_url('auth/admin') ?>"
-                                                    class="text-dark">Admin</a>
-                                            </label>
+                                                don't have an account ? <a href="<?php echo base_url('auth/login') ?>"
+                                                    class="text-dark">login</a> </label>
                                         </div>
 
+
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                                            <button type="submit" class="btn btn-primary btn-lg">Registrasi</button>
                                         </div>
 
                                     </form>
@@ -93,7 +107,7 @@
                                 </div>
                                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                                    <img src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                                    <img src="https://img.freepik.com/free-vector/admin-concept-illustration_114360-2332.jpg"
                                         class="img-fluid" alt="Sample image">
 
                                 </div>
@@ -122,6 +136,5 @@ togglePassword.addEventListener('click', function() {
     }
 });
 </script>
-
 
 </html>

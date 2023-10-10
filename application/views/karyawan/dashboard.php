@@ -9,10 +9,18 @@
 
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="style.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://fontawesome.com/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
     <title>Dashboard</title>
 </head>
 <style>
@@ -560,46 +568,66 @@ nav.close~.dashboard .top {
         <div class="menu-items">
             <ul class="nav-links">
                 <li><a href="<?php echo base_url('karyawan/dashboard') ?>">
-
+                        <i class="fa-solid fa-house"></i>
                         <span class="link-name">Dashboard</span>
                     </a></li>
                 <li><a href="<?php echo base_url('karyawan/karyawan') ?>">
+                        <i class="fa-solid fa-users-line"></i>
 
                         <span class="link-name">Karyawan</span>
                     </a></li>
                 <li><a href="<?php echo base_url('karyawan/absensi') ?>">
-
+                        <i class="fa-regular fa-calendar-days"></i>
                         <span class="link-name">Absensi</span>
                     </a></li>
                 <li><a href="<?php echo base_url('karyawan/izin') ?>">
-
+                        <i class="fa-solid fa-i"></i>
                         <span class="link-name">Izin</span>
                     </a></li>
 
+                <li><a href="<?php echo base_url('karyawan/akun') ?>">
+                        <i class="fa-solid fa-circle-user"></i>
+                        <span class="link-name">Edit Profil</span>
+                    </a></li>
+                <li class="mode">
+                    <a href="#">
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                        <span class="link-name">Mode Gelap</span>
+                    </a>
+
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+                <hr>
+                <li class="logout-mode position-absolute bottom-50 start-0">
+
+                <li>
+
+                    <div id="clock" name="date">
+                        <!-- Jam akan ditampilkan di sini -->
+                    </div>
+                </li>
 
 
-                <ul class="logout-mode">
-                    <li><a href="<?php echo base_url('karyawan/akun') ?>">
-                            <i class="uil "></i>
-                            <span class="link-name">Edit Profil</span>
-                        </a></li>
-                    <li><a href="<?php echo base_url('Auth/logout') ?>">
-                            <i class="uil  "></i>
-                            <span class="link-name">Keluar</span>
-                        </a></li>
+                <script>
+                function updateClock() {
+                    var now = new Date();
+                    var clock = document.getElementById('clock');
+                    clock.innerHTML = now.toLocaleTimeString();
+                }
 
-                    <li class="mode">
-                        <a href="#">
-                            <i class="uil "></i>
-                            <span class="link-name">Mode Gelap</span>
-                        </a>
-
-                        <div class="mode-toggle">
-                            <span class="switch"></span>
-                        </div>
-                    </li>
-                </ul>
+                // Memperbarui jam setiap detik
+                setInterval(updateClock, 1000);
+                </script>
+                <li><a href="<?php echo base_url('Auth/logout') ?>">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="link-name">Keluar</span>
+                    </a></li>
+                </li>
         </div>
+
+
     </nav>
 
     <section class="dashboard">
@@ -618,12 +646,10 @@ nav.close~.dashboard .top {
             <div class="overview">
                 <div class="title">
 
-                    <span class="text">User Karyawan</span>
+                    <span class="text ">User Karyawan</span>
+
                 </div>
 
-                <!-- <div class="boxes">
-                    
-                </div> -->
             </div>
 
         </div>

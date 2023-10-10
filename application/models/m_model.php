@@ -74,6 +74,16 @@ public function get_by_jurusan($tingkat, $jurusan)
             return false;
         }
     }
+    public function registerUser($username, $password, $role_id)
+    {
+        // Simpan data pengguna ke dalam tabel users
+        $data = array(
+            'username' => $username,
+            'password' => $password,
+            'role_id' => $role_id,
+        );
 
+        $this->db->insert('users', $data);
+    }
 
 }
