@@ -42,7 +42,22 @@
 
                                     <form method="POST" class="needs-validation" novalidate="" autocomplete="off"
                                         action="<?php echo base_url(); ?>Auth/aksi_register_admin">
+                                        <div class="row justify-content-start">
+                                            <div class="d-flex flex-row align-items-center mb-4 col-6">
 
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="text" id="nama_depan" placeholder="Nama Depan"
+                                                        name="nama_depan" class="form-control" required autofocus>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center mb-4 col-6">
+
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input placeholder="Nama Belakang" type="text" id="nama_belakang"
+                                                        name="nama_belakang" class="form-control" required autofocus>
+                                                </div>
+                                            </div>
+                                        </div>
 
 
                                         <div class="d-flex flex-row align-items-center mb-4">
@@ -59,20 +74,7 @@
                                                     class="form-control" required autofocus>
                                             </div>
                                         </div>
-                                        <div class="d-flex flex-row align-items-center mb-4">
 
-                                            <div class="form-outline flex-fill mb-0">
-                                                <input type="text" id="nama_depan" placeholder="Nama Depan"
-                                                    name="nama_depan" class="form-control" required autofocus>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-row align-items-center mb-4">
-
-                                            <div class="form-outline flex-fill mb-0">
-                                                <input placeholder="Nama Belakang" type="text" id="nama_belakang"
-                                                    name="nama_belakang" class="form-control" required autofocus>
-                                            </div>
-                                        </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <div class="d-flex form-outline flex-fill mb-0">

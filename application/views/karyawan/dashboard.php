@@ -21,6 +21,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Dashboard</title>
 </head>
 <style>
@@ -303,29 +305,7 @@ nav.close~.dashboard .top {
     margin: 0 30px;
 }
 
-.top .search-box input {
-    position: absolute;
-    border: 1px solid var(--border-color);
-    background-color: var(--panel-color);
-    padding: 0 25px 0 50px;
-    border-radius: 5px;
-    height: 100%;
-    width: 100%;
-    color: var(--text-color);
-    font-size: 15px;
-    font-weight: 400;
-    outline: none;
-}
 
-.top .search-box i {
-    position: absolute;
-    left: 15px;
-    font-size: 22px;
-    z-index: 10;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--black-light-color);
-}
 
 .top img {
     width: 40px;
@@ -358,7 +338,7 @@ nav.close~.dashboard .top {
 .dash-content .title .text {
     font-size: 24px;
     font-weight: 500;
-    color: var(--text-color);
+    color: dark;
     margin-left: 10px;
 }
 
@@ -571,10 +551,11 @@ nav.close~.dashboard .top {
                         <i class="fa-solid fa-house"></i>
                         <span class="link-name">Dashboard</span>
                     </a></li>
-                <li><a href="<?php echo base_url('karyawan/karyawan') ?>">
-                        <i class="fa-solid fa-users-line"></i>
 
-                        <span class="link-name">Karyawan</span>
+                <li><a href="<?php echo base_url('karyawan/history') ?>">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+
+                        <span class="link-name">Histroy Absensi</span>
                     </a></li>
                 <li><a href="<?php echo base_url('karyawan/absensi') ?>">
                         <i class="fa-regular fa-calendar-days"></i>
@@ -604,9 +585,11 @@ nav.close~.dashboard .top {
 
                 <li>
 
-                    <div id="clock" name="date">
-                        <!-- Jam akan ditampilkan di sini -->
-                    </div>
+                    <span id="clock" name="date" class="text-white"> </span>
+
+                </li>
+                <li>
+                    <span id="clock2" name="date2" class="text-dark"> </span>
                 </li>
 
 
@@ -619,11 +602,20 @@ nav.close~.dashboard .top {
 
                 // Memperbarui jam setiap detik
                 setInterval(updateClock, 1000);
+
+                function updateClock2() {
+                    var now = new Date();
+                    var clock = document.getElementById('clock2');
+                    clock.innerHTML = now.toLocaleTimeString();
+                }
+
+                // Memperbarui jam setiap detik
+                setInterval(updateClock2, 1000);
                 </script>
-                <li><a href="<?php echo base_url('Auth/logout') ?>">
+                <li><button class="btn btn-lg   " onclick="logout(id)">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span class="link-name">Keluar</span>
-                    </a></li>
+                    </button>
                 </li>
         </div>
 
@@ -634,27 +626,74 @@ nav.close~.dashboard .top {
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
 
-            <!-- <div class="search-box">
-                <i class="uil uil-search"></i>
-                <input type="text" placeholder="Search here...">
-            </div> -->
 
-            <!--<img src="images/profile.jpg" alt="">-->
         </div>
 
-        <div class="dash-content">
-            <div class="overview">
-                <div class="title">
+        <div class="dash-content mx-auto">
+            <div class="overview shadow p-1 mb-3 bg-body rounded">
+                <div class="d-flex">
 
-                    <span class="text ">User Karyawan</span>
+                    <div class="card  rounded " style="width: 16rem;height:11rem; margin-left:20px;">
+                        <p class=" fs-5 text-white text-center p-3 bg-dark">Total Masuk</p>
+
+                        <p class=" fs-1 text-dark text-center">123</p>
+
+                    </div>
+                    <div class="card  rounded" style="width: 16rem;height:11rem; margin-left:20px;">
+                        <p class=" fs-5 text-white text-center p-3 bg-dark">Total Cuti</p>
+                        <p class=" fs-1 text-dark text-center">12</p>
+
+                    </div>
+                </div>
+                <div class="title ">
+
+                    <span class="text  ">Data Karyawan</span>
 
                 </div>
+            </div>
+
+            <div class="overview shadow p-1 mb-3     bg-body rounded">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="table-dark">
+                            <th scope="col">No</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Nama Depan</th>
+                            <th scope="col">Nama Belakang</th>
+                            <th scope="col">Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no=0; foreach ($user as $key ) : $no++ ?>
+                        <tr>
+                            <td><?php echo  $key->id_karyawan; ?></td>
+                            <td><?php echo $key->username ; ?></td>
+                            <td><?php echo $key->nama_depan; ?></td>
+                            <td><?php echo $key->nama_belakang; ?></td>
+                            <td><?php echo $key->role; ?></td>
+
+
+
+
+                        </tr>
+
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
 
             </div>
 
         </div>
     </section>
 
+
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
     <script src="script.js"></script>
     <script>
     const body = document.querySelector("body"),
@@ -691,5 +730,31 @@ nav.close~.dashboard .top {
     })
     </script>
 </body>
+<script>
+function logout(id) {
+    swal.fire({
+        title: ' Yakin Ingin Log Out',
+        text: "",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Batal',
+        confirmButtonText: 'Log Out'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Log Out',
+                showConfirmButton: false,
+                timer: 1500,
+
+            }).then(function() {
+                window.location.href = "<?php echo base_url('auth/logout/')?>" + id;
+            });
+        }
+    });
+}
+</script>
 
 </html>

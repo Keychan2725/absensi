@@ -29,6 +29,7 @@ class Auth extends CI_Controller
                 'id' => $result['id'],
             ];
             $this->session->set_userdata($data);
+			
             if ($this->session->userdata('role') == 'admin') {
                 redirect(base_url('admin/dashboard'));
             }elseif ($this->session->userdata('role') == 'karyawan') {
@@ -37,7 +38,12 @@ class Auth extends CI_Controller
                 redirect(base_url('auth/login'));
             }
         } else {
-            redirect(base_url('login'));
+			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			Password Atau Email Anda Salah
+			
+		
+		  </div>');
+            redirect(base_url('auth/login'));
         }
     }
    public function logout()

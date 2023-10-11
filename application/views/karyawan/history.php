@@ -23,7 +23,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>Absensi</title>
+    <title>History</title>
 </head>
 <style>
 /* ===== Google Font Import - Poppins ===== */
@@ -539,7 +539,7 @@ nav.close~.dashboard .top {
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <!-- <img src="images/logo.png" alt=""> -->
+                <img src="images/logo.png" alt="">
             </div>
 
             <span class="logo_name">Karyawan</span>
@@ -551,6 +551,7 @@ nav.close~.dashboard .top {
                         <i class="fa-solid fa-house"></i>
                         <span class="link-name">Dashboard</span>
                     </a></li>
+
                 <li><a href="<?php echo base_url('karyawan/history') ?>">
                         <i class="fa-solid fa-clock-rotate-left"></i>
 
@@ -628,28 +629,69 @@ nav.close~.dashboard .top {
 
         </div>
 
-        <div class="dash-content">
+        <div class="dash-content mx-auto">
+            <div class="overview shadow p-1 mb-3 bg-body rounded ">
 
-            <div class="overview shadow p-1 mb-3 bg-body rounded">
                 <div class="title ">
 
-                    <span class="text ">Absensi Karyawan</span>
+                    <span class="text ">Histroy Absensi</span>
 
                 </div>
             </div>
-            <form action="<?php echo base_url('karyawan/kegiatan') ?>" method="post" enctype="multipart/form_data">
-                <div class="overview shadow p-4 mb-3 bg-body rounded">
-                    <div class="wrapper d-flex flex-column">
-                        <input name="id_karyawan" type="hidden">
-                        <textarea name="kegiatan" placeholder="  Kegiatan..."></textarea>
-                    </div>
-                    <br>
-                    <button type="submit" class=" btn btn-sm btn-success mb-3">Absensi</button>
-                </div>
+
+            <div class="overview shadow p-1 mb-3     bg-body rounded">
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Kegiatan</th>
+                            <th scope="col">Tanggal</th>
+                            <th scope="col">Jam Masuk</th>
+                            <th scope="col">Jam Pulang</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no=0; foreach ($absensi as $key ) : $no++ ?>
+                        <tr>
+                            <td><?php echo $key->id; ?></td>
+                            <td><?php echo tampil_id_karyawan($key->id_karyawan); ?></td>
+                            <td><?php echo $key->kegiatan; ?></td>
+
+                            <td><?php echo $key->date; ?></td>
+                            <td><?php echo $key->jam_masuk; ?></td>
+                            <td><?php echo $key->jam_keluar; ?></td>
+                            <td>
+                                <a href="" class="btn btn-lg btn-primary hover:bg-sky:00;"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
+                                <button onclick="hapus(<?php echo $key->id ?>)" class="btn btn-lg btn-danger"><i
+                                        class="fa-solid fa-trash-can"></i></button>
+                                <button onclick="pulang(<?php echo $key->id ?>)" class="btn btn-lg btn-warning"> <i
+                                        class="fa-solid fa-person-walking"></i></button>
+                            </td>
+
+
+
+                        </tr>
+
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+
+            </div>
+
         </div>
-        </form>
     </section>
 
+
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
     <script src="script.js"></script>
     <script>
     const body = document.querySelector("body"),
@@ -687,6 +729,56 @@ nav.close~.dashboard .top {
     </script>
 </body>
 <script>
+function hapus(id) {
+    swal.fire({
+        title: 'Yakin untuk menghapus data ini?',
+        text: "Data ini akan terhapus permanen",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Batal',
+        confirmButtonText: 'Ya Hapus'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil Dihapus',
+                showConfirmButton: false,
+                timer: 1500,
+
+            }).then(function() {
+                window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/')?>" + id;
+            });
+        }
+    });
+}
+
+function pulang(id) {
+    swal.fire({
+        title: 'Ingin Pulang',
+        text: "Hati Hati DI Jalan",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Batal',
+        confirmButtonText: 'Ya Pulang'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Tombol Disabled',
+                showConfirmButton: false,
+                timer: 1500,
+
+            }).then(function() {
+                window.location.href = "<?php echo base_url('karyawan//')?>" + id;
+            });
+        }
+    });
+}
+
 function logout(id) {
     swal.fire({
         title: ' Yakin Ingin Log Out',

@@ -85,5 +85,8 @@ public function get_by_jurusan($tingkat, $jurusan)
 
         $this->db->insert('users', $data);
     }
+    public function absensi($data) {
+        $this->db->insert('absensi', $data);
+    }
 
 }
