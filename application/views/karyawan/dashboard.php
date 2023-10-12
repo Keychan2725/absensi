@@ -13,7 +13,9 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+
     <!-- Script -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
@@ -254,7 +256,7 @@ body.dark .nav-links li a:hover .link-name {
 }
 
 body.dark .switch:before {
-    left: 20px;
+    left: 40px;
 }
 
 .dashboard {
@@ -539,14 +541,14 @@ nav.close~.dashboard .top {
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <img src="images/logo.png" alt="">
+                <img src="https://tse1.mm.bing.net/th?id=OIP.xKEbKVRjeWNbWnFmFDiGxgHaHa&pid=Api&P=0&h=180" alt="">
             </div>
 
             <span class="logo_name">Karyawan</span>
         </div>
 
         <div class="menu-items">
-            <ul class="nav-links">
+            <ul class="nav-links" style="padding-left:16px;">
                 <li><a href="<?php echo base_url('karyawan/dashboard') ?>">
                         <i class="fa-solid fa-house"></i>
                         <span class="link-name">Dashboard</span>
@@ -581,15 +583,15 @@ nav.close~.dashboard .top {
                     </div>
                 </li>
                 <hr>
-                <li class="logout-mode position-absolute bottom-50 start-0">
+                <li class="logout-mode  ">
 
                 <li>
 
-                    <span id="clock" name="date" class="text-white"> </span>
+                    <span id="clock" name="date" class="text-white link-name"> </span>
 
                 </li>
                 <li>
-                    <span id="clock2" name="date2" class="text-dark"> </span>
+                    <span id="clock2" name="date2" class="text-dark link-name"> </span>
                 </li>
 
 
@@ -630,61 +632,110 @@ nav.close~.dashboard .top {
         </div>
 
         <div class="dash-content mx-auto">
-            <div class="overview shadow p-1 mb-3 bg-body rounded">
+            <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
                 <div class="d-flex">
 
                     <div class="card  rounded " style="width: 16rem;height:11rem; margin-left:20px;">
-                        <p class=" fs-5 text-white text-center p-3 bg-dark">Total Masuk</p>
+                        <p class=" fs-6 text-white text-center p-3 bg-dark">Total <br> Masuk</p>
 
-                        <p class=" fs-1 text-dark text-center">123</p>
+                        <p class=" fs-1 text-dark text-center">2!</p>
 
                     </div>
                     <div class="card  rounded" style="width: 16rem;height:11rem; margin-left:20px;">
-                        <p class=" fs-5 text-white text-center p-3 bg-dark">Total Cuti</p>
-                        <p class=" fs-1 text-dark text-center">12</p>
+                        <p class=" fs-6 text-white text-center p-3 bg-dark">Total
+                            <br>Cuti
+                        </p>
+                        <p class=" fs-1 text-dark text-center">2</p>
+                    </div>
 
+                </div>
+            </div>
+            <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="overflow-auto" style="white-space: nowrap;">
+
+                                <div class="title  ">
+
+                                    <span class="text text- ">Data Karyawan</span>
+
+
+                                </div>
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr class="table-hover">
+                                            <th scope="col">No</th>
+                                            <th scope="col">Kegiatan</th>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Jam Masuk</th>
+                                            <th scope="col">Jam Keluar</th>
+                                            <th scope="col">Keterangan Izin</th>
+                                            <th scope="col">Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $no = 0;foreach ($absen as $row): $no++?>
+                                        <tr class="whitespace-nowrap">
+                                            <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no?></td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php echo $row->kegiatan?>
+                                                </div>
+                                            </td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php echo $row->date?>
+                                                </div>
+                                            </td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php if( $row->jam_masuk == NULL) {
+                        echo '-';
+                      } else{
+                        echo $row->jam_masuk;
+                      }?>
+                                                </div>
+                                            </td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php if( $row->jam_keluar == NULL) {
+                        echo '-';
+                      } else{
+                        echo $row->jam_keluar;
+                      }?>
+                                                </div>
+                                            </td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php if( $row->keterangan_izin == NULL) {
+                        echo '-';
+                      } else{
+                        echo $row->keterangan_izin;
+                      }?>
+                                                </div>
+                                            </td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php if( $row->status == NULL) {
+                        echo 'not';
+                      } else{
+                        echo $row->status;
+                      }?>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach?>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="title ">
-
-                    <span class="text  ">Data Karyawan</span>
-
-                </div>
-            </div>
-
-            <div class="overview shadow p-1 mb-3     bg-body rounded">
-                <table class="table table-hover">
-                    <thead>
-                        <tr class="table-dark">
-                            <th scope="col">No</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Nama Depan</th>
-                            <th scope="col">Nama Belakang</th>
-                            <th scope="col">Status</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no=0; foreach ($user as $key ) : $no++ ?>
-                        <tr>
-                            <td><?php echo  $key->id_karyawan; ?></td>
-                            <td><?php echo $key->username ; ?></td>
-                            <td><?php echo $key->nama_depan; ?></td>
-                            <td><?php echo $key->nama_belakang; ?></td>
-                            <td><?php echo $key->role; ?></td>
-
-
-
-
-                        </tr>
-
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
 
             </div>
-
-        </div>
     </section>
 
 

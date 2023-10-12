@@ -539,18 +539,20 @@ nav.close~.dashboard .top {
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <!-- <img src="images/logo.png" alt=""> -->
+                <img src="https://tse1.mm.bing.net/th?id=OIP.xKEbKVRjeWNbWnFmFDiGxgHaHa&pid=Api&P=0&h=180" alt="">
             </div>
 
             <span class="logo_name">Karyawan</span>
         </div>
 
+
         <div class="menu-items">
-            <ul class="nav-links">
+            <ul class="nav-links" style="padding-left:16px;">
                 <li><a href="<?php echo base_url('karyawan/dashboard') ?>">
                         <i class="fa-solid fa-house"></i>
                         <span class="link-name">Dashboard</span>
                     </a></li>
+
                 <li><a href="<?php echo base_url('karyawan/history') ?>">
                         <i class="fa-solid fa-clock-rotate-left"></i>
 
@@ -580,15 +582,15 @@ nav.close~.dashboard .top {
                     </div>
                 </li>
                 <hr>
-                <li class="logout-mode position-absolute bottom-50 start-0">
+                <li class="logout-mode  ">
 
                 <li>
 
-                    <span id="clock" name="date" class="text-white"> </span>
+                    <span id="clock" name="date" class="text-white link-name"> </span>
 
                 </li>
                 <li>
-                    <span id="clock2" name="date2" class="text-dark"> </span>
+                    <span id="clock2" name="date2" class="text-dark link-name"> </span>
                 </li>
 
 
@@ -619,6 +621,7 @@ nav.close~.dashboard .top {
         </div>
 
 
+
     </nav>
 
     <section class="dashboard">
@@ -630,21 +633,22 @@ nav.close~.dashboard .top {
 
         <div class="dash-content">
 
-            <div class="overview shadow p-1 mb-3 bg-body rounded">
+            <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
                 <div class="title ">
 
                     <span class="text ">Absensi Karyawan</span>
 
                 </div>
             </div>
-            <form action="<?php echo base_url('karyawan/kegiatan') ?>" method="post" enctype="multipart/form_data">
-                <div class="overview shadow p-4 mb-3 bg-body rounded">
+            <?php echo $this->session->flashdata('message'); ?>
+            <form action="<?php echo base_url('Karyawan/aksi_absensi') ?>" method="post" enctype="multipart/form-data">
+                <div class="overview shadow-lg p-4 mb-3 bg-body rounded">
                     <div class="wrapper d-flex flex-column">
-                        <input name="id_karyawan" type="hidden">
-                        <textarea name="kegiatan" placeholder="  Kegiatan..."></textarea>
+
+                        <textarea id="kegiatan" name="kegiatan" placeholder="  Kegiatan..." required></textarea>
                     </div>
                     <br>
-                    <button type="submit" class=" btn btn-sm btn-success mb-3">Absensi</button>
+                    <button type="submit" class=" btn btn-sm btn-dark text-white mb-3">Absensi</button>
                 </div>
         </div>
         </form>

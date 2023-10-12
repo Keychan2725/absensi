@@ -22,6 +22,7 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <title>History</title>
 </head>
@@ -532,6 +533,13 @@ nav.close~.dashboard .top {
         left: 0;
         width: 100%;
     }
+
+    .horizontal-scroll {
+        width: 300px;
+        /* Sesuaikan lebar sesuai kebutuhan Anda */
+        white-space: nowrap;
+        overflow-x: auto;
+    }
 }
 </style>
 
@@ -539,14 +547,15 @@ nav.close~.dashboard .top {
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <img src="images/logo.png" alt="">
+                <img src="https://tse1.mm.bing.net/th?id=OIP.xKEbKVRjeWNbWnFmFDiGxgHaHa&pid=Api&P=0&h=180" alt="">
             </div>
 
             <span class="logo_name">Karyawan</span>
         </div>
 
+
         <div class="menu-items">
-            <ul class="nav-links">
+            <ul class="nav-links" style="padding-left:16px;">
                 <li><a href="<?php echo base_url('karyawan/dashboard') ?>">
                         <i class="fa-solid fa-house"></i>
                         <span class="link-name">Dashboard</span>
@@ -581,15 +590,15 @@ nav.close~.dashboard .top {
                     </div>
                 </li>
                 <hr>
-                <li class="logout-mode position-absolute bottom-50 start-0">
+                <li class="logout-mode  ">
 
                 <li>
 
-                    <span id="clock" name="date" class="text-white"> </span>
+                    <span id="clock" name="date" class="text-white link-name"> </span>
 
                 </li>
                 <li>
-                    <span id="clock2" name="date2" class="text-dark"> </span>
+                    <span id="clock2" name="date2" class="text-dark link-name"> </span>
                 </li>
 
 
@@ -620,6 +629,7 @@ nav.close~.dashboard .top {
         </div>
 
 
+
     </nav>
 
     <section class="dashboard">
@@ -640,50 +650,105 @@ nav.close~.dashboard .top {
             </div>
 
             <div class="overview shadow p-1 mb-3     bg-body rounded">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="overflow-auto" style="white-space: nowrap;">
+                                <table class="table table-hover  ">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Kegiatan</th>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Jam Masuk</th>
+                                            <th scope="col">Jam Pulang</th>
+                                            <th scope="col">Keterangan Izin</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $no = 0;foreach ($history as $row): $no++?>
+                                        <tr class="whitespace-nowrap">
+                                            <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no?></td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php echo $row->kegiatan?>
+                                                </div>
+                                            </td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php echo $row->date?>
+                                                </div>
+                                            </td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php if( $row->jam_masuk == NULL) {
+                        echo '-';
+                      } else{
+                        echo $row->jam_masuk;
+                      }?>
+                                                </div>
+                                            </td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php if( $row->jam_keluar == NULL) {
+                        echo '-';
+                      } else{
+                        echo $row->jam_keluar;
+                      }?>
+                                                </div>
+                                            </td>
+                                            <td class="px-3 py-4">
+                                                <div class="text-sm text-gray-900">
+                                                    <?php if( $row->keterangan_izin == NULL) {
+                        echo '-';
+                      } else{
+                        echo $row->keterangan_izin;
+                      }?>
+                                                </div>
+                                            </td>
+                                            <td class="flex  px-3 gap-3 py-4 justify-center d-flex">
+                                                <div class="">
+                                                    <a href="" class="btn btn-lg btn-primary hover:bg-sky:00;"><i
+                                                            class="fa-solid fa-pen-to-square"></i></a>
+                                                </div>
 
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Kegiatan</th>
-                            <th scope="col">Tanggal</th>
-                            <th scope="col">Jam Masuk</th>
-                            <th scope="col">Jam Pulang</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no=0; foreach ($absensi as $key ) : $no++ ?>
-                        <tr>
-                            <td><?php echo $key->id; ?></td>
-                            <td><?php echo tampil_id_karyawan($key->id_karyawan); ?></td>
-                            <td><?php echo $key->kegiatan; ?></td>
+                                                <div class="">
+                                                    <button onclick="hapus(<?php echo $row->id ?>)"
+                                                        class="btn btn-lg btn-danger"><i
+                                                            class="fa-solid fa-trash-can"></i></button>
+                                                </div>
+                                                <?php
+                      if($row->status == 'done') {
+                        echo '<div>
+                        <button disabled class="btn btn-lg btn-dark"> <i
+                        class="fa-solid fa-person-walking"></i></button>
+                       </div>';
+                      } else {
+                        echo '<div>
+                        <button id="pulang" onclick="pulang('. $row->id .')" class="btn btn-lg btn-warning"> <i
+                        class="fa-solid fa-person-walking"></i></button>
+                       </div>';
+                      }
+                      ?>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach?>
+                                    </tbody>
+                                </table>
 
-                            <td><?php echo $key->date; ?></td>
-                            <td><?php echo $key->jam_masuk; ?></td>
-                            <td><?php echo $key->jam_keluar; ?></td>
-                            <td>
-                                <a href="" class="btn btn-lg btn-primary hover:bg-sky:00;"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                                <button onclick="hapus(<?php echo $key->id ?>)" class="btn btn-lg btn-danger"><i
-                                        class="fa-solid fa-trash-can"></i></button>
-                                <button onclick="pulang(<?php echo $key->id ?>)" class="btn btn-lg btn-warning"> <i
-                                        class="fa-solid fa-person-walking"></i></button>
-                            </td>
+                            </div>
 
-
-
-                        </tr>
-
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
-
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
+
     </section>
+
+
+
 
 
     <script>
@@ -754,6 +819,7 @@ function hapus(id) {
     });
 }
 
+
 function pulang(id) {
     swal.fire({
         title: 'Ingin Pulang',
@@ -768,16 +834,17 @@ function pulang(id) {
         if (result.isConfirmed) {
             Swal.fire({
                 icon: 'success',
-                title: 'Tombol Disabled',
+                title: 'Selamat Jalan',
                 showConfirmButton: false,
                 timer: 1500,
 
             }).then(function() {
-                window.location.href = "<?php echo base_url('karyawan//')?>" + id;
+                window.location.href = "<?php echo base_url('karyawan/pulang/')?>" + id;
             });
         }
     });
 }
+
 
 function logout(id) {
     swal.fire({

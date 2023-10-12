@@ -1,7 +1,13 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class M_model extends CI_Model
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
     function get_data($table)
     {
         return $this->db->get($table);
@@ -74,6 +80,7 @@ public function get_by_jurusan($tingkat, $jurusan)
             return false;
         }
     }
+ 
     public function registerUser($username, $password, $role_id)
     {
         // Simpan data pengguna ke dalam tabel users
@@ -88,5 +95,8 @@ public function get_by_jurusan($tingkat, $jurusan)
     public function absensi($data) {
         $this->db->insert('absensi', $data);
     }
-
+    public function get_history($table, $id_karyawan)
+    {
+        return $this->db->where('id_karyawan', $id_karyawan)->get($table);
+    }
 }

@@ -51,7 +51,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 // application/config/routes.php
 
-$route['default_controller'] = 'realtimecontroller';
-$route['default_controller'] = 'user';
+$route['default_controller'] = 'karyawan';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
