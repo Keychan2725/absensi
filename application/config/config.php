@@ -35,7 +35,7 @@ $config['base_url'] = 'http://localhost/absensii/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'absensi.php';
+$config['index_page'] = 'absensii.php';
 
 /*
 |--------------------------------------------------------------------------

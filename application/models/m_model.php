@@ -99,4 +99,51 @@ public function get_by_jurusan($tingkat, $jurusan)
     {
         return $this->db->where('id_karyawan', $id_karyawan)->get($table);
     }
+    public function getlast($table, $where) {
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->where($where);
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit(1);
+        return $this->db->get()->row();
+    }
+    public function get_absen($table, $id_karyawan)
+    {
+    return $this->db->where('id_karyawan', $id_karyawan)
+                    ->where('keterangan_izin', '-')
+                    ->get($table);
+    }
+    public function get_izin($table, $id_karyawan)
+    {
+    return $this->db->where('id_karyawan', $id_karyawan)
+                    ->where('kegiatan', '-')
+                    ->get($table);
+                }
+                public function get_user_data($user_id)
+                {
+                    return $this->db->get_where('user', array('id' => $user_id))->row_array();
+                }
+            
+                public function validate_password($user_id, $password)
+                {
+                    $user_data = $this->db->get_where('user', array('id' => $user_id))->row_array();
+            
+                    return password_verify($password, $user_data['password']);
+                }
+            
+                public function update_profil($user_id, $data)
+                {
+                    $this->db->where('id', $user_id);
+                    $this->db->update('user', $data);
+                }
+                public function save_image($user_id, $image)
+{
+    $data = array(
+        'foto' => $image
+    );
+
+    $this->db->where('id', $user_id);
+    $this->db->update('user', $data);
+}
+
 }

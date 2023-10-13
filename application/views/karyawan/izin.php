@@ -22,6 +22,11 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+    <script src="path-to-sweetalert.js"></script>
+
+
 
     <title>Izin</title>
 </head>
@@ -542,8 +547,9 @@ nav.close~.dashboard .top {
                 <img src="https://tse1.mm.bing.net/th?id=OIP.xKEbKVRjeWNbWnFmFDiGxgHaHa&pid=Api&P=0&h=180" alt="">
             </div>
 
-            <span class="logo_name">Karyawan</span>
+            <a>Karyawan</a>
         </div>
+
 
 
         <div class="menu-items">
@@ -556,7 +562,7 @@ nav.close~.dashboard .top {
                 <li><a href="<?php echo base_url('karyawan/history') ?>">
                         <i class="fa-solid fa-clock-rotate-left"></i>
 
-                        <span class="link-name">Histroy Absensi</span>
+                        <span class="link-name">History Absensi</span>
                     </a></li>
                 <li><a href="<?php echo base_url('karyawan/absensi') ?>">
                         <i class="fa-regular fa-calendar-days"></i>
@@ -571,22 +577,25 @@ nav.close~.dashboard .top {
                         <i class="fa-solid fa-circle-user"></i>
                         <span class="link-name">Edit Profil</span>
                     </a></li>
-                <li class="mode">
-                    <a href="#">
-                        <i class="fa-solid fa-circle-half-stroke"></i>
-                        <span class="link-name">Mode Gelap</span>
-                    </a>
+                <li><a href="<?php echo base_url('karyawan/akun') ?>" onclick=" logout(id)">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="link-name">Keluar</span>
+                    </a></li>
+
+                <br>
+                <li class="mode ">
+
 
                     <div class="mode-toggle">
-                        <span class="switch"></span>
+                        <span class="switch mt-5"></span>
                     </div>
                 </li>
-                <hr>
-                <li class="logout-mode  ">
+
+
 
                 <li>
 
-                    <span id="clock" name="date" class="text-white link-name"> </span>
+                    <span id="clock" name="date" class="text-white  link-name"> </span>
 
                 </li>
                 <li>
@@ -594,31 +603,12 @@ nav.close~.dashboard .top {
                 </li>
 
 
-                <script>
-                function updateClock() {
-                    var now = new Date();
-                    var clock = document.getElementById('clock');
-                    clock.innerHTML = now.toLocaleTimeString();
-                }
 
-                // Memperbarui jam setiap detik
-                setInterval(updateClock, 1000);
 
-                function updateClock2() {
-                    var now = new Date();
-                    var clock = document.getElementById('clock2');
-                    clock.innerHTML = now.toLocaleTimeString();
-                }
-
-                // Memperbarui jam setiap detik
-                setInterval(updateClock2, 1000);
-                </script>
-                <li><button class="btn btn-lg   " onclick="logout(id)">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <span class="link-name">Keluar</span>
-                    </button>
-                </li>
         </div>
+
+
+
 
 
 
@@ -641,7 +631,6 @@ nav.close~.dashboard .top {
                 </div>
             </div>
             <?php echo $this->session->flashdata('message'); ?>
-
             <form action="<?php echo base_url('Karyawan/aksi_izin') ?>" method="post" enctype="multipart/form-data">
                 <div class="overview shadow-lg p-4 mb-3 bg-body rounded">
                     <div class="wrapper d-flex flex-column">
@@ -654,6 +643,25 @@ nav.close~.dashboard .top {
         </div>
         </form>
     </section>
+    <script>
+    function updateClock() {
+        var now = new Date();
+        var clock = document.getElementById('clock');
+        clock.innerHTML = now.toLocaleTimeString();
+    }
+
+    // Memperbarui jam setiap detik
+    setInterval(updateClock, 1000);
+
+    function updateClock2() {
+        var now = new Date();
+        var clock = document.getElementById('clock2');
+        clock.innerHTML = now.toLocaleTimeString();
+    }
+
+    // Memperbarui jam setiap detik
+    setInterval(updateClock2, 1000);
+    </script>
 
     <script src="script.js"></script>
     <script>
@@ -692,6 +700,14 @@ nav.close~.dashboard .top {
     </script>
 </body>
 <script>
+<?php if ($this->session->flashdata('success_message')): ?>
+swal("Sukses", "<?php echo $this->session->flashdata('success_message'); ?>", "success");
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('error')): ?>
+swal("Kesalahan", "<?php echo $this->session->flashdata('error'); ?>", "error");
+<?php endif; ?>
+
 function logout(id) {
     swal.fire({
         title: ' Yakin Ingin Log Out',

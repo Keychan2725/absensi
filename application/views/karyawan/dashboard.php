@@ -517,6 +517,7 @@ nav.close~.dashboard .top {
 
     nav~.dashboard {
         left: 0;
+
         width: 100%;
     }
 
@@ -544,7 +545,7 @@ nav.close~.dashboard .top {
                 <img src="https://tse1.mm.bing.net/th?id=OIP.xKEbKVRjeWNbWnFmFDiGxgHaHa&pid=Api&P=0&h=180" alt="">
             </div>
 
-            <span class="logo_name">Karyawan</span>
+            <a>Karyawan</a>
         </div>
 
         <div class="menu-items">
@@ -557,7 +558,7 @@ nav.close~.dashboard .top {
                 <li><a href="<?php echo base_url('karyawan/history') ?>">
                         <i class="fa-solid fa-clock-rotate-left"></i>
 
-                        <span class="link-name">Histroy Absensi</span>
+                        <span class="link-name">History Absensi</span>
                     </a></li>
                 <li><a href="<?php echo base_url('karyawan/absensi') ?>">
                         <i class="fa-regular fa-calendar-days"></i>
@@ -572,22 +573,25 @@ nav.close~.dashboard .top {
                         <i class="fa-solid fa-circle-user"></i>
                         <span class="link-name">Edit Profil</span>
                     </a></li>
-                <li class="mode">
-                    <a href="#">
-                        <i class="fa-solid fa-circle-half-stroke"></i>
-                        <span class="link-name">Mode Gelap</span>
-                    </a>
+                <li><a href="<?php echo base_url('karyawan/akun') ?>" onclick=" logout(id)">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="link-name">Keluar</span>
+                    </a></li>
+
+                <br>
+                <li class="mode ">
+
 
                     <div class="mode-toggle">
-                        <span class="switch"></span>
+                        <span class="switch mt-5"></span>
                     </div>
                 </li>
-                <hr>
-                <li class="logout-mode  ">
+
+
 
                 <li>
 
-                    <span id="clock" name="date" class="text-white link-name"> </span>
+                    <span id="clock" name="date" class="text-white  link-name"> </span>
 
                 </li>
                 <li>
@@ -595,30 +599,8 @@ nav.close~.dashboard .top {
                 </li>
 
 
-                <script>
-                function updateClock() {
-                    var now = new Date();
-                    var clock = document.getElementById('clock');
-                    clock.innerHTML = now.toLocaleTimeString();
-                }
 
-                // Memperbarui jam setiap detik
-                setInterval(updateClock, 1000);
 
-                function updateClock2() {
-                    var now = new Date();
-                    var clock = document.getElementById('clock2');
-                    clock.innerHTML = now.toLocaleTimeString();
-                }
-
-                // Memperbarui jam setiap detik
-                setInterval(updateClock2, 1000);
-                </script>
-                <li><button class="btn btn-lg   " onclick="logout(id)">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <span class="link-name">Keluar</span>
-                    </button>
-                </li>
         </div>
 
 
@@ -635,17 +617,28 @@ nav.close~.dashboard .top {
             <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
                 <div class="d-flex">
 
-                    <div class="card  rounded " style="width: 16rem;height:11rem; margin-left:20px;">
+                    <div class="card border " style="width: 15rem;height:13rem; margin-left:20px;">
                         <p class=" fs-6 text-white text-center p-3 bg-dark">Total <br> Masuk</p>
 
-                        <p class=" fs-1 text-dark text-center">2!</p>
+
+                        <p class=" fs-1 text-dark text-center"> <i class="fa-regular fa-calendar-days"></i>
+
+                            <?php echo $jumlah_absen;?></p>
+                        <div class="card-footer">
+                            <a href="<?php echo base_url('karyawan/history')?>" class=" btn btn-sm">Data Lengkap</a>
+                        </div>
 
                     </div>
-                    <div class="card  rounded" style="width: 16rem;height:11rem; margin-left:20px;">
+                    <div class="card  border" style="width: 15rem;height:13rem; margin-left:20px;">
                         <p class=" fs-6 text-white text-center p-3 bg-dark">Total
-                            <br>Cuti
+                            <br>Izin
                         </p>
-                        <p class=" fs-1 text-dark text-center">2</p>
+                        <p class=" fs-1 text-dark text-center"> <i class="fa-regular fa-calendar-minus"></i>
+                            <?php echo $jumlah_izin;?>
+                        </p>
+                        <div class="card-footer">
+                            <a href="<?php echo base_url('karyawan/history')?>" class=" btn btn-sm">Data Lengkap</a>
+                        </div>
                     </div>
 
                 </div>
@@ -678,7 +671,7 @@ nav.close~.dashboard .top {
                                     </thead>
                                     <tbody>
                                         <?php $no = 0;foreach ($absen as $row): $no++?>
-                                        <tr class="whitespace-nowrap">
+                                        <tr class=" whitespace-nowrap">
                                             <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no?></td>
                                             <td class="px-3 py-4">
                                                 <div class="text-sm text-gray-900">
@@ -738,7 +731,25 @@ nav.close~.dashboard .top {
             </div>
     </section>
 
+    <script>
+    function updateClock() {
+        var now = new Date();
+        var clock = document.getElementById('clock');
+        clock.innerHTML = now.toLocaleTimeString();
+    }
 
+    // Memperbarui jam setiap detik
+    setInterval(updateClock, 1000);
+
+    function updateClock2() {
+        var now = new Date();
+        var clock = document.getElementById('clock2');
+        clock.innerHTML = now.toLocaleTimeString();
+    }
+
+    // Memperbarui jam setiap detik
+    setInterval(updateClock2, 1000);
+    </script>
     <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();

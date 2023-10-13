@@ -72,7 +72,7 @@ $role="admin";
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
 
 		if ($this->form_validation->run() === TRUE) {
-			// $this->m_model->tambah_data('user', $data);
+			$this->m_model->tambah_data('user', $data);
 			redirect(base_url('auth/login'));
             
 		} else {
@@ -106,7 +106,7 @@ $role="karyawan";
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
 
 		if ($this->form_validation->run() === TRUE) {
-			// $this->m_model->tambah_data('user', $data);
+			$this->m_model->tambah_data('user', $data);
 			redirect(base_url('auth/login'));
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">

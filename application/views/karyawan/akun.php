@@ -23,6 +23,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
     <title>Profile Account</title>
 </head>
 <style>
@@ -542,7 +543,7 @@ nav.close~.dashboard .top {
                 <img src="https://tse1.mm.bing.net/th?id=OIP.xKEbKVRjeWNbWnFmFDiGxgHaHa&pid=Api&P=0&h=180" alt="">
             </div>
 
-            <span class="logo_name">Karyawan</span>
+            <a>Karyawan</a>
         </div>
 
 
@@ -556,7 +557,7 @@ nav.close~.dashboard .top {
                 <li><a href="<?php echo base_url('karyawan/history') ?>">
                         <i class="fa-solid fa-clock-rotate-left"></i>
 
-                        <span class="link-name">Histroy Absensi</span>
+                        <span class="link-name">History Absensi</span>
                     </a></li>
                 <li><a href="<?php echo base_url('karyawan/absensi') ?>">
                         <i class="fa-regular fa-calendar-days"></i>
@@ -571,19 +572,23 @@ nav.close~.dashboard .top {
                         <i class="fa-solid fa-circle-user"></i>
                         <span class="link-name">Edit Profil</span>
                     </a></li>
+                <br>
+
+
                 <li class="mode">
-                    <a href="#">
-                        <i class="fa-solid fa-circle-half-stroke"></i>
-                        <span class="link-name">Mode Gelap</span>
-                    </a>
 
                     <div class="mode-toggle">
                         <span class="switch"></span>
                     </div>
                 </li>
-                <hr>
-                <li class="logout-mode  ">
 
+                <li class="logout-mode  ">
+                <li><button class="btn btn-lg   " onclick=" logout(id)">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="link-name">Keluar</span>
+                    </button>
+
+                </li>
                 <li>
 
                     <span id="clock" name="date" class="text-white link-name"> </span>
@@ -613,12 +618,7 @@ nav.close~.dashboard .top {
                 // Memperbarui jam setiap detik
                 setInterval(updateClock2, 1000);
                 </script>
-                <li><button class="btn btn-lg p-4.5rem  " onclick="logout(id)">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <span class="link-name">Keluar</span>
-                    </button>
 
-                </li>
         </div>
 
 
@@ -628,6 +628,7 @@ nav.close~.dashboard .top {
     <section class="dashboard">
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
+            <h3>Karyawan</h3>
 
 
         </div>
@@ -644,13 +645,10 @@ nav.close~.dashboard .top {
             <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
 
                 <?php $no = 0;
-    foreach ($user as $row) : $no++ ?>
-
-
-                <div class="  w-100 m-auto p-3 ">
-
+foreach ($user as $row) : $no++; ?>
+                <div class="w-100 m-auto p-3">
                     <br>
-                    <div><?php $this->session->flashdata('message') ?></div>
+                    <div><?php echo $this->session->flashdata('message'); ?></div>
                     <div class="row d-flex">
                         <center>
                             <button class="border border-0 btn btn-link" data-bs-toggle="modal"
@@ -666,90 +664,98 @@ nav.close~.dashboard .top {
                         </center>
                         <br>
                         <br>
-                        <form method="post" action="<?php echo base_url('admin/aksi_ubah_password') ?>"
-                            enctype="multipart/form_data">
-                            <input name="id_siswa" type="hidden" value="<?php echo $row->id ?>">
+                        <form method="post" action="<?php echo base_url('karyawan/aksi_update_profile'); ?>"
+                            enctype="multipart/form-data">
+                            <input name="id" type="hidden" value="<?php echo $row->id; ?>">
                             <div class="d-flex flex-row ">
-
                                 <div class="p-2 col-6">
-                                    <label for="" class="form-label fs-5 ">Email </label>
-                                    <input type="text" class="form-control" id="email" name="email" placeholder="Email"
-                                        value="<?php echo $row->email ?>">
-                                </div>
-                                <div class="p-2 col-6">
+                                    <label for="" class="form-label fs-5">Nama Depan </label>
+                                    <input type="text" class="form-control" id="nama_depan" name="nama_depan"
+                                        placeholder="Nama Depan" value="<?php echo $row->nama_depan; ?>">
                                     <label for="" class="form-label fs-5">Username </label>
                                     <input type="text" class="form-control" id="username" name="username"
-                                        placeholder="Username" value="<?php echo $row->username ?>">
+                                        placeholder="Username" value="<?php echo $row->username; ?>">
                                 </div>
-                            </div>
-                            <br>
-                            <br>
-                            <div class="d-flex flex-row ">
-                                <div class="p-2 col-6 >
-                    <label for=" nama="" class="form-label fs-5">Password Baru </label>
-                                    <input type="text" class="form-control" id="password_baru" name="password_baru"
-                                        placeholder="Password Baru" value=>
-                                </div>
-                                <div class="p-2 col-6 >
-                    <label for=" nama="" class="form-label fs-5"> Konfirmasi </label>
-                                    <input type="text" class="form-control" id="password_konfirmasi"
-                                        name="password_konfirmasi" placeholder="Konfirmasi Paswword" value=>
-                                </div>
-                            </div>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Foto Profile</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="container w-75 m p-3">
-                                            <form method="post"
-                                                action="<?php echo base_url('karyawan/upload_image'); ?>"
-                                                enctype="multipart/form-data" class="row">
-                                                <div class="mb-3 col-12">
-                                                    <label for="nama" class="form-label">Foto:</label>
-                                                    <input type="hidden" class="form-control" id="id" name="id"
-                                                        value="<?php echo $this->session->userdata('id'); ?>">
-                                                    <input type="hidden" name="base64_image" id="base64_image">
-                                                    <input class="form-control" type="file" name="userfile"
-                                                        id="userfile" accept="image/*">
-                                                </div>
-                                                <div class="col-12 text-end">
-                                                    <input type="submit" class="btn btn-sm btn-primary px-3"
-                                                        name="submit" value="Ubah Foto"></input>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a class="btn btn-danger"
-                                                href="<?php echo base_url('karyawan/hapus_image'); ?>">Hapus
-                                                Foto</a>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
-
-
-
-
-
-                            </div>
-                            <div class="flex justify-content-between">
-
-                                <div>
-                                    <button type="submit" class="btn btn-sm btn-dark" name=" submit">Confirm</button>
+                                <div class="p-2 col-6">
+                                    <label for="" class="form-label fs-5">Nama Belakang </label>
+                                    <input type="text" class="form-control" id="nama_belakang" name="nama_belakang"
+                                        placeholder="Nama Belakang" value="<?php echo $row->nama_belakang; ?>">
                                 </div>
                             </div>
 
-                        </form>
-                        <?php endforeach ?>
                     </div>
+                </div>
+                <?php endforeach; ?>
+
+                <br>
+                <div class="d-flex form-outline flex-fill mb-0  ">
+                    <input type="password" id="password1" class="form-control" placeholder="Password Baru">
+
+                    <i id="showPassword1" class="fas fa-eye-slash absolute p-2"></i>
+
+
+
+
+                    <input type="password" id="password2" class="form-control" placeholder="Konfirmasi Password">
+
+                    <i id="showPassword2" class="fas fa-eye-slash absolute p-2 "></i>
+
+
+
+                </div>
+                </form>
+                <br>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Foto Profile</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="container w-75 m p-3">
+                                <form method="post" action="<?php echo base_url('project/upload_image'); ?>"
+                                    enctype="multipart/form-data" class="row">
+                                    <div class="mb-3 col-12">
+                                        <label for="nama" class="form-label">Foto:</label>
+                                        <input type="hidden" class="form-control" id="id" name="id"
+                                            value="<?php echo $this->session->userdata('id'); ?>">
+                                        <input type="hidden" name="base64_image" id="base64_image">
+                                        <input class="form-control" type="file" name="userfile" id="userfile"
+                                            accept="image/*">
+                                    </div>
+                                    <div class="col-12 text-end">
+                                        <input type="submit" class="btn btn-primary px-3" name="submit"
+                                            value="Ubah Foto"></input>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-danger" href="<?php echo base_url('Project/hapus_image'); ?>">Hapus
+                                    Foto</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+                </div>
+                <div class="flex justify-content-between">
+
+                    <div>
+                        <button type="submit" class="btn btn-sm btn-dark" name=" submit">Confirm</button>
+                    </div>
+                </div>
+
+                </form>
+            </div>
     </section>
 
     <script src="script.js"></script>
@@ -813,6 +819,37 @@ function logout(id) {
         }
     });
 }
+
+
+const passwordInput1 = document.getElementById('password1');
+const togglePassword1 = document.getElementById('showPassword1');
+
+togglePassword1.addEventListener('click', function() {
+    if (passwordInput1.type === 'password') {
+        passwordInput1.type = 'text';
+        togglePassword1.querySelector('i').classList.remove('fa-eye-slash');
+        togglePassword1.querySelector('i').classList.add('fa-eye');
+    } else {
+        passwordInput1.type = 'password';
+        togglePassword1.querySelector('i').classList.remove('fa-solid fa-eye');
+        togglePassword1.querySelector('i').classList.add('fa-eye-slash');
+    }
+});
+
+const passwordInput2 = document.getElementById('password2');
+const togglePassword2 = document.getElementById('showPassword2');
+
+togglePassword2.addEventListener('click', function() {
+    if (passwordInput2.type === 'password') {
+        passwordInput2.type = 'text';
+        togglePassword2.querySelector('i').classList.remove('fa-eye');
+        togglePassword2.querySelector('i').classList.add('fa-eye-slash');
+    } else {
+        passwordInput2.type = 'password';
+        togglePassword2.querySelector('i').classList.remove('fa-eye-slash');
+        togglePassword2.querySelector('i').classList.add('fa-eye');
+    }
+});
 </script>
 
 </html>
