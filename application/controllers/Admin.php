@@ -15,8 +15,19 @@ class Admin extends CI_Controller
     }
     public function dashboard()
     {
-        $this->load->view('admin/dashboard');
+        $data['absen'] = $this-> m_model->get_data('absensi' , $this->session->userdata('id'))->result();
+        $data['jumlah_absen'] = $this-> m_model->get_data('absensi' , $this->session->userdata('id'))->num_rows();
+         $this->load->view('admin/dashboard',$data);
+    }
+   
+    public function rekap_bulan()
+    {   $data['absensi'] = $this->m_model->getAbsensiLast7Days();
+        $this->load->view('admin/rekap_bulan',$data);
+    }
+    public function karyawan()
+    {
+        $this->load->view('admin/karyawan');
     }
    
     
-}
+}  

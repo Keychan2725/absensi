@@ -65,6 +65,20 @@ public function get_by_nisn($nisn){
         
 
 }
+public function get_foto_by_id($id)
+    {
+        $this->db->select('foto');
+        $this->db->from('user');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+    
+        if ($query->num_rows() > 0) {
+            $result = $query->row();
+            return $result->image;
+        } else {
+            return false;
+        }
+    }
 public function get_by_jurusan($tingkat, $jurusan)
     {
         $this->db->select('id');
@@ -124,26 +138,19 @@ public function get_by_jurusan($tingkat, $jurusan)
                     return $this->db->get_where('user', array('id' => $user_id))->row_array();
                 }
             
-                public function validate_password($user_id, $password)
-                {
-                    $user_data = $this->db->get_where('user', array('id' => $user_id))->row_array();
-            
-                    return password_verify($password, $user_data['password']);
+               
+                public function getAbsensiLast7Days() {
+                    $this->load->database();
+                    $end_date = date('Y-m-d');
+                    $start_date = date('Y-m-d', strtotime('-7 days', strtotime($end_date)));        
+                    $query = $this->db->select('date, kegiatan, jam_masuk, jam_keluar, keterangan_izin, status, COUNT(*) AS total_absences')
+                                      ->from('absensi')
+                                      ->where('date >=', $start_date)
+                                      ->where('date <=', $end_date)
+                                      ->group_by('date, kegiatan, jam_masuk, jam_keluar, keterangan_izin, status')
+                                      ->get();
+                    return $query->result_array();
                 }
             
-                public function update_profil($user_id, $data)
-                {
-                    $this->db->where('id', $user_id);
-                    $this->db->update('user', $data);
-                }
-                public function save_image($user_id, $image)
-{
-    $data = array(
-        'foto' => $image
-    );
-
-    $this->db->where('id', $user_id);
-    $this->db->update('user', $data);
-}
-
+ 
 }

@@ -21,8 +21,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
 
     <title>Absensi</title>
@@ -574,25 +574,26 @@ nav.close~.dashboard .top {
                         <i class="fa-solid fa-circle-user"></i>
                         <span class="link-name">Edit Profil</span>
                     </a></li>
-                <li><a href="<?php echo base_url('karyawan/akun') ?>" onclick=" logout(id)">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <span class="link-name">Keluar</span>
-                    </a></li>
-
                 <br>
-                <li class="mode ">
 
+
+                <li class="mode">
 
                     <div class="mode-toggle">
-                        <span class="switch mt-5"></span>
+                        <span class="switch"></span>
                     </div>
                 </li>
 
+                <li class="logout-mode  ">
+                <li><a class="btn btn-lg   " onclick=" logout(id)">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="link-name">Keluar</span>
+                    </a>
 
-
+                </li>
                 <li>
 
-                    <span id="clock" name="date" class="text-white  link-name"> </span>
+                    <span id="clock" name="date" class="text-white link-name"> </span>
 
                 </li>
                 <li>

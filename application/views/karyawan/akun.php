@@ -13,7 +13,9 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+
     <!-- Script -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
@@ -23,8 +25,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-    <title>Profile Account</title>
+    <title>Dashboard</title>
 </head>
 <style>
 /* ===== Google Font Import - Poppins ===== */
@@ -255,7 +256,7 @@ body.dark .nav-links li a:hover .link-name {
 }
 
 body.dark .switch:before {
-    left: 20px;
+    left: 40px;
 }
 
 .dashboard {
@@ -516,6 +517,7 @@ nav.close~.dashboard .top {
 
     nav~.dashboard {
         left: 0;
+
         width: 100%;
     }
 
@@ -546,7 +548,6 @@ nav.close~.dashboard .top {
             <a>Karyawan</a>
         </div>
 
-
         <div class="menu-items">
             <ul class="nav-links" style="padding-left:16px;">
                 <li><a href="<?php echo base_url('karyawan/dashboard') ?>">
@@ -572,9 +573,9 @@ nav.close~.dashboard .top {
                         <i class="fa-solid fa-circle-user"></i>
                         <span class="link-name">Edit Profil</span>
                     </a></li>
+
+
                 <br>
-
-
                 <li class="mode">
 
                     <div class="mode-toggle">
@@ -583,10 +584,10 @@ nav.close~.dashboard .top {
                 </li>
 
                 <li class="logout-mode  ">
-                <li><button class="btn btn-lg   " onclick=" logout(id)">
+                <li><a class="btn btn-lg   " onclick=" logout(id)">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span class="link-name">Keluar</span>
-                    </button>
+                    </a>
 
                 </li>
                 <li>
@@ -599,28 +600,9 @@ nav.close~.dashboard .top {
                 </li>
 
 
-                <script>
-                function updateClock() {
-                    var now = new Date();
-                    var clock = document.getElementById('clock');
-                    clock.innerHTML = now.toLocaleTimeString();
-                }
 
-                // Memperbarui jam setiap detik
-                setInterval(updateClock, 1000);
-
-                function updateClock2() {
-                    var now = new Date();
-                    var clock = document.getElementById('clock2');
-                    clock.innerHTML = now.toLocaleTimeString();
-                }
-
-                // Memperbarui jam setiap detik
-                setInterval(updateClock2, 1000);
-                </script>
 
         </div>
-
 
 
     </nav>
@@ -628,136 +610,214 @@ nav.close~.dashboard .top {
     <section class="dashboard">
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
-            <h3>Karyawan</h3>
 
 
         </div>
 
-        <div class="dash-content">
-
+        <div class="dash-content mx-auto">
             <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
                 <div class="title ">
 
                     <span class="text ">Profile Account</span>
 
                 </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="overflow-auto" style="white-space: nowrap;">
+                                <?php $no = 0;
+foreach ($user as $row) : $no++; ?>
+                                <div class="w-100 m-auto p-3">
+                                    <br>
+                                    <div><?php echo $this->session->flashdata('message'); ?></div>
+                                    <div class="row d-flex">
+
+
+                                        <span class="border border-0 btn btn-link">
+                                            <?php if (!empty($row->foto)): ?>
+                                            <img class="rounded-circle border border-0" height="150" width="150"
+                                                src="<?php echo  $row->foto;?>">
+                                            <?php else: ?>
+                                            <img class="rounded-circle border border-0" height="150" width="150"
+                                                src="https://slabsoft.com/wp-content/uploads/2022/05/pp-wa-kosong-default.jpg" />
+                                            <?php endif;?>
+                                        </span>
+
+                                        <br>
+                                        <br>
+                                        <form method="post"
+                                            action="<?php echo base_url('karyawan/aksi_update_profile'); ?>"
+                                            enctype="multipart/form-data">
+                                            <input name="id" type="hidden" value="<?php echo $row->id; ?>">
+                                            <div class="d-flex flex-row ">
+                                                <div class="p-2 col-6">
+                                                    <label for="" class="form-label fs-5">Nama
+                                                        <br>
+                                                        Depan </label>
+                                                    <input type="text" class="form-control" id="nama_depan"
+                                                        name="nama_depan" placeholder="Nama Depan"
+                                                        value="<?php echo $row->nama_depan; ?>">
+                                                    <label for="" class="form-label fs-5">Username </label>
+                                                    <input type="text" class="form-control" id="username"
+                                                        name="username" placeholder="Username"
+                                                        value="<?php echo $row->username; ?>">
+                                                </div>
+                                                <br>
+                                                <div class="p-2 col-6">
+                                                    <label for="" class="form-label fs-5">Nama
+                                                        <br>
+                                                        Belakang </label>
+                                                    <input type="text" class="form-control" id="nama_belakang"
+                                                        name="nama_belakang" placeholder="Nama Belakang"
+                                                        value="<?php echo $row->nama_belakang; ?>">
+
+
+
+                                                </div>
+                                            </div>
+                                            <input type="file" name="foto" class="p-3">
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
+
+
+
+                                <div class="d-flex p-2 row justify-content-evenly ">
+                                    <button type="submit" class="btn btn-sm btn-dark col-5" name=" submit">Ubah
+                                        Profile</button>
+
+                                    <a class="btn btn-danger col-5"
+                                        href="<?php echo base_url('karyawan/hapus_image'); ?>">
+                                        Hapus
+                                        Foto</a>
+                                </div>
+
+                                <br>
+
+                                </form>
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
+                <div class="title ">
 
-                <?php $no = 0;
-foreach ($user as $row) : $no++; ?>
-                <div class="w-100 m-auto p-3">
-                    <br>
-                    <div><?php echo $this->session->flashdata('message'); ?></div>
-                    <div class="row d-flex">
-                        <center>
-                            <button class="border border-0 btn btn-link" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <?php if (!empty($row->foto)): ?>
-                                <img class="rounded-circle" height="150" width="150"
-                                    src="<?php echo base64_decode($row->foto);?>">
-                                <?php else: ?>
-                                <img class="rounded-circle" height="150" width="150"
-                                    src="https://slabsoft.com/wp-content/uploads/2022/05/pp-wa-kosong-default.jpg" />
-                                <?php endif;?>
-                            </button>
-                        </center>
-                        <br>
-                        <br>
-                        <form method="post" action="<?php echo base_url('karyawan/aksi_update_profile'); ?>"
-                            enctype="multipart/form-data">
-                            <input name="id" type="hidden" value="<?php echo $row->id; ?>">
-                            <div class="d-flex flex-row ">
-                                <div class="p-2 col-6">
-                                    <label for="" class="form-label fs-5">Nama Depan </label>
-                                    <input type="text" class="form-control" id="nama_depan" name="nama_depan"
-                                        placeholder="Nama Depan" value="<?php echo $row->nama_depan; ?>">
-                                    <label for="" class="form-label fs-5">Username </label>
-                                    <input type="text" class="form-control" id="username" name="username"
-                                        placeholder="Username" value="<?php echo $row->username; ?>">
-                                </div>
-                                <div class="p-2 col-6">
-                                    <label for="" class="form-label fs-5">Nama Belakang </label>
-                                    <input type="text" class="form-control" id="nama_belakang" name="nama_belakang"
-                                        placeholder="Nama Belakang" value="<?php echo $row->nama_belakang; ?>">
-                                </div>
-                            </div>
-
-                    </div>
-                </div>
-                <?php endforeach; ?>
-
-                <br>
-                <div class="d-flex form-outline flex-fill mb-0  ">
-                    <input type="password" id="password1" class="form-control" placeholder="Password Baru">
-
-                    <i id="showPassword1" class="fas fa-eye-slash absolute p-2"></i>
-
-
-
-
-                    <input type="password" id="password2" class="form-control" placeholder="Konfirmasi Password">
-
-                    <i id="showPassword2" class="fas fa-eye-slash absolute p-2 "></i>
-
-
+                    <span class="text ">Password</span>
 
                 </div>
-                </form>
-                <br>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Foto Profile</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="container w-75 m p-3">
-                                <form method="post" action="<?php echo base_url('project/upload_image'); ?>"
-                                    enctype="multipart/form-data" class="row">
-                                    <div class="mb-3 col-12">
-                                        <label for="nama" class="form-label">Foto:</label>
-                                        <input type="hidden" class="form-control" id="id" name="id"
-                                            value="<?php echo $this->session->userdata('id'); ?>">
-                                        <input type="hidden" name="base64_image" id="base64_image">
-                                        <input class="form-control" type="file" name="userfile" id="userfile"
-                                            accept="image/*">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="overflow-auto" style="white-space: nowrap;">
+
+                                <form action="<?php echo base_url('karyawan/aksi_ubah_password'); ?>"
+                                    enctype="multipart/form-data" method="post"></form>
+                                <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
+                                    <div class="d-flex form-outline flex-fill mb-0  ">
+                                        <input type="password" name="password_baru" id="password1" class="form-control"
+                                            placeholder="Password Baru">
+
+                                        <i id="showPassword1" class="fas fa-eye-slash absolute p-2"></i>
+
+
+
+
+                                        <input type="password" name="konfirmasi_password" id="password2"
+                                            class="form-control" placeholder="Konfirmasi Password">
+
+                                        <i id="showPassword2" class="fas fa-eye-slash absolute p-2 "></i>
+
+
+
                                     </div>
-                                    <div class="col-12 text-end">
-                                        <input type="submit" class="btn btn-primary px-3" name="submit"
-                                            value="Ubah Foto"></input>
-                                    </div>
+                                </div>
+
+
+                                <div class="d-flex p-2 row justify-content-evenly ">
+                                    <button type="submit" class="btn btn-sm btn-dark col-5" name=" submit">Ubah
+                                        Password</button>
+
+
+                                </div>
+
+                                <br>
+
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-danger" href="<?php echo base_url('Project/hapus_image'); ?>">Hapus
-                                    Foto</a>
-                            </div>
 
+
+
+                            </div>
                         </div>
-
-                    </div>
-
-
-
-
-
-
-
-                </div>
-                <div class="flex justify-content-between">
-
-                    <div>
-                        <button type="submit" class="btn btn-sm btn-dark" name=" submit">Confirm</button>
                     </div>
                 </div>
-
-                </form>
             </div>
     </section>
 
+    <script>
+    // show pass
+    var passwordInput1 = document.getElementById('password1');
+    var togglePassword1 = document.getElementById('showPassword1');
+
+    togglePassword1.addEventListener('click', function() {
+        if (passwordInput1.type === 'password') {
+            passwordInput1.type = 'text';
+            togglePassword1.classList.remove('fa-eye-slash');
+            togglePassword1.classList.add('fa-eye');
+        } else {
+            passwordInput1.type = 'password';
+            togglePassword1.classList.remove('fa-eye');
+            togglePassword1.classList.add('fa-eye-slash');
+        }
+    });
+
+    var passwordInput2 = document.getElementById('password2');
+    var togglePassword2 = document.getElementById('showPassword2');
+
+    togglePassword2.addEventListener('click', function() {
+        if (passwordInput2.type === 'password') {
+            passwordInput2.type = 'text';
+            togglePassword2.classList.remove('fa-eye-slash');
+            togglePassword2.classList add('fa-eye');
+        } else {
+            passwordInput2.type = 'password';
+            togglePassword2.classList.remove('fa-eye');
+            togglePassword2.classList.add('fa-eye-slash');
+        }
+    });
+
+    // jam
+    function updateClock() {
+        var now = new Date();
+        var clock = document.getElementById('clock');
+        clock.innerHTML = now.toLocaleTimeString();
+    }
+
+    // Memperbarui jam setiap detik
+    setInterval(updateClock, 1000);
+
+    function updateClock2() {
+        var now = new Date();
+        var clock = document.getElementById('clock2');
+        clock.innerHTML = now.toLocaleTimeString();
+    }
+
+    // Memperbarui jam setiap detik
+    setInterval(updateClock2, 1000);
+    </script>
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
     <script src="script.js"></script>
     <script>
     const body = document.querySelector("body"),
@@ -819,37 +879,6 @@ function logout(id) {
         }
     });
 }
-
-
-const passwordInput1 = document.getElementById('password1');
-const togglePassword1 = document.getElementById('showPassword1');
-
-togglePassword1.addEventListener('click', function() {
-    if (passwordInput1.type === 'password') {
-        passwordInput1.type = 'text';
-        togglePassword1.querySelector('i').classList.remove('fa-eye-slash');
-        togglePassword1.querySelector('i').classList.add('fa-eye');
-    } else {
-        passwordInput1.type = 'password';
-        togglePassword1.querySelector('i').classList.remove('fa-solid fa-eye');
-        togglePassword1.querySelector('i').classList.add('fa-eye-slash');
-    }
-});
-
-const passwordInput2 = document.getElementById('password2');
-const togglePassword2 = document.getElementById('showPassword2');
-
-togglePassword2.addEventListener('click', function() {
-    if (passwordInput2.type === 'password') {
-        passwordInput2.type = 'text';
-        togglePassword2.querySelector('i').classList.remove('fa-eye');
-        togglePassword2.querySelector('i').classList.add('fa-eye-slash');
-    } else {
-        passwordInput2.type = 'password';
-        togglePassword2.querySelector('i').classList.remove('fa-eye-slash');
-        togglePassword2.querySelector('i').classList.add('fa-eye');
-    }
-});
 </script>
 
 </html>

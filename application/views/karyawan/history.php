@@ -580,25 +580,26 @@ nav.close~.dashboard .top {
                         <i class="fa-solid fa-circle-user"></i>
                         <span class="link-name">Edit Profil</span>
                     </a></li>
-                <li><a href="<?php echo base_url('karyawan/akun') ?>" onclick=" logout(id)">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <span class="link-name">Keluar</span>
-                    </a></li>
-
                 <br>
-                <li class="mode ">
 
+
+                <li class="mode">
 
                     <div class="mode-toggle">
-                        <span class="switch mt-5"></span>
+                        <span class="switch"></span>
                     </div>
                 </li>
 
+                <li class="logout-mode  ">
+                <li><a class="btn btn-lg   " onclick=" logout(id)">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="link-name">Keluar</span>
+                    </a>
 
-
+                </li>
                 <li>
 
-                    <span id="clock" name="date" class="text-white  link-name"> </span>
+                    <span id="clock" name="date" class="text-white link-name"> </span>
 
                 </li>
                 <li>

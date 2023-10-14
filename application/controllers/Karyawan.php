@@ -60,10 +60,15 @@ public function aksi_absensi()
         'id_karyawan' => $id_karyawan
     ));
 
+    // Mengecek apakah tanggal terakhir absensi sudah berbeda
+    if ($absensi_terakhir && $absensi_terakhir->date !== $tanggal_absensi) {
+        $absensi_terakhir = null; // Atur $absensi_terakhir menjadi null jika tanggal berbeda
+    }
+
     if ($absensi_terakhir && $absensi_terakhir->jam_keluar === null) {
-        // Karyawan belum pulang, tidak dapat melakukan absensi lagi
+        // Karyawan belum pulang, tidak dapat melakukan absensi tambahan
         $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-          Tidak dapat melakukan absensi tambahan
+          Anda tidak dapat melakukan absensi tambahan
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>');
         redirect(base_url('karyawan/absensi'));
@@ -84,6 +89,7 @@ public function aksi_absensi()
     }
 }
 
+
 public function aksi_izin()
 {        
     date_default_timezone_set('Asia/Jakarta');
@@ -91,7 +97,7 @@ public function aksi_izin()
     $id_karyawan = $this->session->userdata('id');
     $tanggal_izin = date('Y-m-d');
 
-    // Cek apakah karyawan sudah memiliki catatan izin pada tanggal yang sama
+    
     $izin = $this->m_model->getwhere('absensi', array(
         'id_karyawan' => $id_karyawan,
         'date' => $tanggal_izin
@@ -99,29 +105,46 @@ public function aksi_izin()
 
     if ($izin->num_rows() > 0) {
         // Karyawan sudah memiliki catatan izin pada tanggal yang sama
-        
         $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
             Anda Sudah Mengajukan Izin Hari Ini
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>');
         redirect(base_url('karyawan/izin'));
     } else {
-        // Karyawan belum memiliki catatan izin pada tanggal yang sama, bisa melanjutkan
-        $data = [
+      
+        
+        // Tambahkan pengecekan apakah sudah ada data absensi pada tanggal yang sama
+        $absensi = $this->m_model->getwhere('absensi', array(
             'id_karyawan' => $id_karyawan,
-            'kegiatan' => '-',
-            'jam_keluar' => NULL,
-            'jam_masuk' => NULL, 
-            'date' => $tanggal_izin,  
-            'keterangan_izin' => $this->input->post('izin'),
-            'status' => 'done'
-        ];
-    
-        $this->m_model->tambah_data('absensi', $data);
-         
-        redirect(base_url('karyawan/history'));
+            'date' => $tanggal_izin
+        ));
+
+        if ($absensi->num_rows() > 0) {
+            // Karyawan sudah memiliki catatan absensi pada tanggal yang sama
+            $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Anda Sudah Melakukan Absensi Hari Ini
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+            redirect(base_url('karyawan/izin'));
+        } else {
+            // Karyawan belum memiliki catatan izin atau absensi pada tanggal yang sama, bisa melanjutkan
+            $data = [
+                'id_karyawan' => $id_karyawan,
+                'kegiatan' => '-',
+                'jam_keluar' => NULL,
+                'jam_masuk' => NULL, 
+                'date' => $tanggal_izin,  
+                'keterangan_izin' => $this->input->post('izin'),
+                'status' => 'done'
+            ];
+        
+            $this->m_model->tambah_data('absensi', $data);
+             
+            redirect(base_url('karyawan/history'));
+        }
     }
 }
+
 
 
 
@@ -146,105 +169,94 @@ public function akun()
 }
 
 public function aksi_update_profile()
-{
+    {
     
-    $password_baru = md5($this->input->post('password_baru', true));
-    $konfirmasi_password = md5($this->input->post('konfirmasi_password', true));
-   
-   
-    $query = $this->m_model->getwhere('user', $data);
-    $result = $query->row_array();
-    if (md5($password_baru) === md5($konfirmasi_password)) {
-
+        
+        $username = $this->input->post('username');
+        $nama_depan = $this->input->post('nama_depan');
+        $nama_belakang = $this->input->post('nama_belakang');
+        $foto = $this->input->post('foto');
      
-            $data =  [   
-                 'password' => md5($this->input->post('password_baru')),
-                 'nama_depan' => $this->input->post('nama_depan'),
-                 'nama_belakang' => $this->input->post('nama_belakang'),
-                 'username' => $this->input->post('username'),
-                 'email' => $this->input->post('email'),
-                ];
-            $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=> $this->session->userdata('id')));
+				$data = [
+                   'foto' => $foto,
+                   'username' => $username,
+                   'nama_depan' => $nama_depan,
+                   'nama_belakang' => $nama_belakang,
+               ];
+               
+              
+               $this->session->set_userdata($data);
+               $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
+               redirect(base_url('karyawan/akun'));
+            
+	 
+           
+		}
+ 
+public function aksi_ubah_password()
+    {
+    
+        $password_baru = $this->input->post('password_baru');
+        $konfirmasi_password = $this->input->post('konfirmasi_password');
+        
+     
+			 
+               if (!empty($password_baru) && strlen($password_baru) >= 8) {
+                   if ($password_baru === $konfirmasi_password) {
+                       $data['password'] = md5($password_baru);
+                   }
+              
+               $this->session->set_userdata($data);
+               $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
+               redirect(base_url('karyawan/akun'));
+             } else {
+                $this->session->set_flashdata('message','Password Anda Kurang Dari 8 Angka');
+                  redirect(base_url('karyawan/akun'));
+              }
+		 
+	 
+           
+		}
+ 
+
+        public function upload_image()
+        {  
+            $base64_image = $this->input->post('base64_image');
+
+            $binary_image = base64_encode($base64_image);
+        
+            $data = array(
+                'foto' => $binary_image
+            );
+        
+            $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=>$this->input->post('id')));
             if($eksekusi) {
                 $this->session->set_flashdata('sukses' , 'berhasil');
                 redirect(base_url('karyawan/akun'));
             } else {
                 $this->session->set_flashdata('error' , 'gagal...');
-                redirect(base_url('karyawan/akun/'.$this->session->userdata('id')));
+               echo "error gais";
             }
+        }
         
-    } else {
-        $this->session->set_flashdata('password_lama' , 'Password lama dengan inputan tidak cocok');
-        redirect(base_url('karyawan/akun/'.$this->session->userdata('id')));
+    
+    public function hapus_image()
+    { 
+        $data = array(
+            'foto' => NULL
+        );
+    
+        $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=>$this->session->userdata('id')));
+        if($eksekusi) {
+            $this->session->set_flashdata('sukses' , 'berhasil');
+            redirect(base_url('karyawan/akun'));
+        } else {
+            $this->session->set_flashdata('error' , 'gagal...');
+           echo "error gais";
+        }
     }
-}
-// public function aksi_update_profile()
-// {
-//     $user_id = $this->session->userdata('id');
-//     $username = $this->input->post('username');
-//     $nama_depan = $this->input->post('nama_depan');
-//     $nama_belakang = $this->input->post('nama_belakang');
-//     $konfirmasi_password = md5($this->input->post('konfirmasi_password'));
-//     $password_baru = md5($this->input->post('password_baru'));
-
-//     if ($this->m_model->validate_password($user_id, $konfirmasi_password)) {
-//         $data = array(
-//             'username' => $username,
-//             'nama_depan' => $nama_depan,
-//             'nama_belakang' => $nama_belakang,
-//             'password' => $password_baru
-//         );
-
-     
-       
-
-//         // Jika pengguna mengganti password, hash password baru
-//         if (!empty($password_baru)) {
-//             $data['password'] = md5($password_baru, PASSWORD_DEFAULT);
-//         }
-
-//         $this->m_model->update_profil($user_id, $data);
-//         redirect('profil'); // Redirect kembali ke halaman profil setelah update
-//     } else {
-//         // Password konfirmasi tidak cocok
-//         echo "Gagal memperbarui profil. Pastikan konfirmasi password benar.";
-//     }
-// }
-public function upload_image()
-{  
-    $base64_image = $this->input->post('base64_image');
-
-    $binary_image = base64_encode($base64_image);
-
-    $data = array(
-        'foto' => $binary_image
-    );
-
-    $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=>$this->input->post('id')));
-    if($eksekusi) {
-        $this->session->set_flashdata('sukses' , 'berhasil');
-        redirect(base_url('karyawan/akun'));
-    } else {
-        $this->session->set_flashdata('error' , 'gagal...');
-       echo "error gais";
-    }
-}
-
-public function hapus_image()
-{ 
-    $data = array(
-        'foto' => NULL
-    );
-
-    $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=>$this->session->userdata('id')));
-    if($eksekusi) {
-        $this->session->set_flashdata('sukses' , 'berhasil');
-        redirect(base_url('karyawan/akun'));
-    } else {
-        $this->session->set_flashdata('error' , 'gagal...');
-       echo "error gais";
-    }
-}
+    
+    
  
 public function ubah_absen($id)
 {
