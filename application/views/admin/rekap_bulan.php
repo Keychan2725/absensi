@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Responsive Sidebar Menu | CodingLab </title>
+    <title>Rekap Bulanan</title>
     <link rel="stylesheet" href="style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -326,11 +326,11 @@
                 <span class="tooltip">Dashboard</span>
             </li>
             <li>
-                <a href="<?php echo base_url('admin/rekap_tanggal') ?>">
+                <a href="<?php echo base_url('admin/rekap_harian') ?>">
                     <i class="fa-regular fa-calendar-days"></i>
-                    <span class="links_name">Rekapan Tanggal</span>
+                    <span class="links_name">Rekapan Harian</span>
                 </a>
-                <span class="tooltip">Rekapan Tanggal</span>
+                <span class="tooltip">Rekapan Harian</span>
             </li>
             <li>
                 <a href="<?php echo base_url('admin/rekap_minggu') ?>">
@@ -354,7 +354,13 @@
                 <span class="tooltip">Karyawan</span>
             </li>
 
-            <span id="clock" name="date" class="links_name"> </span>
+
+            <li>
+
+                <span id="clock" name="date" class="text-white links_name"> </span>
+
+
+            </li>
             <li class="profile">
 
 
@@ -375,14 +381,41 @@
                 <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-black text-white text-xl">
                     <div class="flex justify-center mb-2 md:justify-start md:pl-6">
                         REKAP BULANAN
+                        <div class="flex justify-center p-2 md:justify-end md:pl-6">
+                            <a href="<?php echo base_url('Admin/export_bulan')?>"
+                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Export</a>
 
+                        </div>
                     </div>
                 </div>
                 <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
                     <table class="my-4 w-full divide-y divide-gray-300 text-center">
+                        <form action="rekap_bulan" method="post">
+
+                            <select id="bulan" name="bulan">
+                                <option selected>Pilih Bulan</option>
+                                <option value="01">Januari</option>
+                                <option value="02">Februari</option>
+                                <option value="03">Maret</option>
+                                <option value="04">April</option>
+                                <option value="05">Mei</option>
+                                <option value="06">Juni</option>
+                                <option value="07">Juli</option>
+                                <option value="08">Agustus</option>
+                                <option value="09">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">Desember</option>
+                            </select>
+
+
+
+
+                        </form>
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-3 py-2 text-xs text-gray-500">NO</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">NAMA</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">
                                     KEGIATAN
                                 </th>
@@ -393,40 +426,45 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
-                            <?php $no=0; foreach ($absensi as $absen): $no++ ?>
-                            <tr class="whitespace-nowrap">
+                            <?php $no=0; foreach ($rekap_bulan as $row)
+                            : $no++?> <tr class="whitespace-nowrap">
                                 <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen['kegiatan']; ?>
+                                        <?php echo tampil_id_karyawan($row->id_karyawan); ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen['date']; ?>
+                                        <?php echo $row->kegiatan; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php if( $absen['jam_masuk'] == NULL) {
+                                        <?php echo $row->date; ?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php if(  $row->jam_masuk == NULL) {
                         echo '-';
                       } else{
-                        echo  $absen['jam_masuk'];
+                        echo  $row->jam_masuk;
                       }?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php if( $absen['jam_keluar'] == NULL) {
+                                        <?php if( $row->jam_keluar == NULL) {
                         echo '-';
                       } else{
-                        echo  $absen['jam_keluar'];
+                        echo  $row->jam_keluar;
                       }?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen['keterangan_izin']; ?>
+                                        <?php echo $row->keterangan_izin; ?>
                                     </div>
                                 </td>
                             </tr>
@@ -440,12 +478,12 @@
 
         <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Add an event listener for the "change" event on the select element
+
             var selectElement = document.getElementById('bulan');
-            var formElement = selectElement.form; // Get the parent form
+            var formElement = selectElement.form;
 
             selectElement.addEventListener('change', function() {
-                formElement.submit(); // Submit the form when the select element changes
+                formElement.submit();
             });
         });
         </script>

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
 
 <head>
@@ -25,7 +24,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>Dashboard</title>
+    <title>Profile</title>
 </head>
 <style>
 /* ===== Google Font Import - Poppins ===== */
@@ -631,15 +630,18 @@ foreach ($user as $row) : $no++; ?>
                                 <div class="w-100 m-auto p-3">
                                     <br>
                                     <div><?php echo $this->session->flashdata('message'); ?></div>
+                                    <div><?php echo $this->session->flashdata('sukses'); ?></div>
                                     <div class="row d-flex">
+                                        <input name="id" type="hidden" value="<?php echo $row->id ?>">
 
 
                                         <span class="border border-0 btn btn-link">
                                             <?php if (!empty($row->foto)): ?>
-                                            <img class="rounded-circle border border-0" height="150" width="150"
-                                                src="<?php echo  $row->foto;?>">
+                                            <img src="<?php echo  base_url('./image/' . $row->foto) ?>" height="150"
+                                                width="150" class="rounded-circle">
+
                                             <?php else: ?>
-                                            <img class="rounded-circle border border-0" height="150" width="150"
+                                            <img class="rounded-circle  " height="150" width="150"
                                                 src="https://slabsoft.com/wp-content/uploads/2022/05/pp-wa-kosong-default.jpg" />
                                             <?php endif;?>
                                         </span>
@@ -708,8 +710,9 @@ foreach ($user as $row) : $no++; ?>
                 </div>
             </div>
             <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
-                <div class="title ">
 
+
+                <div class="title ">
                     <span class="text ">Password</span>
 
                 </div>
@@ -719,36 +722,38 @@ foreach ($user as $row) : $no++; ?>
                             <div class="overflow-auto" style="white-space: nowrap;">
 
                                 <form action="<?php echo base_url('karyawan/aksi_ubah_password'); ?>"
-                                    enctype="multipart/form-data" method="post"></form>
-                                <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
-                                    <div class="d-flex form-outline flex-fill mb-0  ">
-                                        <input type="password" name="password_baru" id="password1" class="form-control"
-                                            placeholder="Password Baru">
+                                    enctype="multipart/form-data" method="post">
+                                    <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
+                                        <div class="d-flex form-outline flex-fill mb-0  ">
+                                            <input type="password" name="password_baru" id="password1"
+                                                class="form-control relaltive" placeholder="Password Baru">
 
-                                        <i id="showPassword1" class="fas fa-eye-slash absolute p-2"></i>
+                                            <i id="showPassword1" onclick="togglePasswordVisibility('password1')"
+                                                class="far fa-eye absolute p-2"></i>
 
 
 
 
-                                        <input type="password" name="konfirmasi_password" id="password2"
-                                            class="form-control" placeholder="Konfirmasi Password">
 
-                                        <i id="showPassword2" class="fas fa-eye-slash absolute p-2 "></i>
+                                            <input type="password" name="konfirmasi_password" id="password2"
+                                                class="form-control relative" placeholder="Konfirmasi Password">
+                                            <i id="showPassword2" onclick="togglePasswordVisibility('password2')"
+                                                class="far fa-eye absolute p-2"></i>
 
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="d-flex p-2 row justify-content-evenly ">
+                                        <button type="submit" class="btn btn-sm btn-dark col-5" name=" submit">Ubah
+                                            Password</button>
 
 
                                     </div>
-                                </div>
 
-
-                                <div class="d-flex p-2 row justify-content-evenly ">
-                                    <button type="submit" class="btn btn-sm btn-dark col-5" name=" submit">Ubah
-                                        Password</button>
-
-
-                                </div>
-
-                                <br>
+                                    <br>
 
                                 </form>
 
@@ -762,37 +767,16 @@ foreach ($user as $row) : $no++; ?>
     </section>
 
     <script>
-    // show pass
-    var passwordInput1 = document.getElementById('password1');
-    var togglePassword1 = document.getElementById('showPassword1');
+    // show password
 
-    togglePassword1.addEventListener('click', function() {
-        if (passwordInput1.type === 'password') {
-            passwordInput1.type = 'text';
-            togglePassword1.classList.remove('fa-eye-slash');
-            togglePassword1.classList.add('fa-eye');
+    function togglePasswordVisibility(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
         } else {
-            passwordInput1.type = 'password';
-            togglePassword1.classList.remove('fa-eye');
-            togglePassword1.classList.add('fa-eye-slash');
+            passwordInput.type = "password";
         }
-    });
-
-    var passwordInput2 = document.getElementById('password2');
-    var togglePassword2 = document.getElementById('showPassword2');
-
-    togglePassword2.addEventListener('click', function() {
-        if (passwordInput2.type === 'password') {
-            passwordInput2.type = 'text';
-            togglePassword2.classList.remove('fa-eye-slash');
-            togglePassword2.classList add('fa-eye');
-        } else {
-            passwordInput2.type = 'password';
-            togglePassword2.classList.remove('fa-eye');
-            togglePassword2.classList.add('fa-eye-slash');
-        }
-    });
-
+    }
     // jam
     function updateClock() {
         var now = new Date();

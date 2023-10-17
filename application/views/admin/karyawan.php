@@ -3,12 +3,21 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Responsive Sidebar Menu | CodingLab </title>
+    <title>Karyawan </title>
     <link rel="stylesheet" href="style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
@@ -312,6 +321,7 @@
         </div>
         <ul class="nav-list">
 
+
             <li>
                 <a href="<?php echo base_url('admin/dashboard') ?>">
                     <i class='bx bx-grid-alt'></i>
@@ -320,11 +330,11 @@
                 <span class="tooltip">Dashboard</span>
             </li>
             <li>
-                <a href="<?php echo base_url('admin/rekap_tanggal') ?>">
+                <a href="<?php echo base_url('admin/rekap_harian') ?>">
                     <i class="fa-regular fa-calendar-days"></i>
-                    <span class="links_name">Rekapan Tanggal</span>
+                    <span class="links_name">Rekapan Harian</span>
                 </a>
-                <span class="tooltip">Rekapan Tanggal</span>
+                <span class="tooltip">Rekapan Harian</span>
             </li>
             <li>
                 <a href="<?php echo base_url('admin/rekap_minggu') ?>">
@@ -340,6 +350,7 @@
                 </a>
                 <span class="tooltip">Rekapan Bulan</span>
             </li>
+
             <li>
                 <a href="<?php echo base_url('admin/karyawan') ?>">
                     <i class="fa-solid fa-circle-user"></i>
@@ -348,7 +359,13 @@
                 <span class="tooltip">Karyawan</span>
             </li>
 
-            <span id="clock" name="date" class="links_name"> </span>
+
+            <li>
+
+                <span id="clock" name="date" class="text-white links_name"> </span>
+
+
+            </li>
             <li class="profile">
 
 
@@ -363,7 +380,75 @@
         </ul>
     </div>
     <section class="home-section bg-slate-100">
+        <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-black text-white text-xl">
+                    <div class="flex justify-center mb-2 md:justify-start md:pl-6">
+                        KARYAWAN
+                        <div class="flex justify-center p-2 md:justify-end md:pl-6">
+                            <a href="<?php echo base_url('Admin/export_karyawan')?>"
+                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Export</a>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
+                    <table class="my-4 w-full divide-y divide-gray-300 text-center">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-3 py-2 text-xs text-gray-500">NO</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">
+                                    USERNAME
+                                </th>
+                                <th class="px-3 py-2 text-xs text-gray-500">NAMA DEPAN</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">NAMA BELAKANG</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">FOTO</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">EMAIL</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-300">
+                            <?php $no=0; foreach ($karyawan as $user): $no++ ?>
+                            <tr class="whitespace-nowrap">
+                                <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $user->username; ?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $user->nama_depan; ?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $user->nama_belakang; ?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php if (!empty($user->foto)): ?>
+                                        <img src="<?php echo  base_url('./image/' . $user->foto) ?>" height="80"
+                                            width="80" class="rounded-full">
+
+                                        <?php else: ?>
+                                        <img class="rounded-full border border-0" height="80" width="80"
+                                            src="https://slabsoft.com/wp-content/uploads/2022/05/pp-wa-kosong-default.jpg" />
+                                        <?php endif;?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $user->email; ?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php endforeach?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
 
     </section>
 

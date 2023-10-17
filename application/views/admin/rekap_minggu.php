@@ -3,17 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Dashboard</title>
+    <title>Rekap Mingguan</title>
     <link rel="stylesheet" href="style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </head>
 <style>
@@ -278,7 +280,7 @@
 
 .home-section {
     position: relative;
-    background: white;
+    background: #E4E9F7;
     min-height: 100vh;
     top: 0;
     left: 78px;
@@ -307,7 +309,7 @@
 }
 </style>
 
-<body class="bg-slate-100">
+<body>
     <div class="sidebar">
         <div class="logo-details">
             <i class='bx bxl-c-plus-plus icon'></i>
@@ -353,7 +355,6 @@
                 <span class="tooltip">Karyawan</span>
             </li>
 
-
             <li>
 
                 <span id="clock" name="date" class="text-white links_name"> </span>
@@ -367,84 +368,22 @@
 
 
                 <a class="btn btn-lg   " onclick=" logout(id)">
+
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="links_name">Keluar</span>
                 </a>
             </li>
         </ul>
     </div>
-    <section class="home-section bg-slate-100    ">
+    <section class="home-section bg-slate-100 ">
 
-        <div class="text">Dashboard</div>
-        <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
-            <div class="container mx-auto">
-                <div class="grid gap-4 mb-2 mt-2 md:grid-cols-5">
-                    <a href="<?php echo base_url('admin/rekap_harian') ?>"
-                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
-                        <p class="text-md text-center font-medium">
-                            Absensi Harian
-                        </p>
-                        <div class="text-3xl text-center text-black font-semibold mb-2">
-                            <span class="fa-stack fa-xs">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa-solid fa-calendar-days fa-stack-1x fa-inverse"></i>
-                            </span>
-                            7 Hari
-                        </div>
-                    </a>
-
-                    <a href="<?php echo base_url('admin/rekap_minggu') ?>"
-                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
-                        <p class="text-md text-center font-medium">
-                            Absensi Mingguan
-                        </p>
-                        <div class="text-3xl text-center text-black font-semibold mb-2">
-                            <span class="fa-stack fa-xs">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-
-                                <i class="fa-solid fa-calendar-week fa-stack-1x fa-inverse"></i>
-
-                            </span>
-                            1 Minggu
-                        </div>
-                    </a>
-                    <a href="<?php echo base_url('admin/rekap_bulan') ?>"
-                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
-                        <p class="text-md text-center font-medium">
-                            Absensi Bulanan
-                        </p>
-                        <div class="text-3xl text-center text-black font-semibold mb-2">
-                            <span class="fa-stack fa-xs">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa-solid fa-calendar-days fa-stack-1x fa-inverse"></i>
-                            </span>
-                            Bulan
-                        </div>
-                    </a>
-
-                    <a href="<?php echo base_url('admin/karyawan') ?>"
-                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
-                        <p class="text-md text-center font-medium ">
-                            Karyawan
-                        </p>
-                        <div class="text-3xl text-center text-black font-semibold mb-2">
-                            <span class="fa-stack fa-xs">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa-solid fa-circle-user fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <?php echo $karyawan ?> Karyawan
-                        </div>
-
-                    </a>
-                </div>
-        </main>
         <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
             <div class="container mx-auto">
                 <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-black text-white text-xl">
                     <div class="flex justify-center mb-2 md:justify-start md:pl-6">
-                        REKAP KESELURUHAN
+                        REKAP MINGGUAN
                         <div class="flex justify-center p-2 md:justify-end md:pl-6">
-                            <a href="<?php echo base_url('Admin/export_seluruh')?>"
+                            <a href="<?php echo base_url('Admin/export_minggu')?>"
                                 class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Export</a>
 
                         </div>
@@ -466,45 +405,45 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
-                            <?php $no=0; foreach ($rekap_seluruh as $absen): $no++ ?>
+                            <?php $no=0; foreach ($absensi as $absen): $no++ ?>
                             <tr class="whitespace-nowrap">
                                 <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo tampil_id_karyawan( $absen->id_karyawan); ?>
+                                        <?php echo tampil_id_karyawan( $absen['id_karyawan']); ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->kegiatan; ?>
+                                        <?php echo $absen['kegiatan']; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->date; ?>
+                                        <?php echo $absen['date']; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php if( $absen->jam_masuk == NULL) {
+                                        <?php if( $absen['jam_masuk'] == NULL) {
                         echo '-';
                       } else{
-                        echo  $absen->jam_masuk;
+                        echo  $absen['jam_masuk'];
                       }?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php if( $absen->jam_keluar == NULL) {
+                                        <?php if( $absen['jam_keluar'] == NULL) {
                         echo '-';
                       } else{
-                        echo  $absen->jam_keluar;
+                        echo  $absen['jam_keluar'];
                       }?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->keterangan_izin; ?>
+                                        <?php echo $absen['keterangan_izin']; ?>
                                     </div>
                                 </td>
                             </tr>
@@ -514,8 +453,23 @@
                 </div>
             </div>
         </main>
-    </section>
-    <script src="https://cdn.tailwindcss.com"></script>
+        </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Add an event listener for the "change" event on the select element
+            var selectElement = document.getElementById('bulan');
+            var formElement = selectElement.form; // Get the parent form
+
+            selectElement.addEventListener('change', function() {
+                formElement.submit(); // Submit the form when the select element changes
+            });
+        });
+        </script>
+
+</body>
+
+</section>
 
 </body>
 <script>
