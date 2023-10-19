@@ -633,67 +633,67 @@ nav.close~.dashboard .top {
                 </div>
             </div>
 
-            <div class="overview shadow p-1 mb-3     bg-body rounded">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="overflow-auto" style="white-space: nowrap;">
-                                <table class="table table-hover  ">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Kegiatan</th>
-                                            <th scope="col">Tanggal</th>
-                                            <th scope="col">Jam Masuk</th>
-                                            <th scope="col">Jam Pulang</th>
-                                            <th scope="col">Keterangan Izin</th>
-                                            <th scope="col">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $no = 0;foreach ($history as $row): $no++?>
-                                        <tr class="whitespace-nowrap">
-                                            <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no?></td>
-                                            <td class="px-3 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    <?php echo $row->kegiatan?>
-                                                </div>
-                                            </td>
-                                            <td class="px-3 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    <?php echo $row->date?>
-                                                </div>
-                                            </td>
-                                            <td class="px-3 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    <?php if( $row->jam_masuk == NULL) {
+            <div class="overview shadow p-1 mb-3 bg-body rounded">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="overflow-auto" style="white-space: nowrap;">
+                            <table class="table table-hover  ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Kegiatan</th>
+                                        <th scope="col">Tanggal</th>
+                                        <th scope="col">Jam Masuk</th>
+                                        <th scope="col">Jam Pulang</th>
+                                        <th scope="col">Keterangan Izin</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $no = 0;foreach ($history as $row): $no++?>
+                                    <tr class="whitespace-nowrap">
+                                        <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no?></td>
+                                        <td class="px-3 py-4">
+                                            <div class="text-sm text-gray-900">
+                                                <?php echo $row->kegiatan?>
+                                            </div>
+                                        </td>
+                                        <td class="px-3 py-4">
+                                            <div class="text-sm text-gray-900">
+                                                <?php echo $row->date?>
+                                            </div>
+                                        </td>
+                                        <td class="px-3 py-4">
+                                            <div class="text-sm text-gray-900">
+                                                <?php if( $row->jam_masuk == NULL) {
                         echo '-';
                       } else{
                         echo $row->jam_masuk;
                       }?>
-                                                </div>
-                                            </td>
-                                            <td class="px-3 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    <?php if( $row->jam_keluar == NULL) {
+                                            </div>
+                                        </td>
+                                        <td class="px-3 py-4">
+                                            <div class="text-sm text-gray-900">
+                                                <?php if( $row->jam_keluar == NULL) {
                         echo '-';
                       } else{
                         echo $row->jam_keluar;
                       }?>
-                                                </div>
-                                            </td>
-                                            <td class="px-3 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    <?php if( $row->keterangan_izin == NULL) {
+                                            </div>
+                                        </td>
+                                        <td class="px-3 py-4">
+                                            <div class="text-sm text-gray-900">
+                                                <?php if( $row->keterangan_izin == NULL) {
                         echo '-';
                         
                       } else{
                         echo $row->keterangan_izin;
                       }?>
-                                                </div>
-                                            </td>
-                                            <td class="flex  px-3 gap-3 py-4 justify-center d-flex">
-                                                <?php
+                                            </div>
+                                        </td>
+                                        <td class="flex  px-3 gap-3 py-4 justify-center d-flex">
+                                            <?php
 if ($row->keterangan_izin == '-') {
     echo '<div>
             <button onclick="ubah_absen(' . $row->id . ')" class="btn btn-lg btn-primary">
@@ -711,12 +711,8 @@ if ($row->keterangan_izin == '-') {
 
 
 
-                                                <div class="">
-                                                    <button onclick="hapus(<?php echo $row->id ?>)"
-                                                        class="btn btn-lg btn-danger"><i
-                                                            class="fa-solid fa-trash-can"></i></button>
-                                                </div>
-                                                <?php
+
+                                            <?php
                       if($row->status == 'done') {
                         echo '<div>
                         <button disabled class="btn btn-lg btn-dark"> <i
@@ -729,18 +725,18 @@ if ($row->keterangan_izin == '-') {
                        </div>';
                       }
                       ?>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach?>
-                                    </tbody>
-                                </table>
-
-                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach?>
+                                </tbody>
+                            </table>
 
                         </div>
+
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </section>

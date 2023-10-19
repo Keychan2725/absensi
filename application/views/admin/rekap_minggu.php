@@ -382,9 +382,9 @@
                 <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-black text-white text-xl">
                     <div class="flex justify-center mb-2 md:justify-start md:pl-6">
                         REKAP MINGGUAN
-                        <div class="flex justify-center p-2 md:justify-end md:pl-6">
+                        <div class="flex justify-center p-2 md:justify-start md:pl-6">
                             <a href="<?php echo base_url('Admin/export_minggu')?>"
-                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Export</a>
+                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 ">Export</a>
 
                         </div>
                     </div>
@@ -402,6 +402,7 @@
                                 <th class="px-3 py-2 text-xs text-gray-500">JAM MASUK</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">JAM PULANG</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">KETERANGAN IZIN</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">STATUS</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
@@ -444,6 +445,11 @@
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
                                         <?php echo $absen['keterangan_izin']; ?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $absen['status']; ?>
                                     </div>
                                 </td>
                             </tr>

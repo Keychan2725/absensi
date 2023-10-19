@@ -315,7 +315,7 @@
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-
+            <!-- navbar -->
             <li>
                 <a href="<?php echo base_url('admin/dashboard') ?>">
                     <i class='bx bx-grid-alt'></i>
@@ -374,29 +374,29 @@
         </ul>
     </div>
     <section class="home-section bg-slate-100    ">
-
+        <!-- box dashboard -->
         <div class="text">Dashboard</div>
         <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
             <div class="container mx-auto">
-                <div class="grid gap-4 mb-2 mt-2 md:grid-cols-5">
+                <div class="grid gap-4 mb-2 mt-2 md:grid-cols-4">
                     <a href="<?php echo base_url('admin/rekap_harian') ?>"
                         class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
                         <p class="text-md text-center font-medium">
-                            Absensi Harian
+                            Absensi
                         </p>
                         <div class="text-3xl text-center text-black font-semibold mb-2">
                             <span class="fa-stack fa-xs">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa-solid fa-calendar-days fa-stack-1x fa-inverse"></i>
                             </span>
-                            7 Hari
+                            Harian
                         </div>
                     </a>
 
                     <a href="<?php echo base_url('admin/rekap_minggu') ?>"
                         class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
                         <p class="text-md text-center font-medium">
-                            Absensi Mingguan
+                            Absensi
                         </p>
                         <div class="text-3xl text-center text-black font-semibold mb-2">
                             <span class="fa-stack fa-xs">
@@ -405,20 +405,20 @@
                                 <i class="fa-solid fa-calendar-week fa-stack-1x fa-inverse"></i>
 
                             </span>
-                            1 Minggu
+                            Mingguan
                         </div>
                     </a>
                     <a href="<?php echo base_url('admin/rekap_bulan') ?>"
                         class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
                         <p class="text-md text-center font-medium">
-                            Absensi Bulanan
+                            Absensi
                         </p>
                         <div class="text-3xl text-center text-black font-semibold mb-2">
                             <span class="fa-stack fa-xs">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa-solid fa-calendar-days fa-stack-1x fa-inverse"></i>
                             </span>
-                            Bulan
+                            Bulanan
                         </div>
                     </a>
 
@@ -438,12 +438,13 @@
                     </a>
                 </div>
         </main>
+        <!-- tabel -->
         <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
             <div class="container mx-auto">
                 <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-black text-white text-xl">
                     <div class="flex justify-center mb-2 md:justify-start md:pl-6">
                         REKAP KESELURUHAN
-                        <div class="flex justify-center p-2 md:justify-end md:pl-6">
+                        <div class="flex justify-center p-2  md:justify-start md:pl-6">
                             <a href="<?php echo base_url('Admin/export_seluruh')?>"
                                 class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Export</a>
 
@@ -463,6 +464,7 @@
                                 <th class="px-3 py-2 text-xs text-gray-500">JAM MASUK</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">JAM PULANG</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">KETERANGAN IZIN</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">STATUS</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
@@ -507,6 +509,12 @@
                                         <?php echo $absen->keterangan_izin; ?>
                                     </div>
                                 </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $absen->status; ?>
+                                    </div>
+                                </td>
+
                             </tr>
                             <?php endforeach?>
                         </tbody>

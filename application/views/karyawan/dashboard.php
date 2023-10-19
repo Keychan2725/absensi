@@ -613,124 +613,122 @@ nav.close~.dashboard .top {
 
 
         </div>
-        <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
-            <div class="container mx-auto">
-                <div class="grid gap-4 mb-2 mt-2 md:grid-cols-5">
-                    <div class="dash-content mx-auto">
-                        <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
-                            <div class="d-flex">
+        <div class="title  ">
 
-                                <div class="card border " style="width: 15rem;height:13rem; margin-left:20px;">
-                                    <p class=" fs-6 text-white text-center p-3 bg-dark">Total <br> Masuk</p>
+            <span class="text  ">Dashboard</span>
 
 
-                                    <p class=" fs-1 text-dark text-center"> <i class="fa-regular fa-calendar-days"></i>
+        </div>
 
-                                        <?php echo $jumlah_absen;?></p>
+        <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
+            <div class="d-flex  ">
+
+                <div class="card border " style="width: 15rem;height:13rem; ;">
+                    <p class=" fs-6 text-white text-center p-3 bg-dark">Total <br> Masuk</p>
 
 
-                                </div>
-                                <div class="card  border" style="width: 15rem;height:13rem; margin-left:20px;">
-                                    <p class=" fs-6 text-white text-center p-3 bg-dark">Total
-                                        <br>Izin
-                                    </p>
-                                    <p class=" fs-1 text-dark text-center"> <i class="fa-regular fa-calendar-minus"></i>
-                                        <?php echo $jumlah_izin;?>
-                                    </p>
+                    <p class=" fs-1 text-dark text-center"> <i class="fa-regular fa-calendar-days"></i>
 
-                                </div>
+                        <?php echo $jumlah_absen;?></p>
 
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
+                <div class="card  border" style="width: 15rem;height:13rem; ">
+                    <p class=" fs-6 text-white text-center p-3 bg-dark">Total
+                        <br>Izin
+                    </p>
+                    <p class=" fs-1 text-dark text-center"> <i class="fa-regular fa-calendar-minus"></i>
+                        <?php echo $jumlah_izin;?>
+                    </p>
+
+                </div>
+
             </div>
+        </div>
+        </div>
+        </div>
+        </div>
         </main>
         <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="overflow-auto" style="white-space: nowrap;">
 
-                            <div class="title  ">
-
-                                <span class="text  ">Dashboard</span>
+            <div class="row">
+                <div class="col">
+                    <div class="overflow-auto" style="white-space: nowrap;">
 
 
-                            </div>
 
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr class="table-hover">
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kegiatan</th>
-                                        <th scope="col">Tanggal</th>
-                                        <th scope="col">Jam Masuk</th>
-                                        <th scope="col">Jam Keluar</th>
-                                        <th scope="col">Keterangan Izin</th>
-                                        <th scope="col">Status</th>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="table-hover">
+                                    <th scope="col">No</th>
+                                    <th scope="col">Kegiatan</th>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Jam Masuk</th>
+                                    <th scope="col">Jam Keluar</th>
+                                    <th scope="col">Keterangan Izin</th>
+                                    <th scope="col">Status</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $no = 0;foreach ($absen as $row): $no++?>
-                                    <tr class=" whitespace-nowrap">
-                                        <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no?>
-                                        </td>
-                                        <td class="px-3 py-4">
-                                            <div class="text-sm text-gray-900">
-                                                <?php echo $row->kegiatan?>
-                                            </div>
-                                        </td>
-                                        <td class="px-3 py-4">
-                                            <div class="text-sm text-gray-900">
-                                                <?php echo $row->date?>
-                                            </div>
-                                        </td>
-                                        <td class="px-3 py-4">
-                                            <div class="text-sm text-gray-900">
-                                                <?php if( $row->jam_masuk == NULL) {
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 0;foreach ($absen as $row): $no++?>
+                                <tr class=" whitespace-nowrap">
+                                    <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no?>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php echo $row->kegiatan?>
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php echo $row->date?>
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php if( $row->jam_masuk == NULL) {
                         echo '-';
                       } else{
                         echo $row->jam_masuk;
                       }?>
-                                            </div>
-                                        </td>
-                                        <td class="px-3 py-4">
-                                            <div class="text-sm text-gray-900">
-                                                <?php if( $row->jam_keluar == NULL) {
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php if( $row->jam_keluar == NULL) {
                         echo '-';
                       } else{
                         echo $row->jam_keluar;
                       }?>
-                                            </div>
-                                        </td>
-                                        <td class="px-3 py-4">
-                                            <div class="text-sm text-gray-900">
-                                                <?php if( $row->keterangan_izin == NULL) {
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php if( $row->keterangan_izin == NULL) {
                         echo '-';
                       } else{
                         echo $row->keterangan_izin;
                       }?>
-                                            </div>
-                                        </td>
-                                        <td class="px-3 py-4">
-                                            <div class="text-sm text-gray-900">
-                                                <?php if( $row->status == NULL) {
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php if( $row->status == NULL) {
                         echo 'not';
                       } else{
                         echo $row->status;
                       }?>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach?>
-                                </tbody>
-                            </table>
+                                    </td>
+                                </tr>
+                                <?php endforeach?>
+                            </tbody>
+                        </table>
 
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
         </div>
     </section>

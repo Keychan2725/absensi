@@ -81,6 +81,7 @@
 
                                             </div>
                                         </div>
+                                        <p>*Password harus memiliki 8 angka</p>
 
 
 

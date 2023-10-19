@@ -138,7 +138,7 @@ class M_model extends CI_Model
                     return $this->db->get_where('user', array('id' => $user_id))->row_array();
                 }
             
-               
+            // untuk mengambil data seminggu terakhir
                 public function getAbsensiLast7Days() {
                     $this->load->database();
                     $end_date = date('Y-m-d');
@@ -153,7 +153,7 @@ class M_model extends CI_Model
                 }
               
  
- 
+//  untuk mengambil data absensi perbulan
                 public function getAbsensiLastMonth($date)
                 {
                     $this->db->from('absensi');
@@ -167,6 +167,7 @@ class M_model extends CI_Model
                     
                 return $this->db->get('absensi')->result();// Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
                 }
+                // untuk menagmbil data abensi harian
                 public function get_harian($date)
                 {
                 $this->db->from('absensi');
@@ -174,12 +175,6 @@ class M_model extends CI_Model
                 $query = $this->db->get();
                 return $query->result();
                 }
-                public function getAbsensiDaily($hari)
-                {
-                    $this->db->from('absensi');
-                    $this->db->where('date', $hari);
-                    $query = $this->db->get();
-                    return $query->result();
-                }
+ 
 
 }

@@ -62,9 +62,9 @@
                                                     name="password" class="form-control">
                                                 <i class="fa-solid fa-eye-slash toggle-password p-2"
                                                     id="show-password"></i>
-
                                             </div>
                                         </div>
+                                        <p>*Password harus memiliki 8 angka</p>
 
 
 
@@ -72,10 +72,8 @@
                                             <label for="form2Example3">
                                                 don't have an account ? <a
                                                     href="<?php echo base_url('auth/register') ?>"
-                                                    class="text-dark">Registrasi Karyawan</a>
-                                                Or
-                                                <a href="<?php echo base_url('auth/admin') ?>"
-                                                    class="text-dark">Admin</a>
+                                                    class="text-dark">Registrasi </a>
+
                                             </label>
                                         </div>
 

@@ -31,7 +31,6 @@
     <title>Izin</title>
 </head>
 <style>
-/* ===== Google Font Import - Poppins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 * {
@@ -42,7 +41,6 @@
 }
 
 :root {
-    /* ===== Colors ===== */
     --primary-color: #0E4BF1;
     --panel-color: #FFF;
     --text-color: #000;

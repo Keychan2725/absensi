@@ -641,7 +641,7 @@ foreach ($user as $row) : $no++; ?>
                                                 width="150" class="rounded-circle">
 
                                             <?php else: ?>
-                                            <img class="rounded-circle  " height="150" width="150"
+                                            <img class="rounded-circle " height="150" width="150"
                                                 src="https://slabsoft.com/wp-content/uploads/2022/05/pp-wa-kosong-default.jpg" />
                                             <?php endif;?>
                                         </span>
@@ -745,6 +745,7 @@ foreach ($user as $row) : $no++; ?>
                                         </div>
                                     </div>
 
+                                    <p>*Password harus memiliki 8 angka</p>
 
                                     <div class="d-flex p-2 row justify-content-evenly ">
                                         <button type="submit" class="btn btn-sm btn-dark col-5" name=" submit">Ubah

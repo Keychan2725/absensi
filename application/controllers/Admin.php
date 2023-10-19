@@ -82,10 +82,10 @@ class Admin extends CI_Controller
             $sheet->getStyle('A1')->getFont()->setBold(true);
     
             $sheet->setCellValue('A2','ID');
-            $sheet->setCellValue('B2','USERNAME');
-            $sheet->setCellValue('C2','NAMA DEPAN');
-            $sheet->setCellValue('D2','NAMA BELAKANG');
-            $sheet->setCellValue('E2','FOTO');
+            $sheet->setCellValue('B2','FOTO');
+            $sheet->setCellValue('C2','USERNAME');
+            $sheet->setCellValue('D2','NAMA DEPAN');
+            $sheet->setCellValue('E2','NAMA BELAKANG');
             $sheet->setCellValue('F2','EMAIL');
     
             $sheet->getStyle('A2')->applyFromArray($style_col);
@@ -101,24 +101,24 @@ class Admin extends CI_Controller
             $numrow=3;
             foreach ($karyawan as $data) {
             $sheet->setCellValue('A'.$numrow,$data->id );
-            $sheet->setCellValue('B'.$numrow, $data->username);
-            $sheet->setCellValue('C'.$numrow,$data->nama_depan);
-            $sheet->setCellValue('D'.$numrow,$data->nama_belakang);
-            $sheet->setCellValue('E'.$numrow, $data->foto) ;
+            $sheet->setCellValue('B'.$numrow, $data->foto);
+            $sheet->setCellValue('C'.$numrow,$data->username);
+            $sheet->setCellValue('D'.$numrow,$data->nama_depan);
+            $sheet->setCellValue('E'.$numrow, $data->nama_belakang) ;
             $sheet->setCellValue('F'.$numrow, $data->email) ;
           
     
-    $sheet->getStyle('A'.$numrow)->applyFromArray($style_row);
-    $sheet->getStyle('B'.$numrow)->applyFromArray($style_row);
-    $sheet->getStyle('C'.$numrow)->applyFromArray($style_row);
-    $sheet->getStyle('D'.$numrow)->applyFromArray($style_row);
-    $sheet->getStyle('E'.$numrow)->applyFromArray($style_row);
-    $sheet->getStyle('F'.$numrow)->applyFromArray($style_row);
-     
-    $no++;
-    $numrow++;
-    }
-    
+            $sheet->getStyle('A'.$numrow)->applyFromArray($style_row);
+            $sheet->getStyle('B'.$numrow)->applyFromArray($style_row);
+            $sheet->getStyle('C'.$numrow)->applyFromArray($style_row);
+            $sheet->getStyle('D'.$numrow)->applyFromArray($style_row);
+            $sheet->getStyle('E'.$numrow)->applyFromArray($style_row);
+            $sheet->getStyle('F'.$numrow)->applyFromArray($style_row);
+            
+            $no++;
+            $numrow++;
+            }
+            
     
             $sheet->getColumnDimension('A')->setWidth(5);
             $sheet->getColumnDimension('B')->setWidth(25);
@@ -172,6 +172,7 @@ class Admin extends CI_Controller
                 $jam_masuk = '';
                 $jam_keluar = '';
                 $izin = ''; 
+                $status = ''; 
                 foreach ($rowData as $cellName => $cellData) {
                     if ($cellName == 'kegiatan') {
                        $kegiatan = $cellData;
@@ -193,6 +194,8 @@ class Admin extends CI_Controller
                         }
                     } elseif ($cellName == 'keterangan_izin') {
                         $izin = $cellData;
+                    }   elseif ($cellName == 'status') {
+                        $status = $cellData;
                     }
             
                     // Anda juga dapat menambahkan logika lain jika perlu
@@ -209,6 +212,7 @@ class Admin extends CI_Controller
                 $sheet->setCellValueByColumnAndRow(5, $rowIndex, $jam_masuk);
                 $sheet->setCellValueByColumnAndRow(6, $rowIndex, $jam_keluar);
                 $sheet->setCellValueByColumnAndRow(7, $rowIndex, $izin);
+                $sheet->setCellValueByColumnAndRow(8, $rowIndex, $status);
                 $no++;
             
                 $rowIndex++;
@@ -272,6 +276,7 @@ class Admin extends CI_Controller
                 $jam_masuk = '';
                 $jam_keluar = '';
                 $izin = ''; 
+                $status = ''; 
                 foreach ($rowData as $cellName => $cellData) {
                     if ($cellName == 'kegiatan') {
                        $kegiatan = $cellData;
@@ -293,12 +298,13 @@ class Admin extends CI_Controller
                         }
                     } elseif ($cellName == 'keterangan_izin') {
                         $izin = $cellData;
+                    }  elseif ($cellName == 'status') {
+                        $status = $cellData;
                     }
             
-                    // Anda juga dapat menambahkan logika lain jika perlu
+                    // Anda  dapat menambahkan logika lain jika perlu
                     
-                    // Contoh: $sheet->setCellValueByColumnAndRow($columnIndex, $rowIndex, $cellData);
-                    $columnIndex++;
+                     $columnIndex++;
                 }
                 // Setelah loop, Anda memiliki data yang diperlukan dari setiap kolom
                 // Anda dapat mengisinya ke dalam lembar kerja Excel di sini
@@ -309,6 +315,7 @@ class Admin extends CI_Controller
                 $sheet->setCellValueByColumnAndRow(5, $rowIndex, $jam_masuk);
                 $sheet->setCellValueByColumnAndRow(6, $rowIndex, $jam_keluar);
                 $sheet->setCellValueByColumnAndRow(7, $rowIndex, $izin);
+                $sheet->setCellValueByColumnAndRow(8, $rowIndex, $status);
                 $no++;
             
                 $rowIndex++;
@@ -373,6 +380,7 @@ class Admin extends CI_Controller
                 $jam_masuk = '';
                 $jam_keluar = '';
                 $izin = ''; 
+                $status = ''; 
                 foreach ($rowData as $cellName => $cellData) {
                     if ($cellName == 'kegiatan') {
                        $kegiatan = $cellData;
@@ -394,7 +402,9 @@ class Admin extends CI_Controller
                         }
                     } elseif ($cellName == 'keterangan_izin') {
                         $izin = $cellData;
-                    }
+                    }elseif ($cellName == 'status') {
+                        $status = $cellData;
+                     }
             
                     // Anda juga dapat menambahkan logika lain jika perlu
                     
@@ -410,6 +420,7 @@ class Admin extends CI_Controller
                 $sheet->setCellValueByColumnAndRow(5, $rowIndex, $jam_masuk);
                 $sheet->setCellValueByColumnAndRow(6, $rowIndex, $jam_keluar);
                 $sheet->setCellValueByColumnAndRow(7, $rowIndex, $izin);
+                $sheet->setCellValueByColumnAndRow(8, $rowIndex, $status);
                 $no++;
             
                 $rowIndex++;
@@ -456,7 +467,7 @@ class Admin extends CI_Controller
             $data = $this->m_model->getAbsensiLastMonth($bulan);
             
             // Buat objek Spreadsheet
-            $headers = ['NO','NAMA KARYAWAN','KEGIATAN','TANGGAL','JAM MASUK', 'JAM PULANG' , 'KETERANGAN IZIN'];
+            $headers = ['NO','NAMA KARYAWAN','KEGIATAN','TANGGAL','JAM MASUK', 'JAM PULANG' , 'KETERANGAN IZIN', 'STATUS'];
             $rowIndex = 1;
             foreach ($headers as $header) {
                 $sheet->setCellValueByColumnAndRow($rowIndex, 1, $header);
@@ -474,6 +485,7 @@ class Admin extends CI_Controller
                 $jam_masuk = '';
                 $jam_keluar = '';
                 $izin = ''; 
+                $status = ''; 
                 foreach ($rowData as $cellName => $cellData) {
                     if ($cellName == 'kegiatan') {
                        $kegiatan = $cellData;
@@ -495,6 +507,8 @@ class Admin extends CI_Controller
                         }
                     } elseif ($cellName == 'keterangan_izin') {
                         $izin = $cellData;
+                    } elseif ($cellName == 'status') {
+                       $status = $cellData;
                     }
             
                     // Anda juga dapat menambahkan logika lain jika perlu
@@ -511,6 +525,7 @@ class Admin extends CI_Controller
                 $sheet->setCellValueByColumnAndRow(5, $rowIndex, $jam_masuk);
                 $sheet->setCellValueByColumnAndRow(6, $rowIndex, $jam_keluar);
                 $sheet->setCellValueByColumnAndRow(7, $rowIndex, $izin);
+                $sheet->setCellValueByColumnAndRow(8, $rowIndex, $status);
                 $no++;
             
                 $rowIndex++;

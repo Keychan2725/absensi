@@ -85,7 +85,7 @@
 
                                             </div>
                                         </div>
-
+                                        <p>*Password harus memiliki 8 angka</p>
 
 
                                         <div class="form-check d-flex justify-content-center mb-5">

@@ -397,12 +397,12 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-3 py-2 text-xs text-gray-500">NO</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">FOTO</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">
                                     USERNAME
                                 </th>
                                 <th class="px-3 py-2 text-xs text-gray-500">NAMA DEPAN</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">NAMA BELAKANG</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">FOTO</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">EMAIL</th>
                             </tr>
                         </thead>
@@ -410,6 +410,18 @@
                             <?php $no=0; foreach ($karyawan as $user): $no++ ?>
                             <tr class="whitespace-nowrap">
                                 <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
+                                <td class="justify-item-center px-3 py-4 ">
+                                    <div class="text-sm text-gray-900 ">
+                                        <?php if (!empty($user->foto)): ?>
+                                        <img src="<?php echo  base_url('./image/' . $user->foto) ?>" height="80"
+                                            width="80" class="rounded-full ">
+
+                                        <?php else: ?>
+                                        <img class="rounded-full border border-0" height="80" width="80"
+                                            src="https://slabsoft.com/wp-content/uploads/2022/05/pp-wa-kosong-default.jpg" />
+                                        <?php endif;?>
+                                    </div>
+                                </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
                                         <?php echo $user->username; ?>
@@ -427,21 +439,11 @@
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php if (!empty($user->foto)): ?>
-                                        <img src="<?php echo  base_url('./image/' . $user->foto) ?>" height="80"
-                                            width="80" class="rounded-full">
-
-                                        <?php else: ?>
-                                        <img class="rounded-full border border-0" height="80" width="80"
-                                            src="https://slabsoft.com/wp-content/uploads/2022/05/pp-wa-kosong-default.jpg" />
-                                        <?php endif;?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
                                         <?php echo $user->email; ?>
                                     </div>
                                 </td>
+
+
                             </tr>
                             <?php endforeach?>
                         </tbody>
