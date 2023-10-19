@@ -201,7 +201,7 @@ class Karyawan extends CI_Controller
         // $foto = $this->upload_img('foto');
         // Jika ada foto yang diunggah
         if ($foto) {
-            $kode = round(microtime(true) * 900);
+            $kode = round(microtime(true) * 100);
             $file_name = $kode . '_' . $foto;
             $upload_path = './image/' . $file_name;
 
