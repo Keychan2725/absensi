@@ -404,6 +404,7 @@
                                 <th class="px-3 py-2 text-xs text-gray-500">NAMA DEPAN</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">NAMA BELAKANG</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">EMAIL</th>
+                                <!-- <th class="px-3 py-2 text-xs text-gray-500">AKSI</th> -->
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
@@ -442,6 +443,12 @@
                                         <?php echo $user->email; ?>
                                     </div>
                                 </td>
+                                <!-- <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <button onclick="hapus(id)"
+                                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ">Hapus</button>
+                                    </div>
+                                </td> -->
 
 
                             </tr>
@@ -494,6 +501,31 @@ function menuBtnChange() {
     } else {
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
     }
+}
+
+function hapus(id) {
+    swal.fire({
+        title: 'Yakin untuk menghapus data ini?',
+        text: "Data ini akan terhapus permanen",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Batal',
+        confirmButtonText: 'Ya Hapus'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil Dihapus',
+                showConfirmButton: false,
+                timer: 1500,
+
+            }).then(function() {
+                window.location.href = "<?php echo base_url('Admin/hapus_karyawan/')?>" + id;
+            });
+        }
+    });
 }
 
 function logout(id) {

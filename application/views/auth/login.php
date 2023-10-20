@@ -64,7 +64,6 @@
                                                     id="show-password"></i>
                                             </div>
                                         </div>
-                                        <p>*Password harus memiliki 8 angka</p>
 
 
 
@@ -82,12 +81,7 @@
                                         </div>
 
                                     </form>
-                                    <center>
 
-                                        <p>
-                                            Copyright &copy; 2023 &mdash; Your Company
-                                        <p>@Chandra</p>
-                                    </center>
                                 </div>
                                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 

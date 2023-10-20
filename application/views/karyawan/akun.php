@@ -725,8 +725,8 @@ foreach ($user as $row) : $no++; ?>
                                     enctype="multipart/form-data" method="post">
                                     <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
                                         <div class="d-flex form-outline flex-fill mb-0  ">
-                                            <input type="password" name="password_baru" id="password1"
-                                                class="form-control relaltive" placeholder="Password Baru">
+                                            <input type="password" name="password_lama" id="password1"
+                                                class="form-control relaltive" placeholder="Password Lama">
 
                                             <i id="showPassword1" onclick="togglePasswordVisibility('password1')"
                                                 class="far fa-eye absolute p-2"></i>
@@ -742,10 +742,27 @@ foreach ($user as $row) : $no++; ?>
 
 
 
+                                        </div><br>
+                                        <div class="d-flex form-outline flex-fill col-6  ">
+                                            <input type="password" name="password_baru" id="password3"
+                                                class="form-control relaltive" placeholder="Password Baru">
+
+                                            <i id="showPassword3" onclick="togglePasswordVisibility('password3')"
+                                                class="far fa-eye absolute p-2"></i>
+
+
+
+
+
+
+
+
+
                                         </div>
+
+                                        <p>*Password harus memiliki 8 angka</p>
                                     </div>
 
-                                    <p>*Password harus memiliki 8 angka</p>
 
                                     <div class="d-flex p-2 row justify-content-evenly ">
                                         <button type="submit" class="btn btn-sm btn-dark col-5" name=" submit">Ubah

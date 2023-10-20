@@ -61,6 +61,8 @@ class Auth extends CI_Controller
     public function aksi_register_admin()
 	{
 $role="admin";
+$email= $this->input->post('email');
+
 		$data = [
 			'username' => $this->input->post('username'),
 			'email' => $this->input->post('email'),
@@ -70,20 +72,28 @@ $role="admin";
             'role'=> $role
 		];
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
-
-		if ($this->form_validation->run() === TRUE) {
-			$this->m_model->tambah_data('user', $data);
-			redirect(base_url('auth/login'));
-            
-		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			Password anda kurang dari 8 angka
-			
+//  if ($email !== $this->session->userdata('email')  ) {
+ 
+	if ($this->form_validation->run() === TRUE) {
+		$this->m_model->tambah_data('user', $data);
+		redirect(base_url('auth/login'));
 		
-		  </div>');
-			redirect(base_url(('auth/admin')));
-		}
+	} else {
+		$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		Password anda kurang dari 8 angka
+		
+		
+		</div>');
+		redirect(base_url(('auth/admin')));
 	}
+	
+// }
+// else {
+// 	$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+// 	Email Anda Sudah Terdaftar	</div>');
+// 		redirect(base_url(('auth/admin')));
+// }
+}
     public function register()
 	{
 

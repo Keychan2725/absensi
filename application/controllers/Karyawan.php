@@ -39,12 +39,8 @@ class Karyawan extends CI_Controller
         $this->load->view('karyawan/history',$data);
   
     }
-    
-    public function hapus_karyawan($id)
-    {
-        $this->m_model->delete('absensi', 'id', $id);
-        redirect(base_url('karyawan/history'));
-    }
+   
+ 
     // page absensi
     public function absensi()
     {       
@@ -267,36 +263,38 @@ class Karyawan extends CI_Controller
     public function aksi_ubah_password()
         {
         
-            $password_baru = $this->input->post('password_baru');
-            $konfirmasi_password = $this->input->post('konfirmasi_password');
-            
-        
-                
-                if (!empty($password_baru) && strlen($password_baru) >= 8) {
-                    if ($password_baru === $konfirmasi_password) {
-                        $data['password'] = md5($password_baru);
-                    }
-                
-                $this->session->set_userdata($data);
+            $password_lama = $this->input->post('password_lama', true);
 
-                $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
-                $this->session->set_flashdata('sukses','<div class="alert alert-success alert-dismissible fade show" role="alert">
-                Berhasil Merubah Password
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>');
-                redirect(base_url('karyawan/akun'));
+            $user = $this->m_model->getWhere('user', ['id' => $this->session->userdata('id')])->row_array();
+    
+            if (md5($password_lama) === $user['password']) {
+                $password_baru = $this->input->post('password_baru', true);
+                $konfirmasi_password = $this->input->post('konfirmasi_password', true);
+    
+                // Pastikan password baru dan konfirmasi password sama
+                if ($password_baru === $konfirmasi_password) {
+                    // Update password baru ke dalam database
+                    $data = ['password' => md5($password_baru)];
+                    $this->m_model->ubah_data('user', $data, ['id' => $this->session->userdata('id')]);
+    
+                    $this->session->set_flashdata('sukses', '<div class="alert alert-success alert-dismissible fade show" role="alert">Berhasil Merubah Password<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                            redirect(base_url('karyawan/akun'));
                 } else {
-                    $this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Password anda kurang dari 8
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>');
-                    redirect(base_url('karyawan/akun'));
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Password Baru dan Konfirmasi Password Tidak Cocok<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        redirect(base_url('karyawan/akun'));
                 }
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Password Lama Anda Salah<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>');
+                }            redirect(base_url('karyawan/akun'));
+                redirect(base_url('karyawan/akun'));
+            }
+     
             
         
+
+        
             
-            }
-    
+            
 
         
         

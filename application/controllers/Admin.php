@@ -557,5 +557,10 @@ class Admin extends CI_Controller
             $writer->save('php://output');
             
         }
+        public function hapus_karyawan($id)
+        {
+            $this->m_model->delete('user', 'id', $id);
+             redirect(base_url('admin/karyawan'));
+        }
    
 }  
