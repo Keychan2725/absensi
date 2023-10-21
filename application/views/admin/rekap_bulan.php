@@ -378,35 +378,39 @@
 
         <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
             <div class="container mx-auto">
-                <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-black text-white text-xl">
+                <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-sky-900 text-white text-xl">
                     <div class="flex justify-center mb-2 md:justify-start md:pl-6">
                         REKAP BULANAN
-                        <div class="flex justify-center p-2 md:justify-end md:pl-6">
-                            <a href="<?php echo base_url('Admin/export_bulan')?>"
-                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Export</a>
-
-                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center col-span-2 gap-2 md:justify-end">
+                        <a href="<?php echo base_url('Admin/export_bulan'); ?>"
+                            class="py-1 float-end bg-green-600
+          text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center w-[250px] md:w-[250px]">
+                            Export Data
+                        </a>
                     </div>
                 </div>
                 <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
                     <table class="my-4 w-full divide-y divide-gray-300 text-center">
                         <form action="rekap_bulan" method="post">
+                            <div class="flex flex-wrap justify-center col-span-2 gap-2 md:justify-end">
 
-                            <select id="bulan" name="bulan">
-                                <option selected>Pilih Bulan</option>
-                                <option value="01">Januari</option>
-                                <option value="02">Februari</option>
-                                <option value="03">Maret</option>
-                                <option value="04">April</option>
-                                <option value="05">Mei</option>
-                                <option value="06">Juni</option>
-                                <option value="07">Juli</option>
-                                <option value="08">Agustus</option>
-                                <option value="09">September</option>
-                                <option value="10">Oktober</option>
-                                <option value="11">November</option>
-                                <option value="12">Desember</option>
-                            </select>
+                                <select id="bulan" name="bulan">
+                                    <option selected>Pilih Bulan</option>
+                                    <option value="01">Januari</option>
+                                    <option value="02">Februari</option>
+                                    <option value="03">Maret</option>
+                                    <option value="04">April</option>
+                                    <option value="05">Mei</option>
+                                    <option value="06">Juni</option>
+                                    <option value="07">Juli</option>
+                                    <option value="08">Agustus</option>
+                                    <option value="09">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+                            </div>
 
 
 

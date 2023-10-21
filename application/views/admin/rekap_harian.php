@@ -378,93 +378,96 @@
 
         <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
             <div class="container mx-auto">
-                <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-black text-white text-xl">
+                <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-sky-900 text-white text-xl">
                     <div class="flex justify-center mb-2 md:justify-start md:pl-6">
                         REKAP HARIAN
-                        <div class="flex justify-center p-2 md:justify-end md:pl-6">
-                            <a href="<?php echo base_url('Admin/export_harian')?>"
-                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Export</a>
-
-                        </div>
                     </div>
-
-
-
+                    <div class="flex flex-wrap justify-center col-span-2 gap-2 md:justify-end">
+                        <a href="<?php echo base_url('Admin/export_harian'); ?>"
+                            class="py-1 float-end bg-green-600
+          text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center w-[250px] md:w-[250px]">
+                            Export Data
+                        </a>
+                    </div>
                 </div>
 
-                <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
-                    <form action="rekap_harian" method="post">
-                        <label for="tanggal">Pilih Tanggal : </label>
-                        <input type="date" id="hari" name="hari">
-                        <button class="p-3 btn btn-sm btn-dark" type="submit">Cari</button>
-                    </form>
 
-                    <table class="my-4 w-full divide-y divide-gray-300 text-center">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-3 py-2 text-xs text-gray-500">NO</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">NAMA KARYAWAN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">
-                                    KEGIATAN
-                                </th>
-                                <th class="px-3 py-2 text-xs text-gray-500">TANGGAL</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">JAM MASUK</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">JAM PULANG</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KETERANGAN IZIN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">STATUS</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-300">
-                            <?php $no = 0;foreach ($data_harian  as $row): $no++?>
-                            <tr class="whitespace-nowrap">
-                                <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
-                                <td class="px-3 py-4 text-sm text-gray-500 uppercase">
-                                    <?php echo tampil_id_karyawan($row->id_karyawan) ?></td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $row->kegiatan ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $row->date ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php if ($row->jam_masuk == null) {
+
+            </div>
+
+            <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
+                <form action="rekap_harian" method="post">
+                    <label for="tanggal">Pilih Tanggal : </label>
+                    <input type="date" id="hari" name="hari">
+                    <button class="p-3 btn btn-sm btn-dark" type="submit">Cari</button>
+                </form>
+
+                <table class="my-4 w-full divide-y divide-gray-300 text-center">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-3 py-2 text-xs text-gray-500">NO</th>
+                            <th class="px-3 py-2 text-xs text-gray-500">NAMA KARYAWAN</th>
+                            <th class="px-3 py-2 text-xs text-gray-500">
+                                KEGIATAN
+                            </th>
+                            <th class="px-3 py-2 text-xs text-gray-500">TANGGAL</th>
+                            <th class="px-3 py-2 text-xs text-gray-500">JAM MASUK</th>
+                            <th class="px-3 py-2 text-xs text-gray-500">JAM PULANG</th>
+                            <th class="px-3 py-2 text-xs text-gray-500">KETERANGAN IZIN</th>
+                            <th class="px-3 py-2 text-xs text-gray-500">STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-300">
+                        <?php $no = 0;foreach ($data_harian  as $row): $no++?>
+                        <tr class="whitespace-nowrap">
+                            <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
+                            <td class="px-3 py-4 text-sm text-gray-500 uppercase">
+                                <?php echo tampil_id_karyawan($row->id_karyawan) ?></td>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php echo $row->kegiatan ?>
+                                </div>
+                            </td>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php echo $row->date ?>
+                                </div>
+                            </td>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php if ($row->jam_masuk == null) {
                                         echo '-';
                                     } else {
                                         echo $row->jam_masuk;
                                     }?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php if ($row->jam_keluar == null) {
+                                </div>
+                            </td>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php if ($row->jam_keluar == null) {
                                         echo '-';
                                     } else {
                                         echo $row->jam_keluar;
                                     }?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $row->keterangan_izin ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $row->status ?>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php endforeach?>
-                        </tbody>
-                    </table>
+                                </div>
+                            </td>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php echo $row->keterangan_izin ?>
+                                </div>
+                            </td>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php echo $row->status ?>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach?>
+                    </tbody>
+                </table>
 
 
-                </div>
+            </div>
         </main>
         </div>
 

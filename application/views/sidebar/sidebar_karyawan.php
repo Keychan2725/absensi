@@ -24,7 +24,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>Profile</title>
+    <title>Dashboard</title>
 </head>
 <style>
 /* ===== Google Font Import - Poppins ===== */
@@ -536,6 +536,122 @@ nav.close~.dashboard .top {
     }
 }
 </style>
+<!-- <div class="sales-boxes">
+                <div class="recent-sales box">
+                    <div class="title">Recent Sales</div>
+                    <div class="sales-details">
+                        <ul class="details">
+                            <li class="topic">Date</li>
+                            <li><a href="#">02 Jan 2021</a></li>
+                            <li><a href="#">02 Jan 2021</a></li>
+                            <li><a href="#">02 Jan 2021</a></li>
+                            <li><a href="#">02 Jan 2021</a></li>
+                            <li><a href="#">02 Jan 2021</a></li>
+                            <li><a href="#">02 Jan 2021</a></li>
+                            <li><a href="#">02 Jan 2021</a></li>
+                        </ul>
+                        <ul class="details">
+                            <li class="topic">Customer</li>
+                            <li><a href="#">Alex Doe</a></li>
+                            <li><a href="#">David Mart</a></li>
+                            <li><a href="#">Roe Parter</a></li>
+                            <li><a href="#">Diana Penty</a></li>
+                            <li><a href="#">Martin Paw</a></li>
+                            <li><a href="#">Doe Alex</a></li>
+                            <li><a href="#">Aiana Lexa</a></li>
+                            <li><a href="#">Rexel Mags</a></li>
+                            <li><a href="#">Tiana Loths</a></li>
+                        </ul>
+                        <ul class="details">
+                            <li class="topic">Sales</li>
+                            <li><a href="#">Delivered</a></li>
+                            <li><a href="#">Pending</a></li>
+                            <li><a href="#">Returned</a></li>
+                            <li><a href="#">Delivered</a></li>
+                            <li><a href="#">Pending</a></li>
+                            <li><a href="#">Returned</a></li>
+                            <li><a href="#">Delivered</a></li>
+                            <li><a href="#">Pending</a></li>
+                            <li><a href="#">Delivered</a></li>
+                        </ul>
+                        <ul class="details">
+                            <li class="topic">Total</li>
+                            <li><a href="#">$204.98</a></li>
+                            <li><a href="#">$24.55</a></li>
+                            <li><a href="#">$25.88</a></li>
+                            <li><a href="#">$170.66</a></li>
+                            <li><a href="#">$56.56</a></li>
+                            <li><a href="#">$44.95</a></li>
+                            <li><a href="#">$67.33</a></li>
+                            <li><a href="#">$23.53</a></li>
+                            <li><a href="#">$46.52</a></li>
+                        </ul>
+                    </div>
+                    <div class="button">
+                        <a href="#">See All</a>
+                    </div>
+                </div>
+                <div class="top-sales box">
+                    <div class="title">Top Seling Product</div>
+                    <ul class="top-sales-details">
+                        <li>
+                            <a href="#">
+                                <img src="images/sunglasses.jpg" alt="">
+                                <span class="product">Vuitton Sunglasses</span>
+                            </a>
+                            <span class="price">$1107</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="images/jeans.jpg" alt="">
+                                <span class="product">Hourglass Jeans </span>
+                            </a>
+                            <span class="price">$1567</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="images/nike.jpg" alt="">
+                                <span class="product">Nike Sport Shoe</span>
+                            </a>
+                            <span class="price">$1234</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="images/scarves.jpg" alt="">
+                                <span class="product">Hermes Silk Scarves.</span>
+                            </a>
+                            <span class="price">$2312</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="images/blueBag.jpg" alt="">
+                                <span class="product">Succi Ladies Bag</span>
+                            </a>
+                            <span class="price">$1456</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="images/bag.jpg" alt="">
+                                <span class="product">Gucci Womens's Bags</span>
+                            </a>
+                            <span class="price">$2345</span>
+                        <li>
+                            <a href="#">
+                                <img src="images/addidas.jpg" alt="">
+                                <span class="product">Addidas Running Shoe</span>
+                            </a>
+                            <span class="price">$2345</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="images/shirt.jpg" alt="">
+                                <span class="product">Bilack Wear's Shirt</span>
+                            </a>
+                            <span class="price">$1245</span>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
 
 <body>
     <nav>
@@ -612,197 +728,127 @@ nav.close~.dashboard .top {
 
 
         </div>
+        <div class="title  ">
 
-        <div class="dash-content mx-auto">
-            <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
-                <div class="title ">
+            <span class="text  ">Dashboard</span>
 
-                    <span class="text ">Profile Account</span>
+
+        </div>
+
+        <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
+            <div class="d-flex  ">
+
+                <div class="card border " style="width: 15rem;height:13rem; ;">
+                    <p class=" fs-6 text-white text-center p-3 bg-dark">Total <br> Masuk</p>
+
+
+                    <p class=" fs-1 text-dark text-center"> <i class="fa-regular fa-calendar-days"></i>
+
+                        <?php echo $jumlah_absen;?></p>
+
+
+                </div>
+                <div class="card  border" style="width: 15rem;height:13rem; ">
+                    <p class=" fs-6 text-white text-center p-3 bg-dark">Total
+                        <br>Izin
+                    </p>
+                    <p class=" fs-1 text-dark text-center"> <i class="fa-regular fa-calendar-minus"></i>
+                        <?php echo $jumlah_izin;?>
+                    </p>
 
                 </div>
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="overflow-auto" style="white-space: nowrap;">
-                                <?php $no = 0;
-foreach ($user as $row) : $no++; ?>
-                                <div class="w-100 m-auto p-3">
-                                    <br>
-                                    <div><?php echo $this->session->flashdata('message'); ?></div>
-                                    <div><?php echo $this->session->flashdata('sukses'); ?></div>
-                                    <div class="row d-flex">
-                                        <input name="id" type="hidden" value="<?php echo $row->id ?>">
-
-
-                                        <span class="border border-0 btn btn-link">
-                                            <?php if (!empty($row->foto)): ?>
-                                            <img src="<?php echo  base_url('./image/' . $row->foto) ?>" height="150"
-                                                width="150" class="rounded-circle">
-
-                                            <?php else: ?>
-                                            <img class="rounded-circle " height="150" width="150"
-                                                src="https://slabsoft.com/wp-content/uploads/2022/05/pp-wa-kosong-default.jpg" />
-                                            <?php endif;?>
-                                        </span>
-
-                                        <br>
-                                        <br>
-                                        <form method="post"
-                                            action="<?php echo base_url('karyawan/aksi_update_profile'); ?>"
-                                            enctype="multipart/form-data">
-                                            <input name="id" type="hidden" value="<?php echo $row->id; ?>">
-                                            <div class="d-flex flex-row ">
-                                                <div class="p-2 col-6">
-                                                    <label for="" class="form-label fs-5">Nama
-                                                        <br>
-                                                        Depan </label>
-                                                    <input type="text" class="form-control" id="nama_depan"
-                                                        name="nama_depan" placeholder="Nama Depan"
-                                                        value="<?php echo $row->nama_depan; ?>">
-                                                    <label for="" class="form-label fs-5">Username </label>
-                                                    <input type="text" class="form-control" id="username"
-                                                        name="username" placeholder="Username"
-                                                        value="<?php echo $row->username; ?>">
-                                                </div>
-                                                <br>
-                                                <div class="p-2 col-6">
-                                                    <label for="" class="form-label fs-5">Nama
-                                                        <br>
-                                                        Belakang </label>
-                                                    <input type="text" class="form-control" id="nama_belakang"
-                                                        name="nama_belakang" placeholder="Nama Belakang"
-                                                        value="<?php echo $row->nama_belakang; ?>">
-
-
-
-                                                </div>
-                                            </div>
-                                            <input type="file" name="foto" class="p-3">
-                                    </div>
-                                </div>
-                                <?php endforeach; ?>
-
-
-
-                                <div class="d-flex p-2 row justify-content-evenly ">
-                                    <button type="submit" class="btn btn-sm btn-dark col-5" name=" submit">Ubah
-                                        Profile</button>
-
-                                    <a class="btn btn-danger col-5"
-                                        href="<?php echo base_url('karyawan/hapus_image'); ?>">
-                                        Hapus
-                                        Foto</a>
-                                </div>
-
-                                <br>
-
-                                </form>
-
-
-
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
+        </div>
+        </div>
+        </div>
+        </div>
+        </main>
+        <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
 
-
-                <div class="title ">
-                    <span class="text ">Password</span>
-
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="overflow-auto" style="white-space: nowrap;">
-
-                                <form action="<?php echo base_url('karyawan/aksi_ubah_password'); ?>"
-                                    enctype="multipart/form-data" method="post">
-                                    <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
-                                        <div class="d-flex form-outline flex-fill mb-0  ">
-                                            <input type="password" name="password_lama" id="password1"
-                                                class="form-control relaltive" placeholder="Password Lama">
-
-                                            <button type="button" id="showPassword1"
-                                                onclick="togglePasswordVisibility('password1')"
-                                                class="far fa-eye-slash absolute p-2"></button>
+            <div class="row">
+                <div class="col">
+                    <div class="overflow-auto" style="white-space: nowrap;">
 
 
 
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="table-hover">
+                                    <th scope="col">No</th>
+                                    <th scope="col">Kegiatan</th>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Jam Masuk</th>
+                                    <th scope="col">Jam Keluar</th>
+                                    <th scope="col">Keterangan Izin</th>
+                                    <th scope="col">Status</th>
 
-
-                                            <input type="password" name="konfirmasi_password" id="password2"
-                                                class="form-control relative" placeholder="Konfirmasi Password">
-                                            <button type="button" id="showPassword2"
-                                                onclick="togglePasswordVisibility('password2')"
-                                                class="far fa-eye-slash absolute p-2"></button>
-
-
-
-                                        </div><br>
-                                        <div class="d-flex form-outline flex-fill col-6  ">
-                                            <input type="password" name="password_baru" id="password3"
-                                                class="form-control relaltive" placeholder="Password Baru">
-
-                                            <button type="button" id="showPassword3"
-                                                onclick="togglePasswordVisibility('password3')"
-                                                class="far fa-eye-slash absolute p-2"></button>
-
-
-
-
-
-
-
-
-
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 0;foreach ($absen as $row): $no++?>
+                                <tr class=" whitespace-nowrap">
+                                    <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no?>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php echo $row->kegiatan?>
                                         </div>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php echo $row->date?>
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php if( $row->jam_masuk == NULL) {
+                        echo '-';
+                      } else{
+                        echo $row->jam_masuk;
+                      }?>
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php if( $row->jam_keluar == NULL) {
+                        echo '-';
+                      } else{
+                        echo $row->jam_keluar;
+                      }?>
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php if( $row->keterangan_izin == NULL) {
+                        echo '-';
+                      } else{
+                        echo $row->keterangan_izin;
+                      }?>
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-4">
+                                        <div class="text-sm text-gray-900">
+                                            <?php if( $row->status == NULL) {
+                        echo 'not';
+                      } else{
+                        echo $row->status;
+                      }?>
+                                    </td>
+                                </tr>
+                                <?php endforeach?>
+                            </tbody>
+                        </table>
 
-                                        <p>*Password harus memiliki 8 angka</p>
-                                    </div>
-
-
-                                    <div class="d-flex p-2 row justify-content-evenly ">
-                                        <button type="submit" class="btn btn-sm btn-dark col-5" name=" submit">Ubah
-                                            Password</button>
-
-
-                                    </div>
-
-                                    <br>
-
-                                </form>
-
-
-
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        </div>
     </section>
 
     <script>
-    // show password
-
-    function togglePasswordVisibility(inputId) {
-        var passwordInput = document.getElementById(inputId);
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            togglePassword.classList.remove('fa-eye-slash');
-            togglePassword.classList.add('fa-eye');
-        } else {
-            passwordInput.type = 'password';
-            togglePassword.classList.remove('fa-eye');
-            togglePassword.classList.add('fa-eye-slash');
-        }
-    }
-    // jam
     function updateClock() {
         var now = new Date();
         var clock = document.getElementById('clock');

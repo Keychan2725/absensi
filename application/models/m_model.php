@@ -7,7 +7,10 @@ class M_model extends CI_Model
                 {
                     parent::__construct();
                 }
-                
+                public function register($data)
+                {
+                    $this->db->insert('user', $data);
+                }
                 function get_data($table)
                 {
                     return $this->db->get($table);
@@ -175,6 +178,15 @@ class M_model extends CI_Model
                 $query = $this->db->get();
                 return $query->result();
                 }
- 
+                public function EmailSudahAda($email) {
+                    $this->db->where('email', $email);    // Menggunakan CodeIgniter Query Builder, kita menentukan kondisi pencarian berdasarkan kolom 'email'.
+                    $query = $this->db->get('user');    // Melakukan query ke tabel 'user' dengan kondisi di atas.
+                    return $query->num_rows()>0;//Memeriksa jumlah baris hasil query Jika jumlah baris (rows) lebih dari 0, berarti email sudah ada
+                }   
+                public function usernameSudahAda($username) {
+                    $this->db->where('username', $username);    // Menggunakan CodeIgniter Query Builder, kita menentukan kondisi pencarian berdasarkan kolom 'username'.
+                    $query = $this->db->get('user');    // Melakukan query ke tabel 'user' dengan kondisi di atas.
+                    return $query->num_rows()>0;//Memeriksa jumlah baris hasil query Jika jumlah baris (rows) lebih dari 0, berarti username sudah ada
+                }   
 
 }

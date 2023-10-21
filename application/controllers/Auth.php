@@ -58,41 +58,48 @@ class Auth extends CI_Controller
 
 		$this->load->view('auth/admin');
 	}
-    public function aksi_register_admin()
+    public function aksi_register()
 	{
-$role="admin";
-$email= $this->input->post('email');
+		$email = $this->input->post('email');
+		$username = $this->input->post('username');
+		$nama_depan = $this->input->post('nama_depan');
+		$nama_belakang = $this->input->post('nama_belakang');
+ 		$password = $this->input->post('password');
+		if ($this->m_model->EmailSudahAda($email)) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			Email ini sudah di ada. Gunakan email lainya			
+			
+			</div>');
+			redirect(base_url('auth/admin'));
+		}elseif ($this->m_model->usernameSudahAda($username)) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			Username ini sudah ada. Gunakan username lainya			
+			</div>');
+			redirect(base_url('auth/admin'));
+		} elseif (strlen($password) < 8 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', $password)) {
+			// Password tidak memenuhi persyaratan
+			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			Password harus memiliki setidaknya 8 karakter			</div> ');
+			redirect(base_url('auth/admin'));
+		} else {
+			// Hash password menggunakan MD5
+			$hashed_password = md5($password);
 
-		$data = [
-			'username' => $this->input->post('username'),
-			'email' => $this->input->post('email'),
-			'nama_depan' => $this->input->post('nama_depan'),
-			'nama_belakang' => $this->input->post('nama_belakang'),
-			'password' => md5($this->input->post('password')),
-            'role'=> $role
-		];
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
-//  if ($email !== $this->session->userdata('email')  ) {
- 
-	if ($this->form_validation->run() === TRUE) {
-		$this->m_model->tambah_data('user', $data);
-		redirect(base_url('auth/login'));
-		
-	} else {
-		$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-		Password anda kurang dari 8 angka
-		
-		
-		</div>');
-		redirect(base_url(('auth/admin')));
-	}
-	
-// }
-// else {
-// 	$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-// 	Email Anda Sudah Terdaftar	</div>');
-// 		redirect(base_url(('auth/admin')));
-// }
+			// Simpan data pengguna ke database
+			$data = array(
+				'username' => $username,
+				'password' => $hashed_password,
+				'email' => $email,
+				'role' => 'karyawan',
+				'nama_depan' => $nama_depan,
+				'nama_belakang' => $nama_belakang,
+			);
+
+			$this->m_model->register($data); // Panggil model untuk menyimpan data
+
+			// $this->session->set_flashdata('message', 'Berhasil Register');
+			redirect(base_url('auth/login'));
+		}
 }
     public function register()
 	{
@@ -101,30 +108,47 @@ $email= $this->input->post('email');
 
 		$this->load->view('auth/register');
 	}
-	public function aksi_register()
+	public function aksi_register_admin()
 	{
-$role="karyawan";
-		$data = [
-			'username' => $this->input->post('username'),
-			'email' => $this->input->post('email'),
-			'nama_depan' => $this->input->post('nama_depan'),
-			'nama_belakang' => $this->input->post('nama_belakang'),
-			'password' => md5($this->input->post('password')),
-
-'role'=> $role
-		];
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
-
-		if ($this->form_validation->run() === TRUE) {
-			$this->m_model->tambah_data('user', $data);
-			redirect(base_url('auth/login'));
-		} else {
+		$email = $this->input->post('email');
+		$username = $this->input->post('username');
+		$nama_depan = $this->input->post('nama_depan');
+		$nama_belakang = $this->input->post('nama_belakang');
+ 		$password = $this->input->post('password');
+		if ($this->m_model->EmailSudahAda($email)) {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			Password anda kurang dari 8 angka
+			Email ini sudah di ada. Gunakan email lainya			
 			
-		
-		  </div>');
-			redirect(base_url(('auth/register')));
+			</div>');
+			redirect(base_url('auth/admin'));
+		}elseif ($this->m_model->usernameSudahAda($username)) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			Username ini sudah ada. Gunakan username lainya			
+			</div>');
+			redirect(base_url('auth/admin'));
+		} elseif (strlen($password) < 8 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', $password)) {
+			// Password tidak memenuhi persyaratan
+			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			Password harus memiliki setidaknya 8 karakter			</div> ');
+			redirect(base_url('auth/admin'));
+		} else {
+			// Hash password menggunakan MD5
+			$hashed_password = md5($password);
+
+			// Simpan data pengguna ke database
+			$data = array(
+				'username' => $username,
+				'password' => $hashed_password,
+				'email' => $email,
+				'role' => 'admin',
+				'nama_depan' => $nama_depan,
+				'nama_belakang' => $nama_belakang,
+			);
+
+			$this->m_model->register($data); // Panggil model untuk menyimpan data
+
+			// $this->session->set_flashdata('message', 'Berhasil Register');
+			redirect(base_url('auth/login'));
 		}
-	}
+}
 }

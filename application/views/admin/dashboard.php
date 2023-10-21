@@ -380,7 +380,7 @@
             <div class="container mx-auto">
                 <div class="grid gap-4 mb-2 mt-2 md:grid-cols-4">
                     <a href="<?php echo base_url('admin/rekap_harian') ?>"
-                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
+                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-800">
                         <p class="text-md text-center font-medium">
                             Absensi
                         </p>
@@ -394,7 +394,7 @@
                     </a>
 
                     <a href="<?php echo base_url('admin/rekap_minggu') ?>"
-                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
+                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-800">
                         <p class="text-md text-center font-medium">
                             Absensi
                         </p>
@@ -409,7 +409,7 @@
                         </div>
                     </a>
                     <a href="<?php echo base_url('admin/rekap_bulan') ?>"
-                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
+                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-800">
                         <p class="text-md text-center font-medium">
                             Absensi
                         </p>
@@ -423,7 +423,7 @@
                     </a>
 
                     <a href="<?php echo base_url('admin/karyawan') ?>"
-                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-200">
+                        class="py-2 bg-white shadow border border-gray-900 hover:bg-sky-800">
                         <p class="text-md text-center font-medium ">
                             Karyawan
                         </p>
@@ -441,14 +441,16 @@
         <!-- tabel -->
         <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
             <div class="container mx-auto">
-                <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-black text-white text-xl">
+                <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-sky-900 text-white text-xl">
                     <div class="flex justify-center mb-2 md:justify-start md:pl-6">
                         REKAP KESELURUHAN
-                        <div class="flex justify-center p-2  md:justify-start md:pl-6">
-                            <a href="<?php echo base_url('Admin/export_seluruh')?>"
-                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Export</a>
-
-                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center col-span-2 gap-2 md:justify-end">
+                        <a href="<?php echo base_url('Admin/export_keseluruhan'); ?>"
+                            class="py-1 float-end bg-green-600
+          text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center w-[250px] md:w-[250px]">
+                            Export Data
+                        </a>
                     </div>
                 </div>
                 <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">

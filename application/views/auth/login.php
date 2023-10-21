@@ -33,10 +33,12 @@
                 <div class="col-lg-12 col-xl-11">
                     <div class="card text-black" style="border-radius: 25px;">
                         <div class="card-body p-md-5">
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sistem Absensi</p>
+                            <hr>
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"> Login</p>
+                                    <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4"> Login</p>
 
                                     <?php echo $this->session->flashdata('message'); ?>
 
@@ -60,8 +62,8 @@
                                             <div class="d-flex form-outline flex-fill mb-0">
                                                 <input placeholder="Password" type="password" id="password"
                                                     name="password" class="form-control">
-                                                <i class="fa-solid fa-eye-slash toggle-password p-2"
-                                                    id="show-password"></i>
+                                                <button type="button" class="fa-solid fa-eye-slash toggle-password p-2"
+                                                    id="show-password"></button>
                                             </div>
                                         </div>
 
@@ -71,7 +73,7 @@
                                             <label for="form2Example3">
                                                 don't have an account ? <a
                                                     href="<?php echo base_url('auth/register') ?>"
-                                                    class="text-dark">Registrasi </a>
+                                                    class="text-sky">Registrasi </a>
 
                                             </label>
                                         </div>
