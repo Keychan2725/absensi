@@ -70,17 +70,17 @@ class Auth extends CI_Controller
 			Email ini sudah di ada. Gunakan email lainya			
 			
 			</div>');
-			redirect(base_url('auth/admin'));
+			redirect(base_url('auth/register'));
 		}elseif ($this->m_model->usernameSudahAda($username)) {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 			Username ini sudah ada. Gunakan username lainya			
 			</div>');
-			redirect(base_url('auth/admin'));
+			redirect(base_url('auth/register'));
 		} elseif (strlen($password) < 8 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', $password)) {
 			// Password tidak memenuhi persyaratan
 			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 			Password harus memiliki setidaknya 8 karakter			</div> ');
-			redirect(base_url('auth/admin'));
+			redirect(base_url('auth/register'));
 		} else {
 			// Hash password menggunakan MD5
 			$hashed_password = md5($password);

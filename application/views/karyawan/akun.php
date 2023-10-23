@@ -583,12 +583,7 @@ nav.close~.dashboard .top {
                 </li>
 
                 <li class="logout-mode  ">
-                <li><a class="btn btn-lg   " onclick=" logout(id)">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <span class="link-name">Keluar</span>
-                    </a>
 
-                </li>
                 <li>
 
                     <span id="clock" name="date" class="text-white link-name"> </span>
@@ -599,7 +594,12 @@ nav.close~.dashboard .top {
                 </li>
 
 
+                <li><a class="btn btn-lg position-absolute bottom-0 start-0   " onclick=" logout(id)">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="link-name">Keluar</span>
+                    </a>
 
+                </li>
 
         </div>
 
@@ -806,16 +806,25 @@ foreach ($user as $row) : $no++; ?>
     function updateClock() {
         var now = new Date();
         var clock = document.getElementById('clock');
-        clock.innerHTML = now.toLocaleTimeString();
+
+        var options = {
+            hour12: false
+        };
+        clock.innerHTML = now.toLocaleTimeString(undefined, options);
     }
 
     // Memperbarui jam setiap detik
     setInterval(updateClock, 1000);
 
+
     function updateClock2() {
         var now = new Date();
         var clock = document.getElementById('clock2');
-        clock.innerHTML = now.toLocaleTimeString();
+
+        var options = {
+            hour12: false
+        };
+        clock.innerHTML = now.toLocaleTimeString(undefined, options);
     }
 
     // Memperbarui jam setiap detik

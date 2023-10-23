@@ -100,7 +100,7 @@ class Admin extends CI_Controller
             $no=1;
             $numrow=3;
             foreach ($karyawan as $data) {
-            $sheet->setCellValue('A'.$numrow,$data->id );
+            $sheet->setCellValue('A'.$numrow,$no );
             $sheet->setCellValue('B'.$numrow, $data->foto);
             $sheet->setCellValue('C'.$numrow,$data->username);
             $sheet->setCellValue('D'.$numrow,$data->nama_depan);

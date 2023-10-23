@@ -316,12 +316,20 @@
         </div>
         <ul class="nav-list">
             <!-- navbar -->
+
             <li>
                 <a href="<?php echo base_url('admin/dashboard') ?>">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
                 <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="<?php echo base_url('admin/karyawan') ?>">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span class="links_name">Karyawan</span>
+                </a>
+                <span class="tooltip">Karyawan</span>
             </li>
             <li>
                 <a href="<?php echo base_url('admin/rekap_harian') ?>">
@@ -345,13 +353,7 @@
                 <span class="tooltip">Rekapan Bulan</span>
             </li>
 
-            <li>
-                <a href="<?php echo base_url('admin/karyawan') ?>">
-                    <i class="fa-solid fa-circle-user"></i>
-                    <span class="links_name">Karyawan</span>
-                </a>
-                <span class="tooltip">Karyawan</span>
-            </li>
+
 
 
             <li>
@@ -532,20 +534,16 @@
 function updateClock() {
     var now = new Date();
     var clock = document.getElementById('clock');
-    clock.innerHTML = now.toLocaleTimeString();
+
+    var options = {
+        hour12: false
+    };
+    clock.innerHTML = now.toLocaleTimeString(undefined, options);
 }
 
 // Memperbarui jam setiap detik
 setInterval(updateClock, 1000);
 
-function updateClock2() {
-    var now = new Date();
-    var clock = document.getElementById('clock2');
-    clock.innerHTML = now.toLocaleTimeString();
-}
-
-// Memperbarui jam setiap detik
-setInterval(updateClock2, 1000);
 let sidebar = document.querySelector(".sidebar");
 let closeBtn = document.querySelector("#btn");
 let searchBtn = document.querySelector(".bx-search");
