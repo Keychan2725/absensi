@@ -11,9 +11,8 @@ class Sidebar extends CI_Controller
        
         }
         public function sidebar_1(){
-            $data['absen'] = $this-> m_model->get_history('absensi' , $this->session->userdata('id'))->result();
-            $data['jumlah_absen'] = $this-> m_model->get_absen('absensi' , $this->session->userdata('id'))->num_rows();
-            $data['jumlah_izin'] = $this-> m_model->get_izin('absensi' , $this->session->userdata('id'))->num_rows();
+            $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
+
             $this->load->view('sidebar/sidebar_1',$data);
         }
     }

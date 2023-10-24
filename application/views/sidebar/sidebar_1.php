@@ -3,778 +3,475 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard </title>
+    <title> Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-
-
-    <!-- Script -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <style>
-/* Googlefont Poppins CDN Link */
+/* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .sidebar {
     position: fixed;
+    left: 0;
+    top: 0;
     height: 100%;
-    width: 240px;
-    background: #0A2558;
+    width: 78px;
+    background: #11101D;
+    padding: 6px 14px;
+    z-index: 99;
     transition: all 0.5s ease;
 }
 
-.sidebar.active {
-    width: 60px;
+.sidebar.open {
+    width: 250px;
 }
 
 .sidebar .logo-details {
-    height: 80px;
+    height: 60px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
-.sidebar .logo-details i {
-    font-size: 28px;
-    font-weight: 500;
-    color: #fff;
-    min-width: 60px;
-    text-align: center
+.sidebar .logo-details .icon {
+    opacity: 0;
+    transition: all 0.5s ease;
 }
 
 .sidebar .logo-details .logo_name {
     color: #fff;
-    font-size: 24px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.5s ease;
 }
 
-.sidebar .nav-links {
-    margin-top: 10px;
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name {
+    opacity: 1;
 }
 
-.sidebar .nav-links li {
+.sidebar .logo-details #btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: all 0.4s ease;
+    font-size: 23px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .logo-details #btn {
+    text-align: right;
+}
+
+.sidebar i {
+    color: #fff;
+    height: 60px;
+    min-width: 50px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+}
+
+.sidebar .nav-list {
+    margin-top: 20px;
+    height: 100%;
+}
+
+.sidebar li {
     position: relative;
+    margin: 8px 0;
     list-style: none;
-    height: 50px;
 }
 
-.sidebar .nav-links li a {
+.sidebar li .tooltip {
+    position: absolute;
+    top: -20px;
+    left: calc(100% + 15px);
+    z-index: 3;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: 0s;
+}
+
+.sidebar li:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sidebar.open li .tooltip {
+    display: none;
+}
+
+.sidebar input {
+    font-size: 15px;
+    color: #FFF;
+    font-weight: 400;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    width: 50px;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.5s ease;
+    background: #1d1b31;
+}
+
+.sidebar.open input {
+    padding: 0 20px 0 50px;
+    width: 100%;
+}
+
+.sidebar .bx-search {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 22px;
+    background: #1d1b31;
+    color: #FFF;
+}
+
+.sidebar.open .bx-search:hover {
+    background: #1d1b31;
+    color: #FFF;
+}
+
+.sidebar .bx-search:hover {
+    background: #FFF;
+    color: #11101d;
+}
+
+.sidebar li a {
+    display: flex;
     height: 100%;
     width: 100%;
-    display: flex;
+    border-radius: 12px;
     align-items: center;
     text-decoration: none;
     transition: all 0.4s ease;
+    background: #11101D;
 }
 
-.sidebar .nav-links li a.active {
-    background: #081D45;
+.sidebar li a:hover {
+    background: #FFF;
 }
 
-.sidebar .nav-links li a:hover {
-    background: #081D45;
-}
-
-.sidebar .nav-links li i {
-    min-width: 60px;
-    text-align: center;
-    font-size: 18px;
-    color: #fff;
-}
-
-.sidebar .nav-links li a .links_name {
+.sidebar li a .links_name {
     color: #fff;
     font-size: 15px;
     font-weight: 400;
     white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
 }
 
-.sidebar .nav-links .log_out {
+.sidebar.open li a .links_name {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i {
+    transition: all 0.5s ease;
+    color: #11101D;
+}
+
+.sidebar li i {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    border-radius: 12px;
+}
+
+.sidebar li.profile {
+    position: fixed;
+    height: 60px;
+    width: 78px;
+    left: 0;
+    bottom: -8px;
+    padding: 10px 14px;
+    background: #1d1b31;
+    transition: all 0.5s ease;
+    overflow: hidden;
+}
+
+.sidebar.open li.profile {
+    width: 250px;
+}
+
+.sidebar li .profile-details {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.sidebar li img {
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+.sidebar li.profile .name,
+.sidebar li.profile .job {
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.sidebar li.profile .job {
+    font-size: 12px;
+}
+
+.sidebar .profile #log_out {
     position: absolute;
-    bottom: 0;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background: #1d1b31;
     width: 100%;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 0px;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .profile #log_out {
+    width: 50px;
+    background: none;
 }
 
 .home-section {
     position: relative;
-    background: #f5f5f5;
+    background: white;
     min-height: 100vh;
-    width: calc(100% - 240px);
-    left: 240px;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
     transition: all 0.5s ease;
+    z-index: 2;
 }
 
-.sidebar.active~.home-section {
-    width: calc(100% - 60px);
-    left: 60px;
+.sidebar.open~.home-section {
+    left: 250px;
+    width: calc(100% - 250px);
 }
 
-.home-section nav {
-    display: flex;
-    justify-content: space-between;
-    height: 80px;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    width: calc(100% - 240px);
-    left: 240px;
-    z-index: 100;
-    padding: 0 20px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s ease;
-}
-
-.sidebar.active~.home-section nav {
-    left: 60px;
-    width: calc(100% - 60px);
-}
-
-.home-section nav .sidebar-button {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    font-weight: 500;
-}
-
-nav .sidebar-button i {
-    font-size: 35px;
-    margin-right: 10px;
-}
-
-.home-section nav .search-box {
-    position: relative;
-    height: 50px;
-    max-width: 550px;
-    width: 100%;
-    margin: 0 20px;
-}
-
-nav .search-box input {
-    height: 100%;
-    width: 100%;
-    outline: none;
-    background: #F5F6FA;
-    border: 2px solid #EFEEF1;
-    border-radius: 6px;
-    font-size: 18px;
-    padding: 0 15px;
-}
-
-nav .search-box .bx-search {
-    position: absolute;
-    height: 40px;
-    width: 40px;
-    background: #2697FF;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 4px;
-    line-height: 40px;
-    text-align: center;
-    color: #fff;
-    font-size: 22px;
-    transition: all 0.4 ease;
-}
-
-.home-section nav .profile-details {
-    display: flex;
-    align-items: center;
-    background: #F5F6FA;
-    border: 2px solid #EFEEF1;
-    border-radius: 6px;
-    height: 50px;
-    min-width: 190px;
-    padding: 0 15px 0 2px;
-}
-
-nav .profile-details img {
-    height: 40px;
-    width: 40px;
-    border-radius: 6px;
-    object-fit: cover;
-}
-
-nav .profile-details .admin_name {
-    font-size: 15px;
-    font-weight: 500;
-    color: #333;
-    margin: 0 10px;
-    white-space: nowrap;
-}
-
-nav .profile-details i {
+.home-section .text {
+    display: inline-block;
+    color: #11101d;
     font-size: 25px;
-    color: #333;
-}
-
-.home-section .home-content {
-    position: relative;
-    padding-top: 104px;
-}
-
-.home-content .overview-boxes {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 0 20px;
-    margin-bottom: 26px;
-}
-
-.overview-boxes .box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(100% / 4 - 15px);
-    background: #fff;
-    padding: 15px 14px;
-    border-radius: 12px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-.overview-boxes .box-topic {
-    font-size: 20px;
     font-weight: 500;
+    margin: 18px
 }
 
-.home-content .box .number {
-    display: inline-block;
-    font-size: 35px;
-    margin-top: -6px;
-    font-weight: 500;
-}
-
-.home-content .box .indicator {
-    display: flex;
-    align-items: center;
-}
-
-.home-content .box .indicator i {
-    height: 20px;
-    width: 20px;
-    background: #8FDACB;
-    line-height: 20px;
-    text-align: center;
-    border-radius: 50%;
-    color: #fff;
-    font-size: 20px;
-    margin-right: 5px;
-}
-
-.box .indicator i.down {
-    background: #e87d88;
-}
-
-.home-content .box .indicator .text {
-    font-size: 12px;
-}
-
-.home-content .box .cart {
-    display: inline-block;
-    font-size: 32px;
-    height: 50px;
-    width: 50px;
-    background: #cce5ff;
-    line-height: 50px;
-    text-align: center;
-    color: #66b0ff;
-    border-radius: 12px;
-    margin: -15px 0 0 6px;
-}
-
-.home-content .box .cart.two {
-    color: #2BD47D;
-    background: #C0F2D8;
-}
-
-.home-content .box .cart.three {
-    color: #ffc233;
-    background: #ffe8b3;
-}
-
-.home-content .box .cart.four {
-    color: #e05260;
-    background: #f7d4d7;
-}
-
-.home-content .total-order {
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.home-content .sales-boxes {
-    display: flex;
-    justify-content: space-between;
-    /* padding: 0 20px; */
-}
-
-/* left box */
-.home-content .sales-boxes .recent-sales {
-    width: 65%;
-    background: #fff;
-    padding: 20px 30px;
-    margin: 0 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-.home-content .sales-boxes .sales-details {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.sales-boxes .box .title {
-    font-size: 24px;
-    font-weight: 500;
-    /* margin-bottom: 10px; */
-}
-
-.sales-boxes .sales-details li.topic {
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.sales-boxes .sales-details li {
-    list-style: none;
-    margin: 8px 0;
-}
-
-.sales-boxes .sales-details li a {
-    font-size: 18px;
-    color: #333;
-    font-size: 400;
-    text-decoration: none;
-}
-
-.sales-boxes .box .button {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.sales-boxes .box .button a {
-    color: #fff;
-    background: #0A2558;
-    padding: 4px 12px;
-    font-size: 15px;
-    font-weight: 400;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.sales-boxes .box .button a:hover {
-    background: #0d3073;
-}
-
-/* Right box */
-.home-content .sales-boxes .top-sales {
-    width: 35%;
-    background: #fff;
-    padding: 20px 30px;
-    margin: 0 20px 0 0;
-    border-radius: 12px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-.sales-boxes .top-sales li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 0;
-}
-
-.sales-boxes .top-sales li a img {
-    height: 40px;
-    width: 40px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-right: 10px;
-    background: #333;
-}
-
-.sales-boxes .top-sales li a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-.sales-boxes .top-sales li .product,
-.price {
-    font-size: 17px;
-    font-weight: 400;
-    color: #333;
-}
-
-/* Responsive Media Query */
-@media (max-width: 1240px) {
-    .sidebar {
-        width: 60px;
-    }
-
-    .sidebar.active {
-        width: 220px;
-    }
-
-    .home-section {
-        width: calc(100% - 60px);
-        left: 60px;
-    }
-
-    .sidebar.active~.home-section {
-        /* width: calc(100% - 220px); */
-        overflow: hidden;
-        left: 220px;
-    }
-
-    .home-section nav {
-        width: calc(100% - 60px);
-        left: 60px;
-    }
-
-    .sidebar.active~.home-section nav {
-        width: calc(100% - 220px);
-        left: 220px;
-    }
-}
-
-@media (max-width: 1150px) {
-    .home-content .sales-boxes {
-        flex-direction: column;
-    }
-
-    .home-content .sales-boxes .box {
-        width: 100%;
-        overflow-x: scroll;
-        margin-bottom: 30px;
-    }
-
-    .home-content .sales-boxes .top-sales {
-        margin: 0;
-    }
-}
-
-@media (max-width: 1000px) {
-    .overview-boxes .box {
-        width: calc(100% / 2 - 15px);
-        margin-bottom: 15px;
-    }
-}
-
-@media (max-width: 700px) {
-
-    nav .sidebar-button .dashboard,
-    nav .profile-details .admin_name,
-    nav .profile-details i {
+@media (max-width: 420px) {
+    .sidebar li .tooltip {
         display: none;
-    }
-
-    .home-section nav .profile-details {
-        height: 50px;
-        min-width: 40px;
-    }
-
-    .home-content .sales-boxes .sales-details {
-        width: 560px;
-    }
-}
-
-@media (max-width: 550px) {
-    .overview-boxes .box {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-
-    .sidebar.active~.home-section nav .profile-details {
-        display: none;
-    }
-}
-
-@media (max-width: 400px) {
-    .sidebar {
-        width: 0;
-    }
-
-    .sidebar.active {
-        width: 60px;
-    }
-
-    .home-section {
-        width: 100%;
-        left: 0;
-    }
-
-    .sidebar.active~.home-section {
-        left: 60px;
-        width: calc(100% - 60px);
-    }
-
-    .home-section nav {
-        width: 100%;
-        left: 0;
-    }
-
-    .sidebar.active~.home-section nav {
-        left: 60px;
-        width: calc(100% - 60px);
     }
 }
 </style>
 
-<body>
+<body class="bg-slate-100">
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bxl-c-plus-plus'></i>
-            <span class="logo_name">CodingLab</span>
+            <i class='bx bxl-c-plus-plus icon'></i>
+            <div class="logo_name">AppAbsen</div>
+            <i class='bx bx-menu' id="btn"></i>
         </div>
-        <ul class="nav-links">
+        <ul class="nav-list">
+            <!-- navbar -->
+
             <li>
                 <a href="<?php echo base_url('karyawan/dashboard') ?>">
-                    <i class="fa-solid fa-house"></i>
+                    <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
+                <span class="tooltip">Dashboard</span>
             </li>
-            <li><a href="<?php echo base_url('karyawan/history') ?>">
-                    <i class="fa-solid fa-clock-rotate-left"></i>
-
-                    <span class="links_name">History Absensi</span>
-                </a></li>
-            <li><a href="<?php echo base_url('karyawan/absensi') ?>">
+            <li>
+                <a href="<?php echo base_url('karyawan/absensi') ?>">
                     <i class="fa-regular fa-calendar-days"></i>
                     <span class="links_name">Absensi</span>
-                </a></li>
-            <li><a href="<?php echo base_url('karyawan/izin') ?>">
+                </a>
+                <span class="tooltip">Absensi</span>
+            </li>
+            <li>
+                <a href="<?php echo base_url('karyawan/izin') ?>">
                     <i class="fa-solid fa-i"></i>
-                    <span class="links_name">Izin</span>
-                </a></li>
-
-            <li><a href="<?php echo base_url('karyawan/akun') ?>">
+                    <span class="links_name"> Izin</span>
+                </a>
+                <span class="tooltip"> Izin</span>
+            </li>
+            <li>
+                <a href="<?php echo base_url('karyawan/history') ?>">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span class="links_name"> History Absen</span>
+                </a>
+                <span class="tooltip"> History Absen</span>
+            </li>
+            <li>
+                <a href="<?php echo base_url('karyawan/akun') ?>">
                     <i class="fa-solid fa-circle-user"></i>
-                    <span class="links_name">Edit Profil</span>
-                </a></li>
+                    <span class="links_name"> Profile</span>
+                </a>
+                <span class="tooltip"> Profile</span>
+            </li>
 
-            <li class="log_out">
-                <a href="#">
-                    <i class='bx bx-log-out'></i>
-                    <span class="links_name">Log out</span>
+
+
+
+            <li>
+
+                <span id="clock" name="date" class="text-white links_name"> </span>
+
+
+            </li>
+            <li class="profile">
+
+
+
+
+
+                <a class="btn btn-lg   " onclick=" logout(id)">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="links_name">Keluar</span>
                 </a>
             </li>
         </ul>
     </div>
-    <section class="home-section">
-        <nav>
-            <div class="sidebar-button">
-                <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Dashboard</span>
-            </div>
-            <!-- <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <i class='bx bx-search'></i>
-            </div> -->
-            <div class="profile-details">
-                <img src="images/profile.jpg" alt="">
-                <span class="admin_name">Prem Shahi</span>
-                <i class='bx bx-chevron-down'></i>
-            </div>
-        </nav>
+    <section class="home-section bg-slate-100    ">
+        <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
+            <div class="container mx-auto">
 
-        <div class="home-content">
-            <div class="overview-boxes">
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Order</div>
-                        <div class="number">40,876</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
+        </main>
+        <!-- tabel -->
+        <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-sky-900 text-white text-xl">
+                    <div class="flex justify-center mb-2 md:justify-start md:pl-6">
+                        History
                     </div>
-                    <i class='bx bx-cart-alt cart'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Sales</div>
-                        <div class="number">38,876</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
-                    </div>
-                    <i class='bx bxs-cart-add cart two'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Profit</div>
-                        <div class="number">$12,876</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
-                    </div>
-                    <i class='bx bx-cart cart three'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Return</div>
-                        <div class="number">11,086</div>
-                        <div class="indicator">
-                            <i class='bx bx-down-arrow-alt down'></i>
-                            <span class="text">Down From Today</span>
-                        </div>
-                    </div>
-                    <i class='bx bxs-cart-download cart four'></i>
-                </div>
-            </div>
 
-            <div class="sales-boxes">
-                <div class="recent-sales box">
-                    <div class="title">Recent Sales</div>
-                    <div class="sales-details">
-                        <ul class="details">
-                            <li class="topic">Date</li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Customer</li>
-                            <li><a href="#">Alex Doe</a></li>
-                            <li><a href="#">David Mart</a></li>
-                            <li><a href="#">Roe Parter</a></li>
-                            <li><a href="#">Diana Penty</a></li>
-                            <li><a href="#">Martin Paw</a></li>
-                            <li><a href="#">Doe Alex</a></li>
-                            <li><a href="#">Aiana Lexa</a></li>
-                            <li><a href="#">Rexel Mags</a></li>
-                            <li><a href="#">Tiana Loths</a></li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Sales</li>
-                            <li><a href="#">Delivered</a></li>
-                            <li><a href="#">Pending</a></li>
-                            <li><a href="#">Returned</a></li>
-                            <li><a href="#">Delivered</a></li>
-                            <li><a href="#">Pending</a></li>
-                            <li><a href="#">Returned</a></li>
-                            <li><a href="#">Delivered</a></li>
-                            <li><a href="#">Pending</a></li>
-                            <li><a href="#">Delivered</a></li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Total</li>
-                            <li><a href="#">$204.98</a></li>
-                            <li><a href="#">$24.55</a></li>
-                            <li><a href="#">$25.88</a></li>
-                            <li><a href="#">$170.66</a></li>
-                            <li><a href="#">$56.56</a></li>
-                            <li><a href="#">$44.95</a></li>
-                            <li><a href="#">$67.33</a></li>
-                            <li><a href="#">$23.53</a></li>
-                            <li><a href="#">$46.52</a></li>
-                        </ul>
-                    </div>
-                    <div class="button">
-                        <a href="#">See All</a>
-                    </div>
                 </div>
-                <div class="top-sales box">
-                    <div class="title">Top Seling Product</div>
-                    <ul class="top-sales-details">
-                        <li>
-                            <a href="#">
-                                <img src="images/sunglasses.jpg" alt="">
-                                <span class="product">Vuitton Sunglasses</span>
-                            </a>
-                            <span class="price">$1107</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/jeans.jpg" alt="">
-                                <span class="product">Hourglass Jeans </span>
-                            </a>
-                            <span class="price">$1567</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/nike.jpg" alt="">
-                                <span class="product">Nike Sport Shoe</span>
-                            </a>
-                            <span class="price">$1234</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/scarves.jpg" alt="">
-                                <span class="product">Hermes Silk Scarves.</span>
-                            </a>
-                            <span class="price">$2312</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/blueBag.jpg" alt="">
-                                <span class="product">Succi Ladies Bag</span>
-                            </a>
-                            <span class="price">$1456</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/bag.jpg" alt="">
-                                <span class="product">Gucci Womens's Bags</span>
-                            </a>
-                            <span class="price">$2345</span>
-                        <li>
-                            <a href="#">
-                                <img src="images/addidas.jpg" alt="">
-                                <span class="product">Addidas Running Shoe</span>
-                            </a>
-                            <span class="price">$2345</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/shirt.jpg" alt="">
-                                <span class="product">Bilack Wear's Shirt</span>
-                            </a>
-                            <span class="price">$1245</span>
-                        </li>
-                    </ul>
+                <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
+                    <table class="my-4 w-full divide-y divide-gray-300 text-center">
+
+                    </table>
                 </div>
             </div>
-        </div>
+        </main>
     </section>
-
-    <script>
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".sidebarBtn");
-    sidebarBtn.onclick = function() {
-        sidebar.classList.toggle("active");
-        if (sidebar.classList.contains("active")) {
-            sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-        } else
-            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-    }
-    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </body>
+<script>
+function updateClock() {
+    var now = new Date();
+    var clock = document.getElementById('clock');
+
+    var options = {
+        hour12: false
+    };
+    clock.innerHTML = now.toLocaleTimeString(undefined, options);
+}
+
+// Memperbarui jam setiap detik
+setInterval(updateClock, 1000);
+
+let sidebar = document.querySelector(".sidebar");
+let closeBtn = document.querySelector("#btn");
+let searchBtn = document.querySelector(".bx-search");
+
+// Tambahkan kelas "open" secara default saat halaman dimuat hanya jika tampilan desktop
+if (window.innerWidth > 768) {
+    sidebar.classList.add("open");
+}
+
+closeBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    menuBtnChange();
+});
+
+searchBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    menuBtnChange();
+});
+
+function menuBtnChange() {
+    if (sidebar.classList.contains("open")) {
+        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+    } else {
+        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+}
+
+// Tambahkan event listener untuk memeriksa saat ukuran layar berubah
+window.addEventListener("resize", () => {
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove("open"); // Sembunyikan sidebar pada tampilan mobile
+    }
+});
+
+function logout(id) {
+    swal.fire({
+        title: ' Yakin Ingin Log Out',
+        text: "",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Batal',
+        confirmButtonText: 'Log Out'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Log Out',
+                showConfirmButton: false,
+                timer: 1500,
+
+            }).then(function() {
+                window.location.href = "<?php echo base_url('auth/logout/')?>" + id;
+            });
+        }
+    });
+}
+</script>
 
 </html>

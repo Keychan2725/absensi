@@ -3,19 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Rekap Bulanan</title>
+    <title> Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
 </head>
 <style>
@@ -280,7 +278,7 @@
 
 .home-section {
     position: relative;
-    background: #E4E9F7;
+    background: white;
     min-height: 100vh;
     top: 0;
     left: 78px;
@@ -309,50 +307,52 @@
 }
 </style>
 
-<body>
+<body class="bg-slate-100">
     <div class="sidebar">
         <div class="logo-details">
             <i class='bx bxl-c-plus-plus icon'></i>
-            <div class="logo_name">Admin</div>
+            <div class="logo_name">AppAbsen</div>
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
+            <!-- navbar -->
 
             <li>
-                <a href="<?php echo base_url('admin/dashboard') ?>">
+                <a href="<?php echo base_url('karyawan/dashboard') ?>">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
                 <span class="tooltip">Dashboard</span>
             </li>
             <li>
-                <a href="<?php echo base_url('admin/karyawan') ?>">
+                <a href="<?php echo base_url('karyawan/absensi') ?>">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <span class="links_name">Absensi</span>
+                </a>
+                <span class="tooltip">Absensi</span>
+            </li>
+            <li>
+                <a href="<?php echo base_url('karyawan/izin') ?>">
+                    <i class="fa-solid fa-i"></i>
+                    <span class="links_name"> Izin</span>
+                </a>
+                <span class="tooltip"> Izin</span>
+            </li>
+            <li>
+                <a href="<?php echo base_url('karyawan/history') ?>">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span class="links_name"> History Absen</span>
+                </a>
+                <span class="tooltip"> History Absen</span>
+            </li>
+            <li>
+                <a href="<?php echo base_url('karyawan/akun') ?>">
                     <i class="fa-solid fa-circle-user"></i>
-                    <span class="links_name">Karyawan</span>
+                    <span class="links_name"> Profile</span>
                 </a>
-                <span class="tooltip">Karyawan</span>
+                <span class="tooltip"> Profile</span>
             </li>
-            <li>
-                <a href="<?php echo base_url('admin/rekap_harian') ?>">
-                    <i class="fa-regular fa-calendar-days"></i>
-                    <span class="links_name">Rekapan Harian</span>
-                </a>
-                <span class="tooltip">Rekapan Harian</span>
-            </li>
-            <li>
-                <a href="<?php echo base_url('admin/rekap_minggu') ?>">
-                    <i class="fa-solid fa-calendar-week"></i>
-                    <span class="links_name">Rekapan Minggu</span>
-                </a>
-                <span class="tooltip">Rekapan Minggu</span>
-            </li>
-            <li>
-                <a href="<?php echo base_url('admin/rekap_bulan') ?>">
-                    <i class="fa-regular fa-calendar-days"></i>
-                    <span class="links_name">Rekapan Bulan</span>
-                </a>
-                <span class="tooltip">Rekapan Bulan</span>
-            </li>
+
 
 
 
@@ -375,133 +375,43 @@
             </li>
         </ul>
     </div>
-    <section class="home-section bg-slate-100 ">
+    <section class="home-section bg-slate-100    ">
+        <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
+            <div class="container mx-auto">
 
+        </main>
+        <!-- tabel -->
         <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
             <div class="container mx-auto">
                 <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-sky-900 text-white text-xl">
                     <div class="flex justify-center mb-2 md:justify-start md:pl-6">
-                        REKAP BULANAN
+                        Absensi Karyawan
                     </div>
-                    <div class="flex flex-wrap justify-center col-span-2 gap-2 md:justify-end">
-                        <a href="<?php echo base_url('Admin/export_bulan'); ?>"
-                            class="py-1 float-end bg-green-600
-          text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center w-[250px] md:w-[250px]">
-                            Export Data
-                        </a>
-                    </div>
+
                 </div>
                 <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
                     <table class="my-4 w-full divide-y divide-gray-300 text-center">
-                        <form action="rekap_bulan" method="post">
-                            <div class="flex flex-wrap justify-center col-span-2 gap-2 md:justify-end">
-
-                                <select id="bulan" name="bulan">
-                                    <option selected>Pilih Bulan</option>
-                                    <option value="01">Januari</option>
-                                    <option value="02">Februari</option>
-                                    <option value="03">Maret</option>
-                                    <option value="04">April</option>
-                                    <option value="05">Mei</option>
-                                    <option value="06">Juni</option>
-                                    <option value="07">Juli</option>
-                                    <option value="08">Agustus</option>
-                                    <option value="09">September</option>
-                                    <option value="10">Oktober</option>
-                                    <option value="11">November</option>
-                                    <option value="12">Desember</option>
-                                </select>
+                        <?php echo $this->session->flashdata('message'); ?>
+                        <form action="<?php echo base_url('karyawan/aksi_absen') ?>" enctype="multipart/form-data"
+                            method="post">
+                            <div>
+                                <label for="kegiatan" class="block text-gray-800 font-medium mb-2">Kegiatan</label>
+                                <textarea id="kegiatan" name="kegiatan" rows="6"
+                                    class="bg-gray-50 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
+                                    required></textarea>
                             </div>
-
-
-
-
+                            <div class="text-right mt-6">
+                                <button type="submit"
+                                    class="px-4 py-2 bg-black  text-white rounded  hover:bg-sky-800 focus:outline-none focus:ring focus:ring-sky-700 uppercase rounded text-xs tracking-wider">Simpan</button>
+                            </div>
                         </form>
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-3 py-2 text-xs text-gray-500">NO</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">NAMA</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">
-                                    KEGIATAN
-                                </th>
-                                <th class="px-3 py-2 text-xs text-gray-500">TANGGAL</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">JAM MASUK</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">JAM PULANG</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KETERANGAN IZIN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">STATUS</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-300">
-                            <?php $no=0; foreach ($rekap_bulan as $row)
-                            : $no++?> <tr class="whitespace-nowrap">
-                                <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo tampil_id_karyawan($row->id_karyawan); ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $row->kegiatan; ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $row->date; ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php if(  $row->jam_masuk == NULL) {
-                        echo '-';
-                      } else{
-                        echo  $row->jam_masuk;
-                      }?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php if( $row->jam_keluar == NULL) {
-                        echo '-';
-                      } else{
-                        echo  $row->jam_keluar;
-                      }?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $row->keterangan_izin; ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $row->status; ?>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php endforeach?>
-                        </tbody>
+                        </form>
                     </table>
                 </div>
             </div>
         </main>
-        </div>
-
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
-
-            var selectElement = document.getElementById('bulan');
-            var formElement = selectElement.form;
-
-            selectElement.addEventListener('change', function() {
-                formElement.submit();
-            });
-        });
-        </script>
-
-</body>
-
-</section>
+    </section>
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </body>
 <script>
@@ -517,7 +427,6 @@ function updateClock() {
 
 // Memperbarui jam setiap detik
 setInterval(updateClock, 1000);
-
 
 let sidebar = document.querySelector(".sidebar");
 let closeBtn = document.querySelector("#btn");

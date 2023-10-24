@@ -18,7 +18,7 @@ class Karyawan extends CI_Controller
     // isi dashboard
     public function dashboard()
     {        
-        $data['absen'] = $this-> m_model->get_history('absensi' , $this->session->userdata('id'))->result();
+        $data['absensi'] = $this-> m_model->get_history('absensi' , $this->session->userdata('id'))->result();
         $data['jumlah_absen'] = $this-> m_model->get_absen('absensi' , $this->session->userdata('id'))->num_rows();
         $data['jumlah_izin'] = $this-> m_model->get_izin('absensi' , $this->session->userdata('id'))->num_rows();
      

@@ -507,24 +507,35 @@ let sidebar = document.querySelector(".sidebar");
 let closeBtn = document.querySelector("#btn");
 let searchBtn = document.querySelector(".bx-search");
 
+// Tambahkan kelas "open" secara default saat halaman dimuat hanya jika tampilan desktop
+if (window.innerWidth > 768) {
+    sidebar.classList.add("open");
+}
+
 closeBtn.addEventListener("click", () => {
     sidebar.classList.toggle("open");
-    menuBtnChange(); //calling the function(optional)
+    menuBtnChange();
 });
 
-searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+searchBtn.addEventListener("click", () => {
     sidebar.classList.toggle("open");
-    menuBtnChange(); //calling the function(optional)
+    menuBtnChange();
 });
 
-// following are the code to change sidebar button(optional)
 function menuBtnChange() {
     if (sidebar.classList.contains("open")) {
-        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
     } else {
-        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
     }
 }
+
+// Tambahkan event listener untuk memeriksa saat ukuran layar berubah
+window.addEventListener("resize", () => {
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove("open"); // Sembunyikan sidebar pada tampilan mobile
+    }
+});
 
 function logout(id) {
     swal.fire({
