@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 <style>
 /* Google Font Link */
@@ -362,19 +363,91 @@
 
 
             </li>
-            <li class="profile">
 
 
 
 
+            <li class="profile  ">
 
-                <a class="btn btn-lg   " onclick=" logout(id)">
+
+
+                <a class="btn btn-sm" onclick=" logout(id)">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    <span class="links_name">Keluar</span>
+                    <span class="links_name"> Keluar</span>
                 </a>
-            </li>
-        </ul>
     </div>
+    </li>
+    </ul>
+    </div>
+    <!-- <nav class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-between">
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                      Mobile menu button 
+                    <button type="button"
+                        class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="absolute -inset-0.5"></span>
+                        <span class="sr-only">Open main menu</span>
+       
+                        <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                         
+       
+                        <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                    <div class="flex flex-shrink-0 items-center">
+                        <span class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                            aria-current="page">
+                    </div>
+
+                </div>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <button type="button"
+                        class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span class="absolute -inset-1.5"></span>
+                        <span class="sr-only">View notifications</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                        </svg>
+                    </button>
+
+                      Profile dropdown -->
+    <div class="flex relative ml-3 ">
+        <div class="flex justify-content space-x-2 ">
+            <button type="button"
+                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">Open user menu</span>
+                <img class="h-8 w-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt="">
+            </button>
+
+
+            <span class="text-white text-muted text-sm   font-medium">Chandra@gmail.com</span>
+        </div>
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    </nav> -->
+
     <section class="home-section bg-slate-100    ">
         <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
             <div class="container mx-auto">
@@ -383,21 +456,95 @@
         <!-- tabel -->
         <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
             <div class="container mx-auto">
-                <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-sky-900 text-white text-xl">
-                    <div class="flex justify-center mb-2 md:justify-start md:pl-6">
-                        History
+                <!-- component -->
+
+                <div class="container mx-auto my-20 ">
+                    <div>
+
+                        <div class="bg-white relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
+                            <?php $no=0; foreach ($user as $key  ) :$no++  ?>
+                            <div class="flex justify-center">
+                                <?php if (!empty($row->foto)): ?>
+                                <img src="<?php echo  base_url('./image/' . $row->foto) ?>"
+                                    class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110">
+
+                                <?php else: ?>
+                                <img class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
+                                    src="https://slabsoft.com/wp-content/uploads/2022/05/pp-wa-kosong-default.jpg" />
+                                <?php endif;?>
+
+                            </div>
+                            <div class="mt-16">
+                                <h1 class="font-bold text-center text-3xl text-gray-900">
+                                    <?php echo $key->username ?>
+                                </h1>
+                                <p class="text-center text-sm text-gray-400 font-medium">
+                                    <?php echo $key->email ?></p>
+                                <p>
+                                    <span>
+
+                                    </span>
+                                </p>
+                                <?php endforeach ?>
+                                <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 gap-4">
+                                    <a href=""
+                                        class="text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3">Edit
+                                        Profile</a>
+                                    <a href=""
+                                        class="text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3">Edit
+                                        Password</a>
+
+                                </div>
+
+                                <div class="w-full">
+                                    <h3 class="font-medium text-gray-900 text-left px-6">Aktivitas
+                                        Terbaru</h3>
+                                    <div class="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
+                                        <?php $no=0; foreach ($history as $row  ) :$no++  ?>
+
+                                        <a href="#"
+                                            class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150">
+                                            <i class="fa-solid fa-clock-rotate-left"></i>
+
+                                            <?php if( $row->kegiatan == '-') {
+                        echo  $row->keterangan_izin;
+                      } else{
+                        echo $row->kegiatan;
+                      }?>
+                                            <span class="text-gray-500 text-xs"> <?php if( $row->jam_keluar == NULL) {
+                        echo '-' .' ' . $row->date;
+                      } else{
+                        echo $row->jam_keluar .' , '.$row->date;
+                      }?></span>
+                                        </a>
+
+
+                                        <?php endforeach ?>
+
+                                    </div>
+                                    <div class="my-5 px-6">
+
+
+
+                                        <a href="<?php echo base_url('karyawan/history') ?>"
+                                            class="text-gray-200 block rounded-lg text-center font-medium leading-6 px-6 py-3 bg-gray-900 hover:bg-black hover:text-white">Data
+                                            <span class="font-bold">Lengkap</span></a>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
-
                 </div>
-                <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
-                    <table class="my-4 w-full divide-y divide-gray-300 text-center">
 
-                    </table>
-                </div>
-            </div>
-        </main>
-    </section>
-    <script src="https://cdn.tailwindcss.com"></script>
+</html>
+</div>
+</main>
+
+</section>
+<script src="https://cdn.tailwindcss.com"></script>
 
 </body>
 <script>

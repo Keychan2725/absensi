@@ -317,7 +317,7 @@
     <div class="sidebar">
         <div class="logo-details">
             <i class='bx bxl-c-plus-plus icon'></i>
-            <div class="logo_name">Admin</div>
+            <div class="logo_name">AppAbsen</div>
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
@@ -408,7 +408,7 @@
                                 <th class="px-3 py-2 text-xs text-gray-500">NAMA DEPAN</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">NAMA BELAKANG</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">EMAIL</th>
-                                <!-- <th class="px-3 py-2 text-xs text-gray-500">AKSI</th> -->
+                                <th class="px-3 py-2 text-xs text-gray-500">AKSI</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
@@ -447,12 +447,17 @@
                                         <?php echo $user->email; ?>
                                     </div>
                                 </td>
-                                <!-- <td class="px-3 py-4">
+                                <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <button onclick="hapus(id)"
-                                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ">Hapus</button>
+                                        <button onclick="hapus(<?php echo $user->id ?>)" class="text-red-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 opacity-100"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
                                     </div>
-                                </td> -->
+                                </td>
 
 
                             </tr>
@@ -516,28 +521,29 @@ window.addEventListener("resize", () => {
 
 
 function hapus(id) {
-    swal.fire({
-        title: 'Yakin untuk menghapus data ini?',
-        text: "Data ini akan terhapus permanen",
+    Swal.fire({
+        title: 'Apakah Mau Dihapus?',
+        text: "data ini tidak bisa dikembalikan lagi!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Batal',
-        confirmButtonText: 'Ya Hapus'
+        confirmButtonText: 'Ya, hapus!'
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire({
+                position: 'center',
                 icon: 'success',
-                title: 'Berhasil Dihapus',
+                title: 'Data Terhapus!!',
                 showConfirmButton: false,
-                timer: 1500,
-
-            }).then(function() {
-                window.location.href = "<?php echo base_url('Admin/hapus_karyawan/')?>" + id;
-            });
+                timer: 1500
+            })
+            setTimeout(() => {
+                window.location.href = "<?php echo base_url('admin/hapus_karyawan/') ?>" + id;
+            }, 1800);
         }
-    });
+    })
 }
 
 function logout(id) {

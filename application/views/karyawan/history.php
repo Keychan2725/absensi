@@ -815,6 +815,60 @@ if ($row->keterangan_izin == '-') {
     </script>
 </body>
 <script>
+// function pulang(id) {
+//     const swalWithBootstrapButtons = Swal.mixin({
+//         customClass: {
+//             confirmButton: 'btn btn-success',
+//             cancelButton: 'btn btn-danger',
+//         },
+//         buttonsStyling: false
+//     });
+
+//     // Get the current time
+//     const currentTime = new Date();
+//     const currentHour = currentTime.getHours();
+
+//     // Define the allowed hour (e.g., 15:00 or 3:00 PM)
+//     const allowedHour = 15; // Jam 15.00 WIB
+
+//     if (currentHour < allowedHour) {
+//         // Display an error message if it's too early to leave
+//         swalWithBootstrapButtons.fire(
+//             'Pulang Dilarang',
+//             'Anda tidak dapat pulang sebelum jam 15.00 WIB.',
+//             'error'
+//         );
+//     } else {
+//         swalWithBootstrapButtons.fire({
+//             title: 'Pulang?',
+//             text: 'Anda Yakin Ingin pulang!',
+//             icon: 'question',
+//             showCancelButton: true,
+//             confirmButtonText: 'Ya, pulang!',
+//             cancelButtonText: 'Tidak, batalkan!',
+//             reverseButtons: true
+//         }).then((result) => {
+//             if (result.isConfirmed) {
+//                 swalWithBootstrapButtons.fire(
+//                         'Pulang!',
+//                         'Hati Hati Dijalan',
+//                         'success'
+//                     )
+//                     .then(function() {
+//                         window.location.href = <?= base_url('karyawan/pulang') ?> + id;
+//                     });
+//             } else if (result.dismiss === Swal.DismissReason.cancel) {
+//                 swalWithBootstrapButtons.fire(
+//                     'Dibatalkan',
+//                     'Tidak Jadi Pulang :)',
+//                     'error'
+//                 );
+//             }
+//         });
+//     }
+// }
+
+
 function hapus(id) {
     swal.fire({
         title: 'Yakin untuk menghapus data ini?',

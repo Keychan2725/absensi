@@ -46,7 +46,10 @@ class Admin extends CI_Controller
         
         $this->load->view('admin/karyawan',$data);
     }
-
+    public function  hapus_karyawan($id) {
+        $this->m_model->delete('user' , 'id' , $id);
+        redirect(base_url('admin/karyawan'));
+    }
     public function  export_karyawan(){
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -557,10 +560,5 @@ class Admin extends CI_Controller
             $writer->save('php://output');
             
         }
-        public function hapus_karyawan($id)
-        {
-            $this->m_model->delete('user', 'id', $id);
-             redirect(base_url('admin/karyawan'));
-        }
-   
+       
 }  
