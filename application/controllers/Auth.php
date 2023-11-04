@@ -31,19 +31,17 @@ class Auth extends CI_Controller
             $this->session->set_userdata($data);
 			
             if ($this->session->userdata('role') == 'admin') {
+				$this->session->set_flashdata('sukses', '  Berhasil Login ');
                 redirect(base_url('admin/dashboard'));
             }elseif ($this->session->userdata('role') == 'karyawan') {
+		    $this->session->set_flashdata('sukses', '  Berhasil Login ');
             redirect(base_url('karyawan/dashboard'))  ;
             } else {
                 redirect(base_url('auth/login'));
             }
         } else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			Password Atau Email Anda Salah
-			
-		
-		  </div>');
-            redirect(base_url('auth/login'));
+			$this->session->set_flashdata('gagal', ' Password Atau Email Anda Salah ');
+             redirect(base_url('auth/login'));
         }
     }
    public function logout()
@@ -66,20 +64,14 @@ class Auth extends CI_Controller
 		$nama_belakang = $this->input->post('nama_belakang');
  		$password = $this->input->post('password');
 		if ($this->m_model->EmailSudahAda($email)) {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			Email ini sudah di ada. Gunakan email lainya			
-			
-			</div>');
+			$this->session->set_flashdata('error', '  Email ini sudah  ada. Gunakan email lainya ');
 			redirect(base_url('auth/register'));
 		}elseif ($this->m_model->usernameSudahAda($username)) {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			Username ini sudah ada. Gunakan username lainya			
-			</div>');
+			$this->session->set_flashdata('error', '  Username ini sudah ada. Gunakan username lainya	 ');
 			redirect(base_url('auth/register'));
 		} elseif (strlen($password) < 8 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', $password)) {
 			// Password tidak memenuhi persyaratan
-			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			Password harus memiliki setidaknya 8 karakter			</div> ');
+			$this->session->set_flashdata('error', '  Password harus memiliki setidaknya 8 karakter ');
 			redirect(base_url('auth/register'));
 		} else {
 			// Hash password menggunakan MD5
@@ -97,7 +89,7 @@ class Auth extends CI_Controller
 
 			$this->m_model->register($data); // Panggil model untuk menyimpan data
 
-			// $this->session->set_flashdata('message', 'Berhasil Register');
+			$this->session->set_flashdata('sukses', 'Berhasil Register');
 			redirect(base_url('auth/login'));
 		}
 }
@@ -116,20 +108,14 @@ class Auth extends CI_Controller
 		$nama_belakang = $this->input->post('nama_belakang');
  		$password = $this->input->post('password');
 		if ($this->m_model->EmailSudahAda($email)) {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			Email ini sudah di ada. Gunakan email lainya			
-			
-			</div>');
+			$this->session->set_flashdata('error', ' 	Email ini sudah ada. Gunakan email lainya ');
 			redirect(base_url('auth/admin'));
 		}elseif ($this->m_model->usernameSudahAda($username)) {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			Username ini sudah ada. Gunakan username lainya			
-			</div>');
+			$this->session->set_flashdata('error', ' Username ini sudah ada. Gunakan username lainya ');
 			redirect(base_url('auth/admin'));
 		} elseif (strlen($password) < 8 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', $password)) {
 			// Password tidak memenuhi persyaratan
-			$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			Password harus memiliki setidaknya 8 karakter			</div> ');
+			$this->session->set_flashdata('error', ' Password harus memiliki setidaknya 8 karakter ');
 			redirect(base_url('auth/admin'));
 		} else {
 			// Hash password menggunakan MD5
@@ -147,7 +133,7 @@ class Auth extends CI_Controller
 
 			$this->m_model->register($data); // Panggil model untuk menyimpan data
 
-			// $this->session->set_flashdata('message', 'Berhasil Register');
+			$this->session->set_flashdata('sukses', 'Berhasil Register');
 			redirect(base_url('auth/login'));
 		}
 }

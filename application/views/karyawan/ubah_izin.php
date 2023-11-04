@@ -22,7 +22,10 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link rel="stylesheet" href="path-to-sweetalert2.css">
+    <!-- Replace 'path-to-sweetalert2.css' with the actual path to your SweetAlert CSS file -->
+    <script src="path-to-sweetalert2.js"></script>
+    <!-- Replace 'path-to-sweetalert2.js' with the actual path to your SweetAlert JavaScript file -->
     <title>Ubah Izin</title>
 </head>
 <style>
@@ -622,7 +625,6 @@ nav.close~.dashboard .top {
 
                 </div>
             </div>
-            <?php echo $this->session->flashdata('message'); ?>
             <?php foreach ($izin as $row):  $izin= $row->keterangan_izin;?>
             <form action="<?php echo base_url('Karyawan/aksi_ubah_izin') ?>" method="post"
                 enctype="multipart/form-data">

@@ -24,7 +24,10 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link rel="stylesheet" href="path-to-sweetalert2.css">
+    <!-- Replace 'path-to-sweetalert2.css' with the actual path to your SweetAlert CSS file -->
+    <script src="path-to-sweetalert2.js"></script>
+    <!-- Replace 'path-to-sweetalert2.js' with the actual path to your SweetAlert JavaScript file -->
     <title>Dashboard</title>
 </head>
 <style>
@@ -658,7 +661,7 @@ nav.close~.dashboard .top {
 
 
 
-                        <table class="table table-hover">
+                        <table class="table table-striped">
                             <thead>
                                 <tr class="table-hover">
                                     <th scope="col">No</th>
@@ -829,6 +832,30 @@ function logout(id) {
         }
     });
 }
+
+function displaySweetAlert() {
+    const message = "<?php echo $this->session->flashdata('sukses'); ?>";
+    const error = "<?php echo $this->session->flashdata('error'); ?>";
+
+    if (message) {
+        Swal.fire({
+            title: 'Success!',
+            text: message,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    } else if (error) {
+        Swal.fire({
+            title: 'Error!',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+}
+
+// Call the function when the page loads
+window.onload = displaySweetAlert;
 </script>
 
 </html>

@@ -23,7 +23,10 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link rel="stylesheet" href="path-to-sweetalert2.css">
+    <!-- Replace 'path-to-sweetalert2.css' with the actual path to your SweetAlert CSS file -->
+    <script src="path-to-sweetalert2.js"></script>
+    <!-- Replace 'path-to-sweetalert2.js' with the actual path to your SweetAlert JavaScript file -->
     <title>Profile</title>
 </head>
 <style>
@@ -629,8 +632,7 @@ nav.close~.dashboard .top {
 foreach ($user as $row) : $no++; ?>
                                 <div class="w-100 m-auto p-3">
                                     <br>
-                                    <div><?php echo $this->session->flashdata('message'); ?></div>
-                                    <div><?php echo $this->session->flashdata('sukses'); ?></div>
+
                                     <div class="row d-flex">
                                         <input name="id" type="hidden" value="<?php echo $row->id ?>">
 
@@ -897,6 +899,30 @@ function logout(id) {
         }
     });
 }
+
+function displaySweetAlert() {
+    const message = "<?php echo $this->session->flashdata('sukses'); ?>";
+    const error = "<?php echo $this->session->flashdata('error'); ?>";
+
+    if (message) {
+        Swal.fire({
+            title: 'Success!',
+            text: message,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    } else if (error) {
+        Swal.fire({
+            title: 'Error!',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+}
+
+// Call the function when the page loads
+window.onload = displaySweetAlert;
 </script>
 
 </html>

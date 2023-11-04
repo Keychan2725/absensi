@@ -21,6 +21,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="path-to-sweetalert2.css">
+    <!-- Replace 'path-to-sweetalert2.css' with the actual path to your SweetAlert CSS file -->
+    <script src="path-to-sweetalert2.js"></script>
+    <!-- Replace 'path-to-sweetalert2.js' with the actual path to your SweetAlert JavaScript file -->
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -608,6 +613,7 @@ nav.close~.dashboard .top {
                     </a>
 
                 </li>
+                </li>
 
         </div>
 
@@ -638,7 +644,7 @@ nav.close~.dashboard .top {
                 <div class="row">
                     <div class="col">
                         <div class="overflow-auto" style="white-space: nowrap;">
-                            <table class="table table-hover  ">
+                            <table class="table table-striped ">
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
@@ -815,110 +821,87 @@ if ($row->keterangan_izin == '-') {
     </script>
 </body>
 <script>
-// function pulang(id) {
-//     const swalWithBootstrapButtons = Swal.mixin({
-//         customClass: {
-//             confirmButton: 'btn btn-success',
-//             cancelButton: 'btn btn-danger',
-//         },
-//         buttonsStyling: false
+function pulang(id) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger',
+        },
+        buttonsStyling: false
+    });
+
+    // Get the current time
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+    // Define the allowed hour (e.g., 15:00 or 3:00 PM)
+    const allowedHour = 15; // Jam 15.00 WIB
+
+    if (currentHour < allowedHour) {
+        // Display an error message if it's too early to leave
+        swalWithBootstrapButtons.fire(
+            'Pulang Dilarang',
+            'Anda tidak dapat pulang sebelum jam 15.00 WIB.',
+            'error'
+        );
+    } else {
+        swalWithBootstrapButtons.fire({
+            title: 'Pulang?',
+            text: 'Anda Yakin Ingin pulang!',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, pulang!',
+            cancelButtonText: 'Tidak, batalkan!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                        'Pulang!',
+                        'Hati Hati Dijalan',
+                        'success'
+                    )
+                    .then(function() {
+                        window.location.href = "<?php echo base_url('karyawan/pulang/')?>" + id;
+                    });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    'Dibatalkan',
+                    'Tidak Jadi Pulang :)',
+                    'error'
+                );
+            }
+        });
+    }
+}
+
+
+// function hapus(id) {
+//     swal.fire({
+//         title: 'Yakin untuk menghapus data ini?',
+//         text: "Data ini akan terhapus permanen",
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         cancelButtonText: 'Batal',
+//         confirmButtonText: 'Ya Hapus'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             Swal.fire({
+//                 icon: 'success',
+//                 title: 'Berhasil Dihapus',
+//                 showConfirmButton: false,
+//                 timer: 1500,
+
+//             }).then(function() {
+//                 window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/')?>" + id;
+//             });
+//         }
 //     });
-
-//     // Get the current time
-//     const currentTime = new Date();
-//     const currentHour = currentTime.getHours();
-
-//     // Define the allowed hour (e.g., 15:00 or 3:00 PM)
-//     const allowedHour = 15; // Jam 15.00 WIB
-
-//     if (currentHour < allowedHour) {
-//         // Display an error message if it's too early to leave
-//         swalWithBootstrapButtons.fire(
-//             'Pulang Dilarang',
-//             'Anda tidak dapat pulang sebelum jam 15.00 WIB.',
-//             'error'
-//         );
-//     } else {
-//         swalWithBootstrapButtons.fire({
-//             title: 'Pulang?',
-//             text: 'Anda Yakin Ingin pulang!',
-//             icon: 'question',
-//             showCancelButton: true,
-//             confirmButtonText: 'Ya, pulang!',
-//             cancelButtonText: 'Tidak, batalkan!',
-//             reverseButtons: true
-//         }).then((result) => {
-//             if (result.isConfirmed) {
-//                 swalWithBootstrapButtons.fire(
-//                         'Pulang!',
-//                         'Hati Hati Dijalan',
-//                         'success'
-//                     )
-//                     .then(function() {
-//                         window.location.href = <?= base_url('karyawan/pulang') ?> + id;
-//                     });
-//             } else if (result.dismiss === Swal.DismissReason.cancel) {
-//                 swalWithBootstrapButtons.fire(
-//                     'Dibatalkan',
-//                     'Tidak Jadi Pulang :)',
-//                     'error'
-//                 );
-//             }
-//         });
-//     }
 // }
 
 
-function hapus(id) {
-    swal.fire({
-        title: 'Yakin untuk menghapus data ini?',
-        text: "Data ini akan terhapus permanen",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Batal',
-        confirmButtonText: 'Ya Hapus'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil Dihapus',
-                showConfirmButton: false,
-                timer: 1500,
 
-            }).then(function() {
-                window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/')?>" + id;
-            });
-        }
-    });
-}
-
-
-function pulang(id) {
-    swal.fire({
-        title: 'Ingin Pulang',
-        text: "Hati Hati DI Jalan",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Batal',
-        confirmButtonText: 'Ya Pulang'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Selamat Jalan',
-                showConfirmButton: false,
-                timer: 1500,
-
-            }).then(function() {
-                window.location.href = "<?php echo base_url('karyawan/pulang/')?>" + id;
-            });
-        }
-    });
-}
 
 function ubah_absen(id) {
     swal.fire({
@@ -995,6 +978,30 @@ function logout(id) {
         }
     });
 }
+
+function displaySweetAlert() {
+    const message = "<?php echo $this->session->flashdata('sukses'); ?>";
+    const error = "<?php echo $this->session->flashdata('error'); ?>";
+
+    if (message) {
+        Swal.fire({
+            title: 'Success!',
+            text: message,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    } else if (error) {
+        Swal.fire({
+            title: 'Error!',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+}
+
+// Call the function when the page loads
+window.onload = displaySweetAlert;
 </script>
 
 </html>

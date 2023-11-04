@@ -21,11 +21,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="path-to-sweetalert2.css">
+    <!-- Replace 'path-to-sweetalert2.css' with the actual path to your SweetAlert CSS file -->
+    <script src="path-to-sweetalert2.js"></script>
+    <!-- Replace 'path-to-sweetalert2.js' with the actual path to your SweetAlert JavaScript file -->
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-
-    <script src="path-to-sweetalert.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     <title>Izin</title>
@@ -627,7 +629,6 @@ nav.close~.dashboard .top {
 
                 </div>
             </div>
-            <?php echo $this->session->flashdata('message'); ?>
             <form action="<?php echo base_url('Karyawan/aksi_izin') ?>" method="post" enctype="multipart/form-data">
                 <div class="overview shadow-lg p-4 mb-3 bg-body rounded">
                     <div class="wrapper d-flex flex-column">
@@ -706,14 +707,6 @@ nav.close~.dashboard .top {
     </script>
 </body>
 <script>
-<?php if ($this->session->flashdata('success_message')): ?>
-swal("Sukses", "<?php echo $this->session->flashdata('success_message'); ?>", "success");
-<?php endif; ?>
-
-<?php if ($this->session->flashdata('error')): ?>
-swal("Kesalahan", "<?php echo $this->session->flashdata('error'); ?>", "error");
-<?php endif; ?>
-
 function logout(id) {
     swal.fire({
         title: ' Yakin Ingin Log Out',
@@ -738,6 +731,30 @@ function logout(id) {
         }
     });
 }
+
+function displaySweetAlert() {
+    const message = "<?php echo $this->session->flashdata('sukses'); ?>";
+    const error = "<?php echo $this->session->flashdata('gagal'); ?>";
+
+    if (message) {
+        Swal.fire({
+            title: 'Success!',
+            text: message,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    } else if (error) {
+        Swal.fire({
+            title: 'Error!',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+}
+
+// Call the function when the page loads
+window.onload = displaySweetAlert;
 </script>
 
 </html>

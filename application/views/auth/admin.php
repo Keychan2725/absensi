@@ -11,6 +11,12 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="path-to-sweetalert2.css">
+    <!-- Replace 'path-to-sweetalert2.css' with the actual path to your SweetAlert CSS file -->
+    <script src="path-to-sweetalert2.js"></script>
+    <!-- Replace 'path-to-sweetalert2.js' with the actual path to your SweetAlert JavaScript file -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </head>
 <style>
 .toggle-password {
@@ -33,14 +39,13 @@
                 <div class="col-lg-12 col-xl-11">
                     <div class="card text-black" style="border-radius: 25px;">
                         <div class="card-body p-md-5">
-                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sistem Absensi</p>
+                            <p class="text-center h1 fw-italic mb-5 mx-1 mx-md-4 mt-4">AppAbsen</p>
                             <hr>
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                                     <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4"> Register Admin</p>
 
-                                    <?php echo $this->session->flashdata('message'); ?>
 
                                     <form method="POST" class="needs-validation" novalidate="" autocomplete="off"
                                         action="<?php echo base_url(); ?>Auth/aksi_register_admin">
@@ -135,6 +140,30 @@ togglePassword.addEventListener('click', function() {
         togglePassword.classList.add('fa-eye-slash');
     }
 });
+
+function displaySweetAlert() {
+    const message = "<?php echo $this->session->flashdata('sukses'); ?>";
+    const error = "<?php echo $this->session->flashdata('error'); ?>";
+
+    if (message) {
+        Swal.fire({
+            title: 'Success!',
+            text: message,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    } else if (error) {
+        Swal.fire({
+            title: 'Error!',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+}
+
+// Call the function when the page loads
+window.onload = displaySweetAlert;
 </script>
 
 </html>

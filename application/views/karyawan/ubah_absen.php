@@ -23,9 +23,12 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="path-to-sweetalert2.css">
+    <!-- Replace 'path-to-sweetalert2.css' with the actual path to your SweetAlert CSS file -->
+    <script src="path-to-sweetalert2.js"></script>
+    <!-- Replace 'path-to-sweetalert2.js' with the actual path to your SweetAlert JavaScript file -->
 
-
-    <title>Absensi</title>
+    <title>Ubah Absensi</title>
 </head>
 <style>
 /* ===== Google Font Import - Poppins ===== */
@@ -623,7 +626,6 @@ nav.close~.dashboard .top {
 
                 </div>
             </div>
-            <?php echo $this->session->flashdata('message'); ?>
             <?php foreach ($absen as $row):  $kegiatan= $row->kegiatan;?>
             <form action="<?php echo base_url('Karyawan/aksi_ubah_absen') ?>" method="post"
                 enctype="multipart/form-data">
@@ -731,6 +733,30 @@ function logout(id) {
         }
     });
 }
+
+function displaySweetAlert() {
+    const message = "<?php echo $this->session->flashdata('sukses'); ?>";
+    const error = "<?php echo $this->session->flashdata('error'); ?>";
+
+    if (message) {
+        Swal.fire({
+            title: 'Success!',
+            text: message,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    } else if (error) {
+        Swal.fire({
+            title: 'Error!',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+}
+
+// Call the function when the page loads
+window.onload = displaySweetAlert;
 </script>
 
 </html>

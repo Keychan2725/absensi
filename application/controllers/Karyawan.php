@@ -68,10 +68,7 @@ class Karyawan extends CI_Controller
 
         if ($absensi_terakhir && $absensi_terakhir->jam_keluar === null) {
             // Karyawan belum pulang, tidak dapat melakukan absensi tambahan
-            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Anda tidak dapat melakukan absensi tambahan
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>');
+            $this->session->set_flashdata('error', '    Anda tidak dapat melakukan absensi tambahan  ');
             redirect(base_url('karyawan/absensi'));
         } else {
             // Karyawan sudah pulang atau belum ada catatan absensi
@@ -86,6 +83,7 @@ class Karyawan extends CI_Controller
             ];
 
             $this->m_model->tambah_data('absensi', $data);
+            $this->session->set_flashdata('sukses', ' Berhasil  Absen  ');
             redirect(base_url('karyawan/history'));
         }
     }
@@ -106,10 +104,7 @@ class Karyawan extends CI_Controller
 
         if ($izin->num_rows() > 0) {
             // Karyawan sudah memiliki catatan izin pada tanggal yang sama
-            $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Anda Sudah Mengajukan Izin Hari Ini
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>');
+            $this->session->set_flashdata('gagal', '  Anda tidak dapat melakukan izin tambahan ');
             redirect(base_url('karyawan/izin'));
         } else {
         
@@ -122,10 +117,7 @@ class Karyawan extends CI_Controller
 
             if ($absensi->num_rows() > 0) {
                 // Karyawan sudah memiliki catatan absensi pada tanggal yang sama
-                $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Anda Sudah Melakukan Absensi Hari Ini
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>');
+                $this->session->set_flashdata('gagal', ' Anda tidak dapat melakukan izin tambahan ');
                 redirect(base_url('karyawan/izin'));
             } else {
                 // Karyawan belum memiliki catatan izin atau absensi pada tanggal yang sama, bisa melanjutkan
@@ -140,7 +132,7 @@ class Karyawan extends CI_Controller
                 ];
             
                 $this->m_model->tambah_data('absensi', $data);
-                
+                $this->session->set_flashdata('sukses', ' Berhasil  Izin  ');
                 redirect(base_url('karyawan/history'));
             }
         }
@@ -227,6 +219,7 @@ class Karyawan extends CI_Controller
                 ];
             } else {
                 // Gagal mengunggah foto baru
+                $this->session->set_flashdata('error',' Gagal Upload Foto  ');
                 redirect(base_url('karyawan/dashboard'));
             }
         } else {
@@ -242,12 +235,10 @@ class Karyawan extends CI_Controller
         $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
 
         if ($update_result) {
-            $this->session->set_flashdata('sukses','<div class="alert alert-success alert-dismissible fade show" role="alert">
-        Berhasil Merubah Profile
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>');
+            $this->session->set_flashdata('sukses',' Berhasil Merubah Profile  ');
             redirect(base_url('karyawan/akun'));
         } else {
+            $this->session->set_flashdata('error',' Gagal Merubah Profile  ');
             redirect(base_url('karyawan/akun'));
         }
     
@@ -261,10 +252,10 @@ class Karyawan extends CI_Controller
         $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=>$this->session->userdata('id')));
         if($eksekusi) {
             
-            $this->session->set_flashdata('sukses' , 'berhasil');
+            $this->session->set_flashdata('sukses' , 'Berhasil Menghapus Foto');
             redirect(base_url('karyawan/akun'));
         } else {
-            $this->session->set_flashdata('error' , 'gagal...');
+            $this->session->set_flashdata('error' , 'Gagall...');
             redirect(base_url('karyawan/akun'));
         }
     }
@@ -288,14 +279,14 @@ class Karyawan extends CI_Controller
                     $data = ['password' => md5($password_baru)];
                     $this->m_model->ubah_data('user', $data, ['id' => $this->session->userdata('id')]);
     
-                    $this->session->set_flashdata('sukses', '<div class="alert alert-success alert-dismissible fade show" role="alert">Berhasil Merubah Password<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                    $this->session->set_flashdata('sukses', ' Berhasil Merubah Password ');
                             redirect(base_url('karyawan/akun'));
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Password Baru dan Konfirmasi Password Tidak Cocok<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                    $this->session->set_flashdata('error', ' Password Baru dan Konfirmasi Password Tidak Cocok ');
                         redirect(base_url('karyawan/akun'));
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Password Lama Anda Salah<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>');
+                $this->session->set_flashdata('error', ' Password Lama Anda Salah ');
                 }            redirect(base_url('karyawan/akun'));
                 redirect(base_url('karyawan/akun'));
             }
@@ -323,13 +314,14 @@ class Karyawan extends CI_Controller
         ];
         $eksekusi = $this->m_model->ubah_data('absensi', $data, array('id'=>$this->input->post('id')));
         if($eksekusi) {
-            $this->session->set_flashdata('sukses' , 'berhasil');
+            $this->session->set_flashdata('sukses' , 'Berhasil  ');
             redirect(base_url('karyawan/history'));
         } else {
             $this->session->set_flashdata('error' , 'gagal...');
-            redirect(base_url('karyawan/ubah_absen'.$this->input->post('id')));
+            redirect(base_url('karyawan/ubah_absen/'.$this->input->post('id')));
         }
     }
+    
     public function ubah_izin($id)
     {
         $data['izin'] = $this-> m_model->get_by_id('absensi' , 'id', $id)->result();
@@ -342,7 +334,7 @@ class Karyawan extends CI_Controller
         ];
         $eksekusi = $this->m_model->ubah_data('absensi', $data, array('id'=>$this->input->post('id')));
         if($eksekusi) {
-            $this->session->set_flashdata('sukses' , 'berhasil');
+            $this->session->set_flashdata('sukses' , 'Berhasil');
             redirect(base_url('karyawan/history'));
         } else {
             $this->session->set_flashdata('error' , 'gagal...');
